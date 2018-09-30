@@ -18,6 +18,9 @@ async function requestGPSPermission() {
       console.warn(err);
     }
 }
+
+
+
 export default class App extends Component {
   render() {
     return (
@@ -78,6 +81,52 @@ const styles = StyleSheet.create({
 })
 
 
-/**
-*   STYLESHEET
-*/
+
+
+
+//////////////
+
+
+            <MapView
+            //LOAD MAP
+              provider={PROVIDER_GOOGLE}
+              style={styles.map}
+              region={{
+                latitude:  21.026416,
+                longitude: 105.851541,
+                latitudeDelta: 0.1,
+                longitudeDelta: 0.1,
+              }}
+            >
+            
+            <MapView.Marker
+            // CURRENT LOCATION MARKER
+                coordinate = {{
+                  latitude: 21.026416,
+                  longitude: 105.851541,
+                }}
+                title = {'My Location'}
+                description = {'description'}
+              />
+            </MapView>
+
+
+
+            ////////
+
+               state = {
+      LATITUDE: 'unknown',
+      LONGITUDE : 'unknown', 
+    }
+
+  componentDidMount = () => {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const LATITUDE = position.coords.latitude;
+            const LONGITUDE = position.coords.longitude;
+              this.setState({ LATITUDE, LONGITUDE });
+            },
+          (error) => alert(error.message),
+          { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+        );
+  }
