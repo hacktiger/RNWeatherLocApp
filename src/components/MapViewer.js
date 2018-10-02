@@ -1,47 +1,68 @@
 import React, { Component } from 'react'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { 
-	Text,
 	View, 
 	StyleSheet,
-	PermissionsAndroid
 } from 'react-native'
+//
+import Spinner from './src/components/Spinner';
 
 /**
 *	main class map view
 */
 class MapViewer extends Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			LATITUDE : -9999,
+			LONGITUDE :  -9999 ,
+		};
+	}
+	//{}UNSAFE_componentWillMount()
+	componentDidMount(){
+		navigator.geolocation.getCurrentPosition(
+        (position) => 	{ this.setState({ LATITUDE : position.coords.latitude,
+        								LONGITUDE : position.coords.longitude
+        							}) 
+    					},
+        (err) => console.log(err),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+        );
+	}
 
+	renderMap(){
+			return (
+				<MapView
+			        //LOAD MAP
+			          provider={PROVIDER_GOOGLE}
+			          style={styles.map}
+			          region={{
+			            latitude:  this.state.LATITUDE,
+			            longitude:  this.state.LONGITUDE,
+			            latitudeDelta: 0.1,
+			            longitudeDelta: 0.1,
+			          }}
+			        >
+			        
+			        <MapView.Marker
+			        // CURRENT LOCATION MARKER
+			            coordinate = {{
+			              latitude: this.state.LATITUDE,
+			              longitude:  this.state.LONGITUDE,
+			            }}
+			            title = {'My Location'}
+			            description = {'description'}
+			          />
+			        </MapView>
+			);
+	}
 
 	//myLatitude = this.getCurrentPosition();
 	//myLongitude = this.getCurrentPosition();
 	render(){
 		return(	
 			<View style={styles.container}>
-				<Text>
-            	</Text>
-		        <MapView
-		        //LOAD MAP
-		          provider={PROVIDER_GOOGLE}
-		          style={styles.map}
-		          region={{
-		            latitude:  21.026446999999997,
-		            longitude:  105.8257094,
-		            latitudeDelta: 0.1,
-		            longitudeDelta: 0.1,
-		          }}
-		        >
-		        
-		        <MapView.Marker
-		        // CURRENT LOCATION MARKER
-		            coordinate = {{
-		              latitude:21.026446999999997,
-		              longitude:  105.8257094,
-		            }}
-		            title = {'My Location'}
-		            description = {'description'}
-		          />
-		        </MapView>
+		        {this.renderMap()}
       		</View>
 		)
 	}
