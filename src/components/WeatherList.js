@@ -31,7 +31,7 @@ export default class WeatherList extends Component{
 	*/
 
 	///Component Did Mount
-	componentDidMount(){
+	cccomponentDidMount(){
 		const APIkey = "ZJ0m9fUoAyMyW8YYwuLKDFGbs0LLYNp1";
 
 		fetch("http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=ZJ0m9fUoAyMyW8YYwuLKDFGbs0LLYNp1&q=21.0264415%2C105.82569989999999")
@@ -62,11 +62,19 @@ export default class WeatherList extends Component{
 	}
 	//Test function
 	testThen(){
-		Axios.get('https://rallycoding.herokuapp.com/api/music_albums')
+		const configs = {
+			timeout : 3000,
+			headers: {
+				'data': 'machine',
+				'Content-Type' : 'application/json',
+			}
+		}
+		const url = 'https://rallycoding.herokuapp.com/api/music_albums';
+
+		Axios.get(url,configs)
 			.then( response => this.handleReq(response))
 			.catch( err => console.log(err));
 	}
-
 	handleReq(response){
 		console.log(response);
 	}
