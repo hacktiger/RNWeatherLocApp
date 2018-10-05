@@ -30,7 +30,6 @@ class App extends Component {
 		if ( this.state.loading ){
 			return <Spinner />
 		} 
-
 		return (
 			<TouchableOpacity 
 		        style={styles.button}
@@ -50,6 +49,7 @@ class App extends Component {
 
 	onStatsLoadingFail(){
 	
+
 	}
 	*/
 
@@ -58,14 +58,11 @@ class App extends Component {
 		return (
 			<View style = {styles.container}>
 				<View style = {styles.headerContainer}>
-					<Header headerText = "HEADER2" />
+					<Header headerText = "MAP PAGE" />
 				</View>
-
 				<View style = {styles.body} /* MAIN MAP */>
-
 					<MapViewer />
 				</View>
-
 				<View style = {styles.footerContainer } >
 					{ this.renderButton() /* return touchOpacity JSX */}
 				</View>

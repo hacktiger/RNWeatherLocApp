@@ -5,7 +5,7 @@ import {
 	StyleSheet,
 } from 'react-native'
 //
-import Spinner from './src/components/Spinner';
+//import Spinner from './src/components/Spinner';
 
 /**
 *	main class map view
@@ -13,23 +13,39 @@ import Spinner from './src/components/Spinner';
 class MapViewer extends Component {
 	constructor(props){
 		super(props);
-		this.state = {
+        this.state = {
 			LATITUDE : -9999,
 			LONGITUDE :  -9999 ,
+			LocationKey : 0,
 		};
+
+
 	}
-	//{}UNSAFE_componentWillMount()
-	componentDidMount(){
+	////
+	UNSAFE_componentWillMount(){
 		navigator.geolocation.getCurrentPosition(
-        (position) => 	{ this.setState({ LATITUDE : position.coords.latitude,
-        								LONGITUDE : position.coords.longitude
-        							}) 
+        (position) => 	{ this.setState  ({ LATITUDE : position.coords.latitude,
+        								LONGITUDE : position.coords.longitude  }) 
     					},
         (err) => console.log(err),
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
         );
 	}
 
+	/*
+	getLocationKey(){
+		fetch(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=JHgkYrYxh6FNUAfzQfDZWnlPPcJjl5GR&q=${this.state.LATITUDE}%2C${this.state.LONGITUDE}&language=en&details=false&toplevel=true`)
+			.then( (response) => response.json())
+			.then( (responseJson) => {
+				console.log(this.state.LATITUDE);
+				return this.setState({ LocationKey : responseJson.Key,});
+			})
+			.catch((err) => {
+				console.error(err);
+			});
+	}
+	*/
+	///////
 	renderMap(){
 			return (
 				<MapView
@@ -56,7 +72,7 @@ class MapViewer extends Component {
 			        </MapView>
 			);
 	}
-
+	////MAIN RENDER
 	//myLatitude = this.getCurrentPosition();
 	//myLongitude = this.getCurrentPosition();
 	render(){
