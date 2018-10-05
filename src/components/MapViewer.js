@@ -1,19 +1,18 @@
 import React, { Component } from 'react'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import { 
-	View, 
 	StyleSheet,
 } from 'react-native'
-//
-//import Spinner from './src/components/Spinner';
+// my c
+//	import Spinner from './src/components/Spinner';
 
 /**
-*	main class map view
+*main class map view
 */
 class MapViewer extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
-        this.state = {
+    this.state = {
 			LATITUDE : -9999,
 			LONGITUDE :  -9999 ,
 			LocationKey : 0,

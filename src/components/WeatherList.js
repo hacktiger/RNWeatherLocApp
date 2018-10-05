@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 ///
 import ForecastDetail from './ForecastDetail';
+import Axios from 'axios';
 ///
 
 export default class WeatherList extends Component{
@@ -28,6 +29,8 @@ export default class WeatherList extends Component{
 			});
 
 	*/
+
+	///Component Did Mount
 	componentDidMount(){
 		const APIkey = "ZJ0m9fUoAyMyW8YYwuLKDFGbs0LLYNp1";
 
@@ -57,13 +60,28 @@ export default class WeatherList extends Component{
 			<ForecastDetail key={ForecastList.Date}  ForecastList={ForecastList}  /> 
 		);
 	}
-	
+	//Test function
+	testThen(){
+		Axios.get('https://rallycoding.herokuapp.com/api/music_albums')
+			.then( response => this.handleReq(response))
+			.catch( err => console.log(err));
+	}
 
+	handleReq(response){
+		console.log(response);
+	}
 	render(){
 		return(
 			<View>
-				{this.renderForecast()}
+				{this.testThen()}
+				<Text>aaaa</Text>
+				<Text>aaaa</Text>
+				<Text>aaaa</Text>
+				<Text>aaaa</Text>
+				<Text>aaaa</Text>
 			</View>
 		)
 	}
 }
+
+///// add {this.renderForecast()} in view later
