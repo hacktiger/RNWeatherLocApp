@@ -12,6 +12,7 @@ import {
 //import App from './App';
 import Header from './src/components/header';
 import MapViewer from './src/components/MapViewer';
+import WeatherList from './src/components/WeatherList';
 import Spinner from './src/components/Spinner';
 
 // mayba later : import { Header, MapViewer } from './src/components/index';
@@ -53,7 +54,7 @@ class App extends Component {
 	}
 	*/
 
-	//Render
+	//MAIN RENDER <MapViewer />
 	render(){
 		return (
 			<View style = {styles.container}>
@@ -61,7 +62,8 @@ class App extends Component {
 					<Header headerText = "MAP PAGE" />
 				</View>
 				<View style = {styles.body} /* MAIN MAP */>
-					<MapViewer />
+					
+					<WeatherList />
 				</View>
 				<View style = {styles.footerContainer } >
 					{ this.renderButton() /* return touchOpacity JSX */}
@@ -72,6 +74,8 @@ class App extends Component {
 
 
 };
+
+
 //Styles
 const styles = StyleSheet.create({
   	container: { 
@@ -83,6 +87,7 @@ const styles = StyleSheet.create({
 		flex : 0.1
 	},
 	body:{
+		marginTop:25,
 		flex : 1.6
 	},
 	footerContainer:{

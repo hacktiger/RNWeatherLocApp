@@ -23,6 +23,7 @@ class MapViewer extends Component {
 	}
 	////
 	UNSAFE_componentWillMount(){
+		console.log("Mounting");
 		navigator.geolocation.getCurrentPosition(
         (position) => 	{ this.setState  ({ LATITUDE : position.coords.latitude,
         								LONGITUDE : position.coords.longitude  }) 
@@ -32,19 +33,7 @@ class MapViewer extends Component {
         );
 	}
 
-	/*
-	getLocationKey(){
-		fetch(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=JHgkYrYxh6FNUAfzQfDZWnlPPcJjl5GR&q=${this.state.LATITUDE}%2C${this.state.LONGITUDE}&language=en&details=false&toplevel=true`)
-			.then( (response) => response.json())
-			.then( (responseJson) => {
-				console.log(this.state.LATITUDE);
-				return this.setState({ LocationKey : responseJson.Key,});
-			})
-			.catch((err) => {
-				console.error(err);
-			});
-	}
-	*/
+
 	///////
 	renderMap(){
 			return (
