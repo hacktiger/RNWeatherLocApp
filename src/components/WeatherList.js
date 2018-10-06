@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { 
 	Text,
 	View, 
-	StyleSheet,
 } from 'react-native'
 ///
 import ForecastDetail from './ForecastDetail';
@@ -34,7 +33,7 @@ export default class WeatherList extends Component{
 	cccomponentDidMount(){
 		const APIkey = "ZJ0m9fUoAyMyW8YYwuLKDFGbs0LLYNp1";
 
-		fetch("http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=ZJ0m9fUoAyMyW8YYwuLKDFGbs0LLYNp1&q=21.0264415%2C105.82569989999999")
+		Axios.get("http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=ZJ0m9fUoAyMyW8YYwuLKDFGbs0LLYNp1&q=21.0264415%2C105.82569989999999")
 			.then( (response) => response.json())
 			.then( (responseJson) => {
 				this.setState({ LocationKey : responseJson.Key,});
@@ -44,9 +43,9 @@ export default class WeatherList extends Component{
 			});
 
 		//fetch 2nd
-		fetch("http://dataservice.accuweather.com/forecasts/v1/daily/5day/353412?apikey=ZJ0m9fUoAyMyW8YYwuLKDFGbs0LLYNp1")
+		Axios.get("http://dataservice.accuweather.com/forecasts/v1/daily/5day/353412?apikey=ZJ0m9fUoAyMyW8YYwuLKDFGbs0LLYNp1")
 			.then((response) => response.json())
-			.then((responeWeather) => {
+			.then( (responeWeather) => {
 				this.setState( { ForecastList: responeWeather.DailyForecasts } )
 			})
 			.catch((err) => {
@@ -60,15 +59,8 @@ export default class WeatherList extends Component{
 			<ForecastDetail key={ForecastList.Date}  ForecastList={ForecastList}  /> 
 		);
 	}
-	//Test function
+	//Test function for syntax purposes
 	testThen(){
-		const configs = {
-			timeout : 3000,
-			headers: {
-				'data': 'machine',
-				'Content-Type' : 'application/json',
-			}
-		}
 		const url = 'https://rallycoding.herokuapp.com/api/music_albums';
 
 		Axios.get(url,configs)
@@ -78,6 +70,7 @@ export default class WeatherList extends Component{
 	handleReq(response){
 		console.log(response);
 	}
+	// MAIN RENDER
 	render(){
 		return(
 			<View>

@@ -46,6 +46,7 @@ export default class ApiGateway {
     //response success
     _handleResponse(response){
         console.log(response);
+        return response;
     }
     //get
     get(url, params , configs = null){
