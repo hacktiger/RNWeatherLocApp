@@ -56,7 +56,7 @@ export default class ApiGateway {
             .catch ( err => this._handleError(err) );  
     }
     //create
-    post(url, body,configs){
+    post(url, body, configs){
         axios.post(url, body , configs)
             .then( repsponse => this._handleResponse(response) )
             .catch ( err => this._handleError(err) );
