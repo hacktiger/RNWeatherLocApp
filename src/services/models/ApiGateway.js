@@ -1,6 +1,5 @@
 import apisauce from 'apisauce';
-import error from '@/errors';
-import axios from 'axios';
+import error from '../errors';
 
 const DEFAULT_TIMEOUT = 3000;
 const TIMEOUT_ERROR = 'TIMEOUT_ERROR';
@@ -9,13 +8,13 @@ export default class ApiGateway {
     _instance;
     //
     constructor(configs){
-        const configsGateway = {
+        const configsGateway = ({
             baseURL : configs.endPoint,
-             timeout: configs.timeout || DEFAULT_TIMEOUT,
+            timeout: configs.timeout || DEFAULT_TIMEOUT,
             headers : {
                 'Content-Type' : 'application/json',
             }
-        };
+        });
 
         if ( configs.keyName ){
             configsGateway.params = {
@@ -37,6 +36,10 @@ export default class ApiGateway {
         } else if (error.request) {
             // The request was made but no response was received
             console.log(error.request);
+        } else if (error.repsponse.problem == "NETWORK_ERROR"){
+            console.log("No internet connection ")
+        } else if (error.response.problem == "'TIMEOUT_ERROR'"){
+            console.log(" Connection timed out ")
         } else {
             // Something happened in setting up the request that triggered an Error
             console.log('Error : ', error.message);
@@ -49,28 +52,28 @@ export default class ApiGateway {
         return response;
     }
     //get
-    get(url, params , configs = null){
+    get(url, params , configs = null){      
         /////need fixing
-        axios.get(url,params,configs)
+        this._instance.get(url,params,configs)
             .then( repsponse => this._handleResponse(response) )
             .catch ( err => this._handleError(err) );  
     }
     //create
     post(url, body, configs){
-        axios.post(url, body , configs)
+        this._instance.post(url, body , configs)
             .then( repsponse => this._handleResponse(response) )
             .catch ( err => this._handleError(err) );
     }
 
     //update
     put(url,body,configs){
-        axios.put(url, body,configs)
+        this._instance.put(url, body,configs)
             .then( repsponse => this._handleResponse(response) )
             .catch ( err => this._handleError(err) );
     }
     //delete 
     delete(url, configs){
-        axios.delete(url, configs)
+        this._instance.delete(url, configs)
             .then( repsponse => this._handleResponse(response) )
             .catch( err => this._handleError(err) );
     }
