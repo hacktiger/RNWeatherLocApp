@@ -16,3 +16,5 @@ const createCloudConfigs = (type, env = ENV) => {
 };
 
 const createLocalConfigs = () => null;
+
+export default createCloudConfigs

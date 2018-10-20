@@ -1,5 +1,5 @@
 import apisauce from 'apisauce';
-import error from '../errors';
+//import error from '@/errors';
 
 const DEFAULT_TIMEOUT = 3000;
 const TIMEOUT_ERROR = 'TIMEOUT_ERROR';
@@ -48,33 +48,37 @@ export default class ApiGateway {
     }
     //response success
     _handleResponse(response){
+        // 200 - 300 success
+        // 400 - < 500 client error
+        // >= 500 server 
         console.log(response);
+        
         return response;
     }
     //get
     get(url, params , configs = null){      
         /////need fixing
         this._instance.get(url,params,configs)
-            .then( repsponse => this._handleResponse(response) )
+            .then(this._handleResponse)
             .catch ( err => this._handleError(err) );  
     }
     //create
     post(url, body, configs){
         this._instance.post(url, body , configs)
-            .then( repsponse => this._handleResponse(response) )
+            .then( response => this._handleResponse(response) )
             .catch ( err => this._handleError(err) );
     }
 
     //update
     put(url,body,configs){
         this._instance.put(url, body,configs)
-            .then( repsponse => this._handleResponse(response) )
+            .then( response => this._handleResponse(response) )
             .catch ( err => this._handleError(err) );
     }
     //delete 
     delete(url, configs){
         this._instance.delete(url, configs)
-            .then( repsponse => this._handleResponse(response) )
+            .then( response => this._handleResponse(response) )
             .catch( err => this._handleError(err) );
     }
 }

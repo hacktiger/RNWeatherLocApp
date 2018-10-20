@@ -10,10 +10,9 @@ import {
 
 //My Components
 //import App from './App';
-import Header from './src/components/header';
-import MapViewer from './src/components/MapViewer';
-import WeatherList from './src/components/WeatherList';
-import Spinner from './src/components/Spinner';
+import Header from './src/view/common/Header';
+import MapViewer from './src/view/Screens/Map/MapViewer';
+import Spinner from './src/view/common/Spinner';
 
 // mayba later : import { Header, MapViewer } from './src/components/index';
 
@@ -62,8 +61,8 @@ class App extends Component {
 					<Header headerText = "MAP PAGE" />
 				</View>
 				<View style = {styles.body} /* MAIN MAP */>
-					
-					<WeatherList />
+					<MapViewer />
+					{/* <WeatherList /> */}
 				</View>
 				<View style = {styles.footerContainer } >
 					{ this.renderButton() /* return touchOpacity JSX */}

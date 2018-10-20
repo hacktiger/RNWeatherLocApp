@@ -15,3 +15,18 @@
   Create a folder name "configs"
   
   This folder will contains all configuration of the app. (endpoint, api key, ...)
+
+  https://google.com.vn
+  localhost:8081/
+
+  RESTFUL
+
+  GET:
+  https://www.example.com/getItem/${id}?key=123123
+
+  POST: create
+  PUT: update
+  DELETE
+
+
+
