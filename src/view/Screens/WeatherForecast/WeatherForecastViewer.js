@@ -1,12 +1,12 @@
+// react imports
 import React, { Component } from 'react';
 import { 
   Text,
   View 
 } from 'react-native';
-///
+// my imports
 import ForecastDetail from './components/WeatherForecastDetail';
-import WeatherGateway from '../../../configs/myApi';
-///
+//
 
 class WeatherForecastViewer extends Component {
   constructor (props) {
@@ -15,10 +15,9 @@ class WeatherForecastViewer extends Component {
       LocationKey: 0,
       ForecastList: [],
       // temporary put api key herre
-      APIkey: "ZJ0m9fUoAyMyW8YYwuLKDFGbs0LLYNp1"
     };
   }
-
+  /*
   /// latitude and longitude will come from state of other
   getLocationKey () {
     WeatherGateway.get(
@@ -43,7 +42,7 @@ class WeatherForecastViewer extends Component {
         this.setState({ ForecastList: responeWeather.DailyForecasts });
       });
   }
-
+  */
   // Helper function
   renderForecast () {
     return this.state.ForecastList.map(ForecastList => (
