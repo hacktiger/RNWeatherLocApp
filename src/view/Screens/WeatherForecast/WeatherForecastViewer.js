@@ -5,7 +5,8 @@ import {
   View 
 } from 'react-native';
 // my imports
-import ForecastDetail from './components/WeatherForecastDetail';
+// import ForecastDetail from './components/WeatherForecastDetail' ;
+// import WeatherForecastController from '../../../controller/WeatherForecastController' ;
 //
 
 class WeatherForecastViewer extends Component {
@@ -14,35 +15,15 @@ class WeatherForecastViewer extends Component {
     this.state = {
       LocationKey: 0,
       ForecastList: [],
-      // temporary put api key herre
     };
+    // this.myForecast = new WeatherForecastController();
   }
-  /*
-  /// latitude and longitude will come from state of other
-  getLocationKey () {
-    WeatherGateway.get(
-      "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${this.state.APIkey}&q=21.0264415%2C105.82569989999999"
-    )
-      .then(response => response.json())
-      .then(responseJson => {
-        this.setState({ LocationKey: responseJson.Key });
-      })
-      .then(this.fetchForecastData())
-      .catch(err => {
-        console.error(err);
-      });
+  //
+  setForecastList () {
+    // let k = this.myForecast.get5DaysWeatherForecast();
+    // console.log(k);
   }
 
-  fetchForecastData (locationKey) {
-    WeatherGateway.get(
-      `http://dataservice.accuweather.com/forecasts/v1/daily/5day/353412?apikey=${locationKey}`
-    )
-      .then(response => response.json())
-      .then(responeWeather => {
-        this.setState({ ForecastList: responeWeather.DailyForecasts });
-      });
-  }
-  */
   // Helper function
   renderForecast () {
     return this.state.ForecastList.map(ForecastList => (

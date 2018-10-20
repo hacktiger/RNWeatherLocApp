@@ -6,7 +6,7 @@ import environment from './environment/index.js';
  */
 const ENV = 'QA';
 
-//default ENV is QA;
+// default ENV is QA;
 const createCloudConfigs = (type, env = ENV) => {
   if (!environment[type] || !environment[type][env]) {
     return

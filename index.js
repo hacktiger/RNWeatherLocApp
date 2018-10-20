@@ -11,19 +11,24 @@ import {
 //My Components
 //import App from './App';
 import Header from './src/view/common/Header';
-import MapViewer from './src/view/Screens/Map/MapViewer';
 import Spinner from './src/view/common/Spinner';
-
+import WeatherForecastViewer from './src/view/Screens/WeatherForecast/WeatherForecastViewer' ;
+import MapViewer from './src/view/Screens/Map/MapViewer';
 // mayba later : import { Header, MapViewer } from './src/components/index';
 
-//Create comp
+// Create comp
 class App extends Component { 
 	//State
-	state = { loading : false , region : 'unknown'};
+	state = { 
+		loading : false , 
+		region : 'unknown'
+	};
 
 	//TouchOpacity(button) on press => execute this func
 	onButtonPress() {
-		this.setState({ loading : true });
+		this.setState({ 
+			loading : true 
+		});
 	}
 	// Render touchOp or Spinner ( if loading )
 	renderButton(){
@@ -52,7 +57,6 @@ class App extends Component {
 
 	}
 	*/
-
 	//MAIN RENDER <MapViewer />
 	render(){
 		return (
@@ -61,8 +65,8 @@ class App extends Component {
 					<Header headerText = "MAP PAGE" />
 				</View>
 				<View style = {styles.body} /* MAIN MAP */>
-					<MapViewer />
-					{/* <WeatherList /> */}
+					{/* <MapViewer /> */}
+					<WeatherForecastViewer />
 				</View>
 				<View style = {styles.footerContainer } >
 					{ this.renderButton() /* return touchOpacity JSX */}
@@ -73,7 +77,6 @@ class App extends Component {
 
 
 };
-
 
 //Styles
 const styles = StyleSheet.create({
@@ -102,6 +105,5 @@ const styles = StyleSheet.create({
 	},
 })
 
-
-//Render
+// App registry
 AppRegistry.registerComponent('WorkingApp', () => App);

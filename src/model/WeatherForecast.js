@@ -1,9 +1,9 @@
-import WeatherGateway from '../../../configs/myApi';
+import WeatherGateway from '../configs/myApi';
 //
 const ENDPOINT = 'http://dataservice.accuweather.com';
 const PATH_LOCATION_KEY = '/locations/v1/cities/geoposition';
-const API_KEY = 'ZJ0m9fUoAyMyW8YYwuLKDFGbs0LLYNp1';
 const PATH_5DAYS_FORECAST = '/forecasts/v1/daily/5day';
+const API_KEY = 'ZJ0m9fUoAyMyW8YYwuLKDFGbs0LLYNp1';
 // 21.0264415%2C105.82569989999999
 
 export const getAccuWeatherLocationKey = async (lat, long) => {
