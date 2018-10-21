@@ -1,27 +1,47 @@
-const environment = {
-  // type : weather
+// 
+const TIME_OUT_STANDARD = 3000 ;
+const HEADERS = {
+  'Content-Type': 'application/json'
+}
+const ENVIRONMENT = {
+  // type : 'weather'
   weather: {
+    // envs {'QA', 'STG', 'PRD'}
     QA: {
       endPoint: 'https://example.com',
-      timeout: 2000,
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      timeout: TIME_OUT_STANDARD,
+      headers: HEADERS
     },
     STG: {
       endPoint: 'https://exampleSTG.com',
-      timeout: 3000,
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      timeout: TIME_OUT_STANDARD,
+      headers: HEADERS
     },
     PRD: {
-
+      endPoint: 'https://examplePRD.com',
+      timeout: TIME_OUT_STANDARD,
+      headers: HEADERS
     }
   },
-  // type : google
+  // type : 'google'
   google: {
-
+    QA: {
+      endPoint: 'https://example.com',
+      timeout: TIME_OUT_STANDARD,
+      headers: HEADERS
+    },
+    STG: {
+      endPoint: 'https://exampleSTG.com',
+      timeout: TIME_OUT_STANDARD,
+      headers: HEADERS
+    },
+    PRD: {
+      endPoint: 'https://examplePRD.com',
+      timeout: TIME_OUT_STANDARD,
+      headers: HEADERS
+    }
   }
 }
-export default environment
+
+// export environment
+export default ENVIRONMENT

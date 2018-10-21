@@ -12,7 +12,7 @@ const createCloudConfigs = (type, env = ENV) => {
     return
   }
 
-  return environment[type][env];
+  return environment[type][env] ;
 };
 
 const createLocalConfigs = () => null;
