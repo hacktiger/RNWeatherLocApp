@@ -1,22 +1,31 @@
 //
 import {
-  getAccuWeatherLocationKey,
-  get5DaysForecast
+  promiseAccuWeatherLocationKey,
+  promiseAccuWeather5DaysForecast
 } from '../model/WeatherForecast'; 
 
 class WeatherForecastController {
-  async get5DaysWeatherForecast (latitude, longitude) {
-    const locationKey = await getAccuWeatherLocationKey(latitude, longitude) ;
-    // console.log('key :', locationKey) ;
-    if (locationKey) {
-      const forecast = await get5DaysForecast();
-      if (!forecast.error) {
-        return forecast ;
-      }
-    } else {
-      return console.log('error');
-    }
+  getLocationKey (latitude, longitude) {
+    promiseAccuWeatherLocationKey(latitude, longitude)
+      .then(response => response.json())
+      .then(
+        responseJson => this.setState({
+          LocationKey: responseJson.Key
+        })
+      )
+      .catch(err => console.log('LOC_KEY ERR : ', err))
   }
+
+  get5DaysForecast (locationKey) {
+    promiseAccuWeather5DaysForecast(locationKey)
+      .then(response => response.json())
+      .then(responseJson => this.setState({
+        ForecastList: responseJson.DailyForecasts
+      }))
+      .catch(err => console.log('FORE_ERROR : ', err))
+  }
+// end class
 }
 
+// export as default
 export default WeatherForecastController ;

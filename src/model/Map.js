@@ -4,8 +4,8 @@
 class Map{
   // my coordinates
   myCoords = {
-    LATITUDE : 2,
-    LONGITUDE : 4,
+    LATITUDE : 0,
+    LONGITUDE : 0,
   }
   // setter
   setMyCoords = () => {
@@ -13,9 +13,9 @@ class Map{
       navigator.geolocation.getCurrentPosition(
         // for some reason cant return from here
         position => {
-            this.myCoords.LATITUDE = position.coords.latitude;
-            this.myCoords.LONGITUDE = position.coords.longitude;
-            resolve();
+              this.myCoords.LATITUDE = position.coords.latitude;
+              this.myCoords.LONGITUDE = position.coords.longitude;
+              resolve()
         },
         (err => {
           console.log(err);

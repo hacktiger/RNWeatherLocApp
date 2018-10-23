@@ -1,3 +1,14 @@
+/// NOTEs
+- import Data1, {Data2, Data3} from '../' ; ( Data1 : export default | Data2, Data3 : export) !important
+
+
+/// TESTS 
+- create ApiGateway(createCloudConfigs('weather'))   :    ok
+but WeatherGateway = new ApiGateway(createCloudConfigs('weather')) === unidentified
+
+
+
+/// DESIGN
 file legends : 
 	' * ' (asterisk) : notify a folder
 	' - ' (small dash) : notify file ( ex : .js files )
@@ -10,7 +21,6 @@ WeatherForecastApp :
 		// get APIs, ... 
 		- Map
 			+ const PATH :
-			+ const ENDPOINT : 
 			+ getCurrentLatLong() : return { lat: , long: }
 			
 		- Weather	

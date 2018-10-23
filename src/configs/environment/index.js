@@ -1,5 +1,6 @@
-// 
-const TIME_OUT_STANDARD = 3000 ;
+// constants
+export const WEATHER_API_KEY = 'ZJ0m9fUoAyMyW8YYwuLKDFGbs0LLYNp1' ;
+const DEFAULT_TIMEOUT = 3000 ;
 const HEADERS = {
   'Content-Type': 'application/json'
 }
@@ -8,18 +9,18 @@ const ENVIRONMENT = {
   weather: {
     // envs {'QA', 'STG', 'PRD'}
     QA: {
-      endPoint: 'https://example.com',
-      timeout: TIME_OUT_STANDARD,
+      endPoint: 'http://dataservice.accuweather.com',
+      timeout: DEFAULT_TIMEOUT,
       headers: HEADERS
     },
     STG: {
-      endPoint: 'https://exampleSTG.com',
-      timeout: TIME_OUT_STANDARD,
+      endPoint: 'http://dataservice.accuweather.com',
+      timeout: DEFAULT_TIMEOUT,
       headers: HEADERS
     },
     PRD: {
-      endPoint: 'https://examplePRD.com',
-      timeout: TIME_OUT_STANDARD,
+      endPoint: 'http://dataservice.accuweather.com',
+      timeout: DEFAULT_TIMEOUT,
       headers: HEADERS
     }
   },
@@ -27,17 +28,17 @@ const ENVIRONMENT = {
   google: {
     QA: {
       endPoint: 'https://example.com',
-      timeout: TIME_OUT_STANDARD,
+      timeout: DEFAULT_TIMEOUT,
       headers: HEADERS
     },
     STG: {
       endPoint: 'https://exampleSTG.com',
-      timeout: TIME_OUT_STANDARD,
+      timeout: DEFAULT_TIMEOUT,
       headers: HEADERS
     },
     PRD: {
       endPoint: 'https://examplePRD.com',
-      timeout: TIME_OUT_STANDARD,
+      timeout: DEFAULT_TIMEOUT,
       headers: HEADERS
     }
   }
