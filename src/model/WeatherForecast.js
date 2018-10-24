@@ -8,12 +8,12 @@ const PATH_5DAYS_FORECAST = '/forecasts/v1/daily/5day';
 
 export const promiseAccuWeatherLocationKey = (lat, long) => {
   return new Promise((resolve, reject) => {
-    WeatherGateway.get(`/${PATH_LOCATION_KEY}/search?apikey=${WEATHER_API_KEY}&q=${lat}%2C${long}`)
+    resolve(WeatherGateway.get(`${PATH_LOCATION_KEY}/search?apikey=${WEATHER_API_KEY}&q=${lat},${long}`))
   })
 }
 
 export const promiseAccuWeather5DaysForecast = (LocationKey) => {
   return new Promise((resolve, reject) => {
-    WeatherGateway.get(`${PATH_5DAYS_FORECAST}/${LocationKey}?apikey=${WEATHER_API_KEY}}`)
+    WeatherGateway.get(`${PATH_5DAYS_FORECAST}/${LocationKey}?apikey=${WEATHER_API_KEY}`)
   })
 }

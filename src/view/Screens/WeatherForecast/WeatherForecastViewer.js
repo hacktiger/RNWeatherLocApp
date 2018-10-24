@@ -9,12 +9,16 @@ import {
 import WeatherForecastController from '../../../controller/WeatherForecastController' ;
 
 // IMPORTS FOR TESTING PURPOSES
-import { WeatherGateway } from '../../../configs/myApi';
+// import { WeatherGateway } from '../../../configs/myApi';
 // import { createCloudConfigs } from '../../../configs/configs';
 // import environment from '../../../configs/environment/index';
 // import createCloudConfigs from '../../../configs/configs';
 // import ApiGateway from '../../../services/models/ApiGateway' ; 
 
+import {
+  promiseAccuWeatherLocationKey,
+  promiseAccuWeather5DaysForecast
+} from '../../../model/WeatherForecast'; 
 
 // main class
 class WeatherForecastViewer extends Component {
@@ -39,13 +43,11 @@ class WeatherForecastViewer extends Component {
     }
   }
 
-  async test () {
-    let test = await this.myForecast.getLocationKey()
-    console.log(this.state)
-  }
   componentDidMount () {
     // this.setForecastList()
-    this.test()
+    // this.myGetLocationKey(21, 105)
+    promiseAccuWeather5DaysForecast(353986)
+    
   }
 
   // Helper function
