@@ -1,7 +1,7 @@
 //
 import WeatherDataService from '../services/models/WeatherDataService';
 
-export default class WeatherForecastController {
+export default class WeatherForecast {
   constructor () {
     this.WeatherDataServices = new WeatherDataService()
   }

@@ -10,16 +10,9 @@ export default class WeatherDataService {
 
   getLocationKey (lat, long) {
     WeatherGateway.get(`${PATH_LOCATION_KEY}/search?apikey=${WEATHER_API_KEY}&q=${lat},${long}`)
-      .then((response) => {
-        WeatherGateway.forecast(response.data.Key)
-      })
-      .catch(err => console.log(err))
   }
 
   forecast (locationKey) {
-    this.getLocationKey(`${PATH_5DAYS_FORECAST}/${locationKey}?apikey=${WEATHER_API_KEY}`)
-      .then()
-      .catch()
+    WeatherGateway.get(`${PATH_5DAYS_FORECAST}/${locationKey}?apikey=${WEATHER_API_KEY}`)
   }
 }
-

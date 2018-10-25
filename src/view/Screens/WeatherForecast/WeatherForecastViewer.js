@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 // my imports
 // import ForecastDetail from './components/WeatherForecastDetail' ;
-import WeatherForecastController from '../../../controller/WeatherForecastController' ;
+import WeatherForecast from '../../../controller/WeatherForecast' ;
 
 // IMPORTS FOR TESTING PURPOSES
 // import { WeatherGateway } from '../../../configs/myApi';
@@ -14,21 +14,17 @@ import WeatherForecastController from '../../../controller/WeatherForecastContro
 // import environment from '../../../configs/environment/index';
 // import createCloudConfigs from '../../../configs/configs';
 // import ApiGateway from '../../../services/models/ApiGateway' ; 
-
-import {
-  promiseAccuWeatherLocationKey,
-  promiseAccuWeather5DaysForecast
-} from '../../../model/WeatherForecast'; 
-
 // main class
 class WeatherForecastViewer extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
       LocationKey: 0,
-      ForecastList: []
-    };
-    this.myForecast = new WeatherForecastController();
+      ForecastList: [],
+      lat: 0,
+      long: 0
+    }
+    this.myForecast = new WeatherForecast();
   }
   //
   async setForecastList () {
@@ -46,8 +42,13 @@ class WeatherForecastViewer extends Component {
   componentDidMount () {
     // this.setForecastList()
     // this.myGetLocationKey(21, 105)
-    promiseAccuWeather5DaysForecast(353986)
-    
+    this.myForecast.forecast5days(this.state.lat, this.state.long)
+      .then((response) => {
+        this.setState({
+          ForecastList: response
+        })
+      })
+      .catch(err => console.log('MapForecastViewer :', err))
   }
 
   // Helper function
