@@ -8,19 +8,18 @@ const PATH_5DAYS_FORECAST = '/forecasts/v1/daily/5day';
 // fore : `${PATH_5DAYS_FORECAST}/${LocationKey}?apikey=${WEATHER_API_KEY}`
 export default class WeatherDataService {
 
-  getLocationKey = () => {
-    WeatherGateway.get()
-      .then( (response) => {
-        WeatherGateway.forecast(response.apikey)
-      })
-      .then( (forecast) => {
-        return Promise.resolve(forecast)
+  getLocationKey (lat, long) {
+    WeatherGateway.get(`${PATH_LOCATION_KEY}/search?apikey=${WEATHER_API_KEY}&q=${lat},${long}`)
+      .then((response) => {
+        WeatherGateway.forecast(response.data.Key)
       })
       .catch(err => console.log(err))
   }
 
-  forecast = (locationKey) => {
-    
+  forecast (locationKey) {
+    this.getLocationKey(`${PATH_5DAYS_FORECAST}/${locationKey}?apikey=${WEATHER_API_KEY}`)
+      .then()
+      .catch()
   }
 }
 

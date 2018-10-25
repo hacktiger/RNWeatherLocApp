@@ -5,26 +5,18 @@ export default class WeatherForecastController {
   constructor () {
     this.WeatherDataServices = new WeatherDataService()
   }
-  getLocationKey (latitude, longitude) {
-    this.WeatherDataServices.getLocationKey(latitude, longitude)
-      .then(response => response.json())
-      .then(responseJson =>
-        this.setState({
-          LocationKey: responseJson.Key
-        })
-      )
-      .catch(err => console.log('LOC_KEY ERR : ', err));
+
+  get5DaysForecast (lat, long) {
+    WeatherDataService.getLocationKey(lat, long)
+      .then(response => this.handleSuccess(response))
+      .catch(err => this.handleError(err))
   }
 
-  get5DaysForecast (locationKey) {
-    this.WeatherDataServices.forecast(locationKey)
-      .then(response => response.json())
-      .then(responseJson =>
-        this.setState({
-          ForecastList: responseJson.DailyForecasts
-        })
-      )
-      .catch(err => console.log("FORE_ERROR : ", err));
+  handleSuccess (response) {
+    return WeatherDataService.forecast(response.locationKey)
   }
-  // end class
+
+  handleError (error) {
+    console.log(error)
+  }
 }
