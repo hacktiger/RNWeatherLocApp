@@ -1,7 +1,7 @@
 // import React, { Component } from 'react';
 // import { StyleSheet, View } from 'react-native';
 //
-import Map from '../model/Map';
+import Map from '../services/models/MapDataService' 
 //
 
 class MapController {

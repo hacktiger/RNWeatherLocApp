@@ -1,31 +1,30 @@
 //
-import {
-  promiseAccuWeatherLocationKey,
-  promiseAccuWeather5DaysForecast
-} from '../model/WeatherForecast'; 
+import WeatherDataService from '../services/models/WeatherDataService';
 
-class WeatherForecastController {
+export default class WeatherForecastController {
+  constructor () {
+    this.WeatherDataServices = new WeatherDataService()
+  }
   getLocationKey (latitude, longitude) {
-    promiseAccuWeatherLocationKey(latitude, longitude)
+    this.WeatherDataServices.getLocationKey(latitude, longitude)
       .then(response => response.json())
-      .then(
-        responseJson => this.setState({
+      .then(responseJson =>
+        this.setState({
           LocationKey: responseJson.Key
         })
       )
-      .catch(err => console.log('LOC_KEY ERR : ', err))
+      .catch(err => console.log('LOC_KEY ERR : ', err));
   }
 
   get5DaysForecast (locationKey) {
-    promiseAccuWeather5DaysForecast(locationKey)
+    this.WeatherDataServices.forecast(locationKey)
       .then(response => response.json())
-      .then(responseJson => this.setState({
-        ForecastList: responseJson.DailyForecasts
-      }))
-      .catch(err => console.log('FORE_ERROR : ', err))
+      .then(responseJson =>
+        this.setState({
+          ForecastList: responseJson.DailyForecasts
+        })
+      )
+      .catch(err => console.log("FORE_ERROR : ", err));
   }
-// end class
+  // end class
 }
-
-// export as default
-export default WeatherForecastController ;
