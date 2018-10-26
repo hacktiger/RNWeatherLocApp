@@ -7,13 +7,14 @@ export default class WeatherForecast {
   }
 
   get5DaysForecast (lat, long) {
-    WeatherDataService.getLocationKey(lat, long)
+    return this.WeatherDataServices.getLocationKey(lat, long)
       .then(response => this.handleSuccess(response))
       .catch(err => this.handleError(err))
   }
 
   handleSuccess (response) {
-    return WeatherDataService.forecast(response.locationKey)
+    console.log('controller handle : ', response)
+    return this.WeatherDataServices.forecast(response.data.Key)
   }
 
   handleError (error) {

@@ -48,18 +48,13 @@ export default class ApiGateway {
     }
     //response success
     _handleResponse(response){
-        // 200 - 300 success
-        // 400 - < 500 client error
-        // >= 500 server
-        console.log(response)
-        return response;
+        return response
     }
     //get
     get(url, params , configs = null){      
-        /////need fixing
-        this._instance.get(url,params,configs)
-            .then(response => this._handleResponse(response))
-            .catch ( err => this._handleError(err) )
+        return this._instance.get(url,params,configs)
+                .then( response => this._handleResponse(response) )
+                .catch ( err => this._handleError(err) );
     }
     //create
     post(url, body, configs){

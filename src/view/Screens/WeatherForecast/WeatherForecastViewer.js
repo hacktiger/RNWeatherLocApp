@@ -4,16 +4,10 @@ import {
   Text,
   View 
 } from 'react-native';
-// my imports
-// import ForecastDetail from './components/WeatherForecastDetail' ;
-import WeatherForecast from '../../../controller/WeatherForecast' ;
 
 // IMPORTS FOR TESTING PURPOSES
-// import { WeatherGateway } from '../../../configs/myApi';
-// import { createCloudConfigs } from '../../../configs/configs';
-// import environment from '../../../configs/environment/index';
-// import createCloudConfigs from '../../../configs/configs';
-// import ApiGateway from '../../../services/models/ApiGateway' ; 
+import WeatherForecast from '../../../controller/WeatherForecast' ;
+
 // main class
 class WeatherForecastViewer extends Component {
   constructor (props) {
@@ -21,32 +15,19 @@ class WeatherForecastViewer extends Component {
     this.state = {
       LocationKey: 0,
       ForecastList: [],
-      lat: 0,
-      long: 0
+      lat: 21,
+      long: 105
     }
-    this.myForecast = new WeatherForecast();
-  }
-  //
-  async setForecastList () {
-    await this.myForecast.getLocationKey()
-    let forecast = await this.myForecast.get5DaysForecast()
-    // temp
-    console.log('gg')
-    if (forecast) {
-      console.log('ok')
-    } else {
-      console.log('not ok')
-    }
+    this.myForecast = new WeatherForecast()
   }
 
   componentDidMount () {
-    // this.setForecastList()
-    // this.myGetLocationKey(21, 105)
-    this.myForecast.forecast5days(this.state.lat, this.state.long)
+    this.myForecast.get5DaysForecast(this.state.lat, this.state.long)
       .then((response) => {
         this.setState({
-          ForecastList: response
+          ForecastList: response.data
         })
+        console.log('state', this.state.ForecastList)
       })
       .catch(err => console.log('MapForecastViewer :', err))
   }
@@ -55,7 +36,7 @@ class WeatherForecastViewer extends Component {
   renderForecast () {
     return this.state.ForecastList.map(ForecastList => (
       <ForecastDetail key={ForecastList.Date} ForecastList={ForecastList} />
-    ));
+    ))
   }
 
   // MAIN RENDER
