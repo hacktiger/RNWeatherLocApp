@@ -12,12 +12,12 @@
   Learn about SOLID.
 
 # TODO
-  [] Create a folder name "configs"
+  [x] Create a folder name "configs"
   This folder will contains all configuration of the app. (endpoint, api key, ...)
 
-  [] RESTFUL
+  [x] RESTFUL
 
-  [] GET:
+  [x] GET:
   https://www.example.com/getItem/${id}?key=123123
   POST: create
   PUT: update
