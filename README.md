@@ -12,21 +12,22 @@
   Learn about SOLID.
 
 # TODO
-  Create a folder name "configs"
-  
+  [] Create a folder name "configs"
   This folder will contains all configuration of the app. (endpoint, api key, ...)
 
-  https://google.com.vn
-  localhost:8081/
+  [] RESTFUL
 
-  RESTFUL
-
-  GET:
+  [] GET:
   https://www.example.com/getItem/${id}?key=123123
-
   POST: create
   PUT: update
   DELETE
 
+  [] Create Login Page w user token
 
+  [] new Endpoint => list user/load more
+
+  [] constructor not needed 
+
+  [] handle error only if key not exist
 

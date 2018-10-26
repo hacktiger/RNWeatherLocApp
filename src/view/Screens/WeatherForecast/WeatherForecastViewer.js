@@ -1,13 +1,13 @@
 // react imports
-import React, { Component } from 'react';
-import { 
+import React, { Component } from 'react'
+import {
   Text,
-  View 
-} from 'react-native';
+  View
+} from 'react-native'
 
 // IMPORTS FOR TESTING PURPOSES
-import WeatherForecast from '../../../controller/WeatherForecast' ;
-
+import WeatherForecast from '../../../controller/WeatherForecast'
+import WeatherForecastDetail from './components/WeatherForecastDetail'
 // main class
 class WeatherForecastViewer extends Component {
   constructor (props) {
@@ -25,7 +25,7 @@ class WeatherForecastViewer extends Component {
     this.myForecast.get5DaysForecast(this.state.lat, this.state.long)
       .then((response) => {
         this.setState({
-          ForecastList: response.data
+          ForecastList: response.data.DailyForecasts
         })
         console.log('state', this.state.ForecastList)
       })
@@ -44,14 +44,11 @@ class WeatherForecastViewer extends Component {
     return (
       <View>
         <Text>aaaa</Text>
-        <Text>aaaa</Text>
-        <Text>aaaa</Text>
-        <Text>aaaa</Text>
-        <Text>aaaa</Text>
+        <Text> {console.log('inside render', this.state.ForecastList.DailyForecasts)} </Text>
+        { this.renderForecast() }
       </View>
-    );
+    )
   }
 }
 
-export default WeatherForecastViewer ;
-// add {this.renderForecast()} in view later
+export default WeatherForecastViewer
