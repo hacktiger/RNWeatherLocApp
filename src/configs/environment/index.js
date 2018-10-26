@@ -41,6 +41,14 @@ const ENVIRONMENT = {
       timeout: DEFAULT_TIMEOUT,
       headers: HEADERS
     }
+  },
+  // type : 'user'
+  user: {
+    QA: {
+      endPoint: 'https://reqres.in',
+      timeout: DEFAULT_TIMEOUT,
+      headers: HEADERS
+    }
   }
 }
 

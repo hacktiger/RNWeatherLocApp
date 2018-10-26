@@ -14,6 +14,7 @@ import Header from './src/view/common/Header';
 import Spinner from './src/view/common/Spinner';
 import WeatherForecastViewer from './src/view/Screens/WeatherForecast/WeatherForecastViewer' ;
 import MapViewer from './src/view/Screens/Map/MapViewer';
+import UserViewer from './src/view/Screens/User/UserViewer';
 // mayba later : import { Header, MapViewer } from './src/components/index';
 
 // Create comp
@@ -62,11 +63,12 @@ class App extends Component {
 		return (
 			<View style = {styles.container}>
 				<View style = {styles.headerContainer}>
-					<Header headerText = "MAP PAGE" />
+					<Header headerText = "UserPAGE" />
 				</View>
 				<View style = {styles.body} /* MAIN MAP */>
 					{/* <MapViewer /> */}
-					<WeatherForecastViewer />
+					{/* <WeatherForecastViewer />  */}
+					<UserViewer />
 				</View>
 				<View style = {styles.footerContainer } >
 					{ this.renderButton() /* return touchOpacity JSX */}
