@@ -3,20 +3,23 @@ import UserDataService from '../services/models/UserDataService'
 
 const UserData = new UserDataService()
 export default class User {
+  // try to get all some time later
   getAllUserList () {
-    var myArray = [1, 2, 3, 4,5,6,7,8]
-    for (var value of myArray) {
-      UserData.getUserList(value)
-        .then(response=>console.log(response))
+    return UserData.getUserList(4)
+      .then(response => this._handleSuccess(response))
+      .catch(err => this._handleError(err))
+  }
+  // handle response if success
+  _handleSuccess (response) {
+    if (response.status === 404) {
+      return this._handleError('User Page not Found')
+    } else {
+      return UserData.getUserList(4)
     }
   }
-
-  handleSuccess (response) {
-    console.log('User controller handle : ', response)
-    // return this.WeatherDataServices.forecast(response.data.Key)
-  }
-
-  handleError (error) {
+  // handle response if error
+  _handleError (error) {
     console.log(error)
+    return null
   }
 }

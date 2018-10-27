@@ -8,6 +8,6 @@ const PATH_USER_LIST_PAGE = '?page='
 // fore : `${PATH_5DAYS_FORECAST}/${LocationKey}?apikey=${WEATHER_API_KEY}`
 export default class WeatherDataService {
   getUserList (pageNum) {
-    return UserGateway.get(`${PATH_COMMON}${PATH_USER_LIST}${PATH_USER_LIST_PAGE}${pageNum}`)
+    return UserGateway.get(`${PATH_COMMON}${PATH_USER_LIST}/23`)
   }
 }
