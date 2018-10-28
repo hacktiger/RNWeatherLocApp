@@ -35,15 +35,14 @@ class WeatherForecastViewer extends Component {
   // Helper function
   renderForecast () {
     return this.state.ForecastList.map(ForecastList => (
-      <ForecastDetail key={ForecastList.Date} ForecastList={ForecastList} />
+      <WeatherForecastDetail key={ForecastList.Date} ForecastList={ForecastList} />
     ))
   }
 
   // MAIN RENDER
   render () {
     return (
-      <View>
-        <Text>aaaa</Text>
+      <View style={{ flex: 1 }}>
         <Text> {console.log('inside render', this.state.ForecastList.DailyForecasts)} </Text>
         { this.renderForecast() }
       </View>

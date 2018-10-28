@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
   },
 
   headerBox: {
+    flex: 1,
     backgroundColor: '#3b5998',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 60,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,

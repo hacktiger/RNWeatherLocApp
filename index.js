@@ -5,9 +5,9 @@ import {
 	View, 
 	StyleSheet, 
 	TouchableOpacity,
-	Text
+	Text,
+	Dimensions 
 } from 'react-native';
-
 //My Components
 //import App from './App';
 import Header from './src/view/common/Header';
@@ -15,7 +15,6 @@ import Spinner from './src/view/common/Spinner';
 import WeatherForecastViewer from './src/view/Screens/WeatherForecast/WeatherForecastViewer' ;
 import MapViewer from './src/view/Screens/Map/MapViewer';
 import UserViewer from './src/view/Screens/User/UserViewer';
-// mayba later : import { Header, MapViewer } from './src/components/index';
 
 // Create comp
 class App extends Component { 
@@ -43,7 +42,7 @@ class App extends Component {
 		        //func will happen in future -> bind this
 		        onPress={this.onButtonPress.bind(this)}
 		    >
-		        <Text style = {{color : '#FFFFFF'}}> Get Weather Stats </Text>
+		        <Text style = {{color : '#FFFFFF'}}> Bottom Tab Nav </Text>
 		    </TouchableOpacity>
 		);
 	}
@@ -69,13 +68,13 @@ class App extends Component {
 				{/* main body */}
 				<View style = {styles.body} >
 					{/* <MapViewer /> */}
-					{/* <WeatherForecastViewer />  */}
+					{/* <WeatherForecastViewer /> */} 
 					<UserViewer />
 				</View>
 				{/* Footer */}
-{/* 				<View style = {styles.footerContainer } >
+				<View style = {styles.footerContainer } >
 					{ this.renderButton()}
-				</View> */}
+				</View> 
 			</View>
 		)
 	}
@@ -85,28 +84,29 @@ class App extends Component {
 
 //Styles
 const styles = StyleSheet.create({
-  	container: { 
-	  	... StyleSheet.absoluteFillObject,
-	  	flex: 1,
-	  	flexDirection : 'column',
-  	},
+  container: { 
+	  flex: 1,
+		backgroundColor:'#b642f4'
+  },
 	headerContainer:{
-		flex : 0.1
+		width: Dimensions.get('window').width,
+		flexGrow:0.14
+		,backgroundColor:'green'
 	},
 	body:{
-		marginTop: 5,
-		flex : 1.6
+		width: Dimensions.get('window').width,
+		flexGrow: 0.76
+		,backgroundColor:'red'
 	},
-	footerContainer:{
-		flex: 0.2,   
-		justifyContent: 'center',	
+	footerContainer:{  
+		width: Dimensions.get('window').width,
+		flexGrow:0.1
 	},  
 	button : {
-		borderRadius : 2,
-		height : 60,
+		flexGrow:1,
 		justifyContent: 'center',
 		alignItems: 'center',
-    	backgroundColor: '#3b5998',
+    backgroundColor: '#3b5998',
 	},
 })
 
