@@ -62,17 +62,20 @@ class App extends Component {
 	render(){
 		return (
 			<View style = {styles.container}>
+				{/* Header */}
 				<View style = {styles.headerContainer}>
 					<Header headerText = "UserPAGE" />
 				</View>
-				<View style = {styles.body} /* MAIN MAP */>
+				{/* main body */}
+				<View style = {styles.body} >
 					{/* <MapViewer /> */}
 					{/* <WeatherForecastViewer />  */}
 					<UserViewer />
 				</View>
-				<View style = {styles.footerContainer } >
-					{ this.renderButton() /* return touchOpacity JSX */}
-				</View>
+				{/* Footer */}
+{/* 				<View style = {styles.footerContainer } >
+					{ this.renderButton()}
+				</View> */}
 			</View>
 		)
 	}
@@ -91,7 +94,7 @@ const styles = StyleSheet.create({
 		flex : 0.1
 	},
 	body:{
-		marginTop:25,
+		marginTop: 5,
 		flex : 1.6
 	},
 	footerContainer:{

@@ -4,8 +4,8 @@ import UserDataService from '../services/models/UserDataService'
 const UserData = new UserDataService()
 export default class User {
   // try to get all some time later
-  getAllUserList () {
-    return UserData.getUserList(4)
+  getAllUserList (pageNo) {
+    return UserData.getUserList(pageNo)
       .then(response => this._handleSuccess(response))
       .catch(err => this._handleError(err))
   }
@@ -14,7 +14,7 @@ export default class User {
     if (response.status === 404) {
       return this._handleError('User Page not Found')
     } else {
-      return UserData.getUserList(4)
+      return UserData.getUserList(parseInt(response.data.page))
     }
   }
   // handle response if error

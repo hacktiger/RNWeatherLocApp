@@ -21,12 +21,12 @@ export default class MyListItem extends PureComponent {
 }
 const styles = StyleSheet.create({
   container: {
-    padding: 30,
+    padding: 25,
     backgroundColor: 'yellow'
   },
   text: {
     color: 'red',
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: '200',
     textAlign: 'center'
   }
