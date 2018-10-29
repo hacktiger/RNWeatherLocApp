@@ -25,7 +25,7 @@
 
   [] Create Login Page w user token
 
-  [working on it] new Endpoint => list user/load more with flatlist
+  [x] new Endpoint => list user/load more with flatlist
 
   [] constructor not needed 
 
