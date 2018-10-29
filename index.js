@@ -5,24 +5,23 @@ import {
 	View, 
 	StyleSheet, 
 	TouchableOpacity,
-	Text
+	Text,
+	Dimensions 
 } from 'react-native';
-
 //My Components
 //import App from './App';
 import Header from './src/view/common/Header';
 import Spinner from './src/view/common/Spinner';
 import WeatherForecastViewer from './src/view/Screens/WeatherForecast/WeatherForecastViewer' ;
 import MapViewer from './src/view/Screens/Map/MapViewer';
-// mayba later : import { Header, MapViewer } from './src/components/index';
+import UserViewer from './src/view/Screens/User/UserViewer';
 
 // Create comp
 class App extends Component { 
 	//State
 	state = { 
-		loading : false , 
-		region : 'unknown'
-	};
+		loading : false 
+	}
 
 	//TouchOpacity(button) on press => execute this func
 	onButtonPress() {
@@ -30,6 +29,7 @@ class App extends Component {
 			loading : true 
 		});
 	}
+	/*
 	// Render touchOp or Spinner ( if loading )
 	renderButton(){
 		if ( this.state.loading ){
@@ -42,11 +42,11 @@ class App extends Component {
 		        //func will happen in future -> bind this
 		        onPress={this.onButtonPress.bind(this)}
 		    >
-		        <Text style = {{color : '#FFFFFF'}}> Get Weather Stats </Text>
+		        <Text style = {{color : '#FFFFFF'}}> Bottom Tab Nav </Text>
 		    </TouchableOpacity>
 		);
 	}
-	/*
+
 	72.  2p50
 	onStatsLoadingSuccess(){
 		
@@ -61,16 +61,20 @@ class App extends Component {
 	render(){
 		return (
 			<View style = {styles.container}>
+				{/* Header */}
 				<View style = {styles.headerContainer}>
-					<Header headerText = "MAP PAGE" />
+					<Header headerText = "UserPAGE" />
 				</View>
-				<View style = {styles.body} /* MAIN MAP */>
+				{/* main body */}
+				<View style = {styles.body} >
 					{/* <MapViewer /> */}
-					<WeatherForecastViewer />
+					{/* <WeatherForecastViewer /> */} 
+					<UserViewer />
 				</View>
+				{/* Footer */}
 				<View style = {styles.footerContainer } >
-					{ this.renderButton() /* return touchOpacity JSX */}
-				</View>
+					<Text style={{color:'white', fontSize: 20}}> Bottom Nav </Text>
+				</View> 
 			</View>
 		)
 	}
@@ -80,29 +84,31 @@ class App extends Component {
 
 //Styles
 const styles = StyleSheet.create({
-  	container: { 
-	  	... StyleSheet.absoluteFillObject,
-	  	flex: 1,
-	  	flexDirection : 'column',
-  	},
+  container: { 
+	  flex: 1,
+  },
 	headerContainer:{
-		flex : 0.1
+		width: Dimensions.get('window').width,
+		flexGrow:0.13
 	},
 	body:{
-		marginTop:25,
-		flex : 1.6
+		width: Dimensions.get('window').width,
+		flexGrow: 0.82
 	},
-	footerContainer:{
-		flex: 0.2,   
-		justifyContent: 'center',	
-	},  
+	footerContainer:{  
+		width: Dimensions.get('window').width,
+		flexGrow:0.05,
+		backgroundColor: '#3b5998',
+		alignItems: 'center',
+		justifyContent: 'center'
+	}/* ,  
 	button : {
-		borderRadius : 2,
-		height : 60,
+		flexGrow:1,
 		justifyContent: 'center',
 		alignItems: 'center',
     	backgroundColor: '#3b5998',
 	},
+	*/
 })
 
 // App registry

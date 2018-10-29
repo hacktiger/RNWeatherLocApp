@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import {
   StyleSheet,
-  View 
+  View,
+  Dimensions
 } from 'react-native';
 // my c
 // import Spinner from './src/components/Spinner';
@@ -32,6 +33,10 @@ class MapViewer extends Component {
 
   //
   renderMap () {
+
+  }
+  // MAIN RENDER
+  render () {
     return (
       <MapView
         // LOAD MAP
@@ -56,22 +61,14 @@ class MapViewer extends Component {
       </MapView>
     )
   }
-  // MAIN RENDER
-  render () {
-    return (
-      <View style={styles.container}>
-        { /* render map with renderMap() */ }
-        {this.renderMap()}
-      </View>
-    )
-  }
 }
 
 // STYLES
 const styles = StyleSheet.create({
-  container: { ...StyleSheet.absoluteFillObject, elevation: 1 },
-  map: { ...StyleSheet.absoluteFillObject }
-});
+  map: {
+    flex: 1
+  }
+})
 
 // EXPORT !!important
 export default MapViewer

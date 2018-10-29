@@ -1,4 +1,4 @@
-import { WeatherGateway } from '../../configs/myApi'
+import { WeatherGateway } from '../../configs/myGateway'
 import { WEATHER_API_KEY } from '../../configs/environment/index'
 //
 const PATH_LOCATION_KEY = '/locations/v1/cities/geoposition'
