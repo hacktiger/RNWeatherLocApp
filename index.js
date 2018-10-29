@@ -20,9 +20,8 @@ import UserViewer from './src/view/Screens/User/UserViewer';
 class App extends Component { 
 	//State
 	state = { 
-		loading : false , 
-		region : 'unknown'
-	};
+		loading : false 
+	}
 
 	//TouchOpacity(button) on press => execute this func
 	onButtonPress() {
@@ -30,6 +29,7 @@ class App extends Component {
 			loading : true 
 		});
 	}
+	/*
 	// Render touchOp or Spinner ( if loading )
 	renderButton(){
 		if ( this.state.loading ){
@@ -46,7 +46,7 @@ class App extends Component {
 		    </TouchableOpacity>
 		);
 	}
-	/*
+
 	72.  2p50
 	onStatsLoadingSuccess(){
 		
@@ -73,7 +73,7 @@ class App extends Component {
 				</View>
 				{/* Footer */}
 				<View style = {styles.footerContainer } >
-					{ this.renderButton()}
+					<Text style={{color:'white', fontSize: 20}}> Bottom Nav </Text>
 				</View> 
 			</View>
 		)
@@ -86,28 +86,29 @@ class App extends Component {
 const styles = StyleSheet.create({
   container: { 
 	  flex: 1,
-		backgroundColor:'#b642f4'
   },
 	headerContainer:{
 		width: Dimensions.get('window').width,
-		flexGrow:0.14
-		,backgroundColor:'green'
+		flexGrow:0.13
 	},
 	body:{
 		width: Dimensions.get('window').width,
-		flexGrow: 0.76
-		,backgroundColor:'red'
+		flexGrow: 0.82
 	},
 	footerContainer:{  
 		width: Dimensions.get('window').width,
-		flexGrow:0.1
-	},  
+		flexGrow:0.05,
+		backgroundColor: '#3b5998',
+		alignItems: 'center',
+		justifyContent: 'center'
+	}/* ,  
 	button : {
 		flexGrow:1,
 		justifyContent: 'center',
 		alignItems: 'center',
-    backgroundColor: '#3b5998',
+    	backgroundColor: '#3b5998',
 	},
+	*/
 })
 
 // App registry

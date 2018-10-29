@@ -1,10 +1,10 @@
 // react imports
 import React, { PureComponent } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { List, SearchBar } from 'react-native-elements';
+import { View, Text, FlatList, StyleSheet,TouchableOpacity } from 'react-native';
+import { List, SearchBar, ListItem, Avatar } from 'react-native-elements';
 // My imports
 import User from '../../../controller/User';
-import UserListItem from './userListItem';
+// import UserListItem from './userListItem'; // custom ListItem
 import Spinner from '../../common/Spinner';
 
 // main class
@@ -14,27 +14,39 @@ class UserViewer extends PureComponent {
     this.state = {
       UserList: [],
       arrayholder: [],
-      query: "",
+      query: '',
       page: 1,
-      error: null,
+      error: 'None',
       isLoading: true,
       isRefreshing: false
     };
+    // react native create reference
     this.search = React.createRef()
     this.User = new User()
   }
   // component did mount
   componentDidMount () {
-    this.retrieveUserList();
+    // this.testFunc()
+    this.retrieveUserList()
   }
+/*   testFunc = () => {
+    const my = {
+      'name': 'morp',
+      'job': 'leader'
+    }
+    this.User.updateUser(2,my)
+    .then(response => console.log(response))
+    .catch(err => console.log(err))
+  } */
   //get User
   // @ref : componentDidMount
   retrieveUserList = () => {
     this.User.getAllUserList(this.state.page)
-      .then(response => this._handleSuccess(response))
+      .then(response => this._handleResponse(response))
+      .catch(err => console.log(err))
   }
   // handle success of getting user
-  _handleSuccess (response) {
+  _handleResponse (response) {
     if ( response ) {
       // console.log('user view response: ', response)
       this.setState({
@@ -54,17 +66,31 @@ class UserViewer extends PureComponent {
     // console.log(this.state)
   }
 
-  //////////////////////////////////////
-  // HELPER FUNCTIONS FOR FLAT LIST   //
-  //////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+  // HELPER FUNCTIONS FOR FLAT LIST   
+  ///////////////////////////////////////////////////////////////////
   // render each items
   // @ref render -> FlatList
-  _renderItem = ({ item }) => 
-  <UserListItem 
-    first_name={item.first_name}
-    last_name={item.last_name}
-    avatar={item.avatar}
-  />
+  _renderItem = ({ item }) => (
+    <TouchableOpacity>
+      <ListItem
+        avatar = { <Avatar
+                      medium
+                      rounded
+                      style={{ width: 50, height: 50 }}
+                      source={{ uri: `${item.avatar}` }}
+                      activeOpacity={0.7}
+                    />
+        }
+        title = {item.first_name + ' ' + item.last_name}
+        titleStyle = {{fontSize:25,paddingLeft:30}}
+        chevronColor = 'black'
+      />
+    </TouchableOpacity>
+  )
+  // key Extractor
+  // @ref render -> Flatlist
+  _keyExtractor = (item,index) => index.toString()
   // render separator between items
   // @ref render -> FlatList
   _renderSeparator = () => {
@@ -86,7 +112,7 @@ class UserViewer extends PureComponent {
       />
     )
   }
-  //
+  // do some filtering on search bar later
   _handleTextChange = (text) => {
     // console.log(text)
   }
@@ -94,7 +120,7 @@ class UserViewer extends PureComponent {
   // render footer ( Spinner )
   // @ref render -> FlatList
   _renderFooter = () => {
-    if (typeof this.state.error !== null ){
+    if (this.state.error === 'None' ){
       if(!this.state.isLoading){
         return null
       }
@@ -112,7 +138,6 @@ class UserViewer extends PureComponent {
         </View>
       )
     }
-
   }
 
   // handle when pull to refresh
@@ -135,7 +160,10 @@ class UserViewer extends PureComponent {
       this.retrieveUserList(this.state.page)
     })
   }
+
+  /////////////////////////////////////////////////////////////////////
   // MAIN RENDER
+  /////////////////////////////////////////////////////////////////////
   render () {
     return (
       <View style={styles.container}>
@@ -143,8 +171,7 @@ class UserViewer extends PureComponent {
           <FlatList
             data={this.state.UserList}
             renderItem={this._renderItem}
-            keyExtractor={(item, index) => index.toString()}
-            initialNumToRender = {6}
+            keyExtractor={this._keyExtractor}
             // Separator/ Header/ Footer
             ItemSeparatorComponent={this._renderSeparator}
             ListHeaderComponent={this._renderHeader}
@@ -166,7 +193,8 @@ export default UserViewer;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    marginTop :-22
   },
   spinnerView:{
     height: 1,
