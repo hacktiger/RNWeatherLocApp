@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import React, { Component } from 'react'
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import {
   StyleSheet,
-  View,
-  Dimensions
-} from 'react-native';
+  YellowBox
+} from 'react-native'
 // my c
 // import Spinner from './src/components/Spinner';
-import MapController from '../../../controller/MapController';
-
+import MapController from '../../../controller/MapController'
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader'])
 /**
  *main class map view
  */
@@ -17,18 +16,18 @@ class MapViewer extends Component {
     super(props)
     this.state = {
       LATITUDE: -9999,
-      LONGITUDE: -9999,
-      LocationKey: 0
+      LONGITUDE: -9999
     }
     this.myMapController = new MapController()
   }
   //
   async componentDidMount () {
-    let coords = await this.myMapController.retrieveMyCurrentPosition();
+    let coords = await this.myMapController.retrieveMyCurrentPosition()
     this.setState({
       LATITUDE: coords.LATITUDE,
       LONGITUDE: coords.LONGITUDE
     })
+    console.log(this.state)
   }
 
   //
