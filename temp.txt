@@ -1,0 +1,18 @@
+// App.js -> UserViewerScreen -> render :
+<View style = {styles.container}>
+{ console.log('userview screen') }
+{/* main body */}
+<View style = {styles.body} >
+  {/* <MapViewer /> 
+  {/* <WeatherForecastViewer /> */}
+  <UserViewer />
+</View>
+{/* Footer -- This is for testing to navigate between screens in the same stack*/}
+<View style = {styles.footerContainer } >
+  <Button
+    title="Go to Home"
+    // onPress change navigate('x') x: @ref HomeStack
+    onPress={() => this.props.navigation.navigate('Home')}
+  />
+</View>
+</View> 
