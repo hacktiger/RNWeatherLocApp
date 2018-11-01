@@ -12,8 +12,8 @@ class UserViewer extends PureComponent {
   constructor (props) {
     super (props)
     this.state = {
+      OriginalUserList: [],
       UserList: [],
-      arrayholder: [],
       query: '',
       page: 1,
       error: 'None',
@@ -21,7 +21,6 @@ class UserViewer extends PureComponent {
       isRefreshing: false
     };
     // react native create reference
-    this.search = React.createRef()
     this.User = new User()
   }
   // component did mount
@@ -29,15 +28,6 @@ class UserViewer extends PureComponent {
     // this.testFunc()
     this.retrieveUserList()
   }
-/*   testFunc = () => {
-    const my = {
-      'name': 'morp',
-      'job': 'leader'
-    }
-    this.User.updateUser(2,my)
-    .then(response => console.log(response))
-    .catch(err => console.log(err))
-  } */
   //get User
   // @ref : componentDidMount
   retrieveUserList = () => {
@@ -47,14 +37,15 @@ class UserViewer extends PureComponent {
   }
   // handle success of getting user
   _handleResponse (response) {
+    console.log(response)
     if ( response ) {
       // console.log('user view response: ', response)
       this.setState({
         UserList: [...this.state.UserList, ...response.data.data],
-        arrayholder: [...this.state.arrayholder, ...response.data.data],
+        OriginalUserList: [...this.state.OriginalUserList, ...response.data.data],
         isLoading: false,
         isRefreshing: false
-      });
+      })
       // console.log(this.state.UserList)
     } else {
       this.setState({
@@ -90,7 +81,7 @@ class UserViewer extends PureComponent {
   )
   // key Extractor
   // @ref render -> Flatlist
-  _keyExtractor = (item,index) => index.toString()
+  _keyExtractor = (item) => item.id.toString()
   // render separator between items
   // @ref render -> FlatList
   _renderSeparator = () => {
@@ -109,12 +100,22 @@ class UserViewer extends PureComponent {
         round
         platform="android"
         onChangeText = {(text) => this._handleTextChange(text)}
+        autoCorrect={false} 
       />
     )
   }
   // do some filtering on search bar later
   _handleTextChange = (text) => {
-    // console.log(text)
+    const filteredData = this.state.OriginalUserList.filter(item => {      
+      const itemData = `${item.first_name.toUpperCase()} ${item.last_name.toUpperCase()}`;
+      const formatQuery = text.toUpperCase();
+      // return  
+      return itemData.indexOf(formatQuery) > -1;    
+    });
+    this.setState({ UserList: filteredData })
+    console.log('original', this.state.OriginalUserList)
+    console.log('newData :', filteredData)
+    // console.log('itemData :',itemData)
   }
 
   // render footer ( Spinner )
@@ -191,6 +192,7 @@ class UserViewer extends PureComponent {
 
 export default UserViewer;
 
+// STYLES
 const styles = StyleSheet.create({
   container: {
     flex: 1,
