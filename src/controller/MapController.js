@@ -1,18 +1,13 @@
-// import React, { Component } from 'react';
-// import { StyleSheet, View } from 'react-native';
-//
-import Map from '../services/models/MapDataService' 
-//
-
+// my imports
+import Map from '../services/models/MapDataService'
+// init Map() from MapDataService
+const myMap = new Map()
+// Class
 class MapController {
-  constructor () {
-    this.myMap = new Map()
-  }
-
   async retrieveMyCurrentPosition () {
-    await this.myMap.setMyCoords();
-    let coords = await this.myMap.getMyCoords();
-    return coords ;
+    await myMap.setMyCoords()
+    let coords = await myMap.getMyCoords()
+    return coords
   }
 }
 

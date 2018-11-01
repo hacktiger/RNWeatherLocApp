@@ -2,7 +2,8 @@
 import React, { Component } from 'react'
 import {
   Text,
-  View
+  View,
+  ScrollView
 } from 'react-native'
 
 // IMPORTS FOR TESTING PURPOSES
@@ -15,21 +16,32 @@ class WeatherForecastViewer extends Component {
     this.state = {
       LocationKey: 0,
       ForecastList: [],
-      lat: 21,
-      long: 105
+      lat: -9999,
+      long: -9999
     }
     this.myForecast = new WeatherForecast()
   }
+  //
+  async componentWillReceiveProps (props) {
+    // console.log('PROPS :', props)
+    await this.setState({
+      lat: props.lat,
+      long: props.long
+    })
+    await this.setForecastList()
+  }
 
-  componentDidMount () {
+  // set Forecast
+  setForecastList = () => {
     this.myForecast.get5DaysForecast(this.state.lat, this.state.long)
       .then((response) => {
         this.setState({
           ForecastList: response.data.DailyForecasts
         })
-        console.log('state', this.state.ForecastList)
+        // console.log('state', this.state.ForecastList)
       })
       .catch(err => console.log('MapForecastViewer :', err))
+    // console.log('setForecastList', this.state)
   }
 
   // Helper function
@@ -42,10 +54,14 @@ class WeatherForecastViewer extends Component {
   // MAIN RENDER
   render () {
     return (
-      <View style={{ flex: 1 }}>
-        <Text> {console.log('inside render', this.state.ForecastList.DailyForecasts)} </Text>
+      <ScrollView
+        style={{ flex: 1 }}
+        horizontal={true}
+        alwaysBounceHorizontal={true}
+        showsHorizontalScrollIndicator={true}
+      >
         { this.renderForecast() }
-      </View>
+      </ScrollView>
     )
   }
 }

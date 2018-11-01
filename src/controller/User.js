@@ -1,6 +1,6 @@
-//
+// my imports
 import UserDataService from '../services/models/UserDataService'
-
+// init UserDataService() as UserData
 const UserData = new UserDataService()
 export default class User {
   // get list by page num

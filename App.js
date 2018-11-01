@@ -99,12 +99,11 @@ const HomeStack = createStackNavigator(
 // 
 const WeatherStack = createStackNavigator(
   {
-    Map: { screen: MapViewScreen },
-    Forecast: { screen: WeatherForecastViewScreen }
+    Map: { screen: MapViewScreen }
   },
   {
     // after merging Map and Forecast => initial => delete
-    initialRouteName: 'Forecast',
+    initialRouteName: 'Map',
     navigationOptions: HeaderOptions
   }
 )

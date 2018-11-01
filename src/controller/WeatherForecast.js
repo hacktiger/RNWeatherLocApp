@@ -1,6 +1,6 @@
-//
+// my imports
 import WeatherDataService from '../services/models/WeatherDataService';
-
+// init WeatherDataService as  WeatherDataServices
 const WeatherDataServices = new WeatherDataService()
 export default class WeatherForecast {
 
@@ -11,11 +11,11 @@ export default class WeatherForecast {
   }
 
   _handleSuccess (response) {
-    console.log('controller handle : ', response)
+    // console.log('controller handle : ', response)
     return WeatherDataServices.forecast(response.data.Key)
   }
 
   _handleError (error) {
-    console.log(error)
+    console.log('WeatherForecast.js:', error)
   }
 }

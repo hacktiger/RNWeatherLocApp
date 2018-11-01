@@ -1,6 +1,6 @@
 // constants
-export const WEATHER_API_KEY = 'B4XZzmib2UpHusbRkTq3LEw5hSUI8WGC' ;
-const DEFAULT_TIMEOUT = 3000 ;
+export const WEATHER_API_KEY = 'UgEihPiQMVVUIdsz05M8MHxCxpi5jG2I'
+const DEFAULT_TIMEOUT = 3000
 const HEADERS = {
   'Content-Type': 'application/json'
 }

@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import {
   StyleSheet,
-  YellowBox
+  View
 } from 'react-native'
 // my c
-// import Spinner from './src/components/Spinner';
 import MapController from '../../../controller/MapController'
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader'])
+import WeatherForecastViewer from '../WeatherForecast/WeatherForecastViewer'
 /**
  *main class map view
  */
@@ -21,21 +20,19 @@ class MapViewer extends Component {
     this.myMapController = new MapController()
   }
   //
-  async componentDidMount () {
+  componentDidMount () {
+    this.setLatLong()
+  }
+  //
+  async setLatLong () {
     let coords = await this.myMapController.retrieveMyCurrentPosition()
     this.setState({
       LATITUDE: coords.LATITUDE,
       LONGITUDE: coords.LONGITUDE
     })
-    console.log(this.state)
   }
-
   //
   renderMap () {
-
-  }
-  // MAIN RENDER
-  render () {
     return (
       <MapView
         // LOAD MAP
@@ -58,6 +55,24 @@ class MapViewer extends Component {
           description={'This is your current position'}
         />
       </MapView>
+    )
+  }
+
+  renderForecast () {
+    return <WeatherForecastViewer lat={this.state.LATITUDE} long={this.state.LONGITUDE} />
+  }
+
+  // MAIN RENDER
+  render () {
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 0.5 }}>
+          { this.renderMap() }
+        </View>
+        <View style={{ flex: 0.5 }}>
+          { this.renderForecast() }
+        </View>
+      </View>
     )
   }
 }

@@ -37,7 +37,6 @@ class UserViewer extends PureComponent {
   }
   // handle success of getting user
   _handleResponse (response) {
-    console.log(response)
     if ( response ) {
       // console.log('user view response: ', response)
       this.setState({
@@ -113,9 +112,6 @@ class UserViewer extends PureComponent {
       return itemData.indexOf(formatQuery) > -1;    
     });
     this.setState({ UserList: filteredData })
-    console.log('original', this.state.OriginalUserList)
-    console.log('newData :', filteredData)
-    // console.log('itemData :',itemData)
   }
 
   // render footer ( Spinner )
