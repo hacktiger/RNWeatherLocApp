@@ -93,7 +93,6 @@ class UserViewer extends PureComponent {
   _renderHeader = () => {
     return (
       <SearchBar
-        ref={search => this.search = search}
         placeholder="Type Here..."
         lightTheme
         round

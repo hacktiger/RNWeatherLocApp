@@ -41,7 +41,6 @@ class WeatherForecastViewer extends Component {
         // console.log('state', this.state.ForecastList)
       })
       .catch(err => console.log('MapForecastViewer :', err))
-    // console.log('setForecastList', this.state)
   }
 
   // Helper function

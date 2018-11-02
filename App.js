@@ -11,9 +11,9 @@ import Header from './src/view/common/Header'
 import WeatherForecastViewer from './src/view/Screens/WeatherForecast/WeatherForecastViewer'
 import MapViewer from './src/view/Screens/Map/MapViewer'
 import UserViewer from './src/view/Screens/User/UserViewer'
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
-// import { Ionicons } from '@expo/vector-icons'
-
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import { createStackNavigator } from 'react-navigation'
+import Icon from 'react-native-vector-icons/Ionicons'
 // Classes
 //
 class HomeScreen extends React.Component {
@@ -40,7 +40,7 @@ class UserViewScreen extends React.Component {
   }
   render () {
     return (
-      <UserViewer />
+      <UserViewer/>
     )
   }
 }
@@ -87,12 +87,9 @@ const HeaderOptions = {
 // 
 const HomeStack = createStackNavigator(
   {
-  Home: { screen: HomeScreen },
-  User: { screen: UserViewScreen } // only a test screen
+  User: { screen: UserViewScreen } 
   },
   {
-    initialRouteName: 'User',
-    /* The header config from HomeScreen is now here */
     navigationOptions: HeaderOptions
   }
 )
@@ -117,34 +114,42 @@ const SettingsStack = createStackNavigator(
   }
 )
 
-export default createBottomTabNavigator(
+export default createMaterialBottomTabNavigator(
   {
-    Home: { screen: HomeStack },
-    Forecast: { screen: WeatherStack },
-    Settings: { screen: SettingsStack }
+    Home: { screen: HomeStack, 
+      navigationOptions: {
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name='ios-home' color={tintColor} size={24} />
+        )
+      }
+    },
+    Forecast: { screen: WeatherStack,
+      navigationOptions: {
+        tabBarLabel: 'Map',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name='ios-map' color={tintColor} size={24} />
+        )
+      }  
+    },
+    Settings: { screen: SettingsStack,
+      navigationOptions: {
+        tabBarLabel: 'Settings',
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name='ios-settings' color={tintColor} size={24} />
+        )
+      } 
+    }
     // Login: { screen: LoginStack },
   },
   {
-    navigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, tintColor }) => {
-        const { routeName } = navigation.state
-        // let iconName
-        // icon with each tab
-        if (routeName === 'Home') {
-          // iconName = `ios-information-circle${focused ? '' : '-outline'}`
-        } else if (routeName === 'Settings') {
-          // iconName = `ios-options${focused ? '' : '-outline'}`
-        }
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
-        // return <Ionicons name={iconName} size={25} color={tintColor} />
-        return <Text>WOW</Text>
-      }
-    }),
-    tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray'
-    }
+    initialRouteName: 'Home',
+    activeColor: '#ffffff',
+    inactiveColor: '#b2b2b2',
+    barStyle: { 
+      backgroundColor: '#f4511e',
+    }, 
+    
   }
 )
 

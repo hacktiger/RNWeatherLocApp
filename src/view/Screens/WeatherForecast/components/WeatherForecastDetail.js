@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Dimensions
 } from 'react-native'
-
+// lay out of the forecast list
 const renderLayout = (props) => {
   return (
     <View style={styles.container}>
