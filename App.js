@@ -2,22 +2,21 @@ import React from 'react'
 import {
   StyleSheet,
   Dimensions,
-  Text } from 'react-native'
-// My Comps
-import Header from './src/view/common/Header'
+  ActivityIndicator,
+  Text,
+  View,
+  Button
+} from 'react-native'
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
+import { createSwitchNavigator, createStackNavigator } from 'react-navigation'
+import Icon from 'react-native-vector-icons/Ionicons'
 // Screens
-import WeatherForecastViewer from './src/view/Screens/WeatherForecast/WeatherForecastViewer'
 import MapViewer from './src/view/Screens/Map/MapViewer'
 import UserViewer from './src/view/Screens/User/UserViewer'
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
-// import { createStackNavigator } from 'react-navigation'
-import Icon from 'react-native-vector-icons/Ionicons'
+import SignInViewer from './src/view/Screens/Auth/SignInViewer'
 // Classes
 // 
 class UserViewScreen extends React.Component {
-  static navigationOptions = {
-    title: 'UserList'
-  }
   render () {
     return (
       <UserViewer/>
@@ -26,20 +25,9 @@ class UserViewScreen extends React.Component {
 }
 // 
 class MapViewScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Weather Forecast',
-  }
   render () {
     return (
       <MapViewer />
-    )
-  }
-}
-// 
-class WeatherForecastViewScreen extends React.Component {
-  render () {
-    return (
-      <WeatherForecastViewer />
     )
   }
 }
@@ -55,7 +43,38 @@ class SettingsScreen extends React.Component {
   }
 }
 
-export default createMaterialBottomTabNavigator(
+class AuthLoadingScreen extends React.Component {
+  constructor (props) {
+    super(props)
+    this._navigate()
+  }
+
+  _navigate = () => {
+    this.props.navigation.navigate('Auth')
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+}
+
+class SignInScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Please sign in',
+  }
+  render () {
+    return (
+      <SignInViewer />
+    )
+  }
+}
+
+const AuthStack = createStackNavigator({ SignIn: SignInScreen })
+const AppStack = createMaterialBottomTabNavigator(
   {
     // RouteConfig
     Home: { screen: UserViewScreen, 
@@ -93,6 +112,16 @@ export default createMaterialBottomTabNavigator(
     activeColor: 'white',
     inactiveColor: 'grey',
     barStyle :{  }
+  }
+)
+
+export default createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    App: AppStack,
+    Auth: AuthStack,
+  },{
+    initialRouteName: 'AuthLoading'
   }
 )
 
