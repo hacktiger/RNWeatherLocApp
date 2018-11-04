@@ -4,7 +4,6 @@ import { View, Text, FlatList, StyleSheet,TouchableOpacity } from 'react-native'
 import { List, SearchBar, ListItem, Avatar } from 'react-native-elements';
 // My imports
 import User from '../../../controller/User';
-// import UserListItem from './userListItem'; // custom ListItem
 import Spinner from '../../common/Spinner';
 
 // main class
@@ -25,7 +24,6 @@ class UserViewer extends PureComponent {
   }
   // component did mount
   componentDidMount () {
-    // this.testFunc()
     this.retrieveUserList()
   }
   //get User
@@ -80,7 +78,7 @@ class UserViewer extends PureComponent {
   )
   // key Extractor
   // @ref render -> Flatlist
-  _keyExtractor = (item) => item.id.toString()
+  _keyExtractor = (item,index) => index.toString()
   // render separator between items
   // @ref render -> FlatList
   _renderSeparator = () => {

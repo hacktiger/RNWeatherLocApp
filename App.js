@@ -13,7 +13,9 @@ import Icon from 'react-native-vector-icons/Ionicons'
 // Screens
 import MapViewer from './src/view/Screens/Map/MapViewer'
 import UserViewer from './src/view/Screens/User/UserViewer'
-import SignInViewer from './src/view/Screens/Auth/SignInViewer'
+import LoginViewer from './src/view/Screens/Auth/LoginViewer'
+import SignUpViewer from './src/view/Screens/Auth/SignUpViewer'
+import SettingsViewer from './src/view/Screens/Settings/SettingsViewer'
 // Classes
 // 
 class UserViewScreen extends React.Component {
@@ -38,7 +40,7 @@ class SettingsScreen extends React.Component {
   }
   render () {
     return (
-      <Text>Settings Screen</Text>
+      <SettingsViewer />
     )
   }
 }
@@ -62,18 +64,37 @@ class AuthLoadingScreen extends React.Component {
   }
 }
 
-class SignInScreen extends React.Component {
+class LoginScreen extends React.Component {
   static navigationOptions = {
-    title: 'Please sign in',
+    title: 'Login Screen',
   }
   render () {
     return (
-      <SignInViewer />
+      <LoginViewer />
     )
   }
 }
 
-const AuthStack = createStackNavigator({ SignIn: SignInScreen })
+class SignUpScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Sign up Screen'
+  }
+  render () {
+    return (
+      <SignUpViewer />
+    )
+  }
+}
+
+const AuthStack = createStackNavigator(
+  { 
+    Login: LoginScreen,
+    SignUp: SignUpScreen
+  },
+  {
+    initialRouteName: 'Login'
+  }
+)
 const AppStack = createMaterialBottomTabNavigator(
   {
     // RouteConfig

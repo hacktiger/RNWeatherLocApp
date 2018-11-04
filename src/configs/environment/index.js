@@ -52,5 +52,14 @@ const ENVIRONMENT = {
   }
 }
 
+export const FIREBASE_CONFIGS = {
+  apiKey: 'AIzaSyDh6IrfHjQuQyUXAAhtPQcSFUx1NIyWxUU',
+  authDomain: 'weather-location-app-217808.firebaseapp.com',
+  databaseURL: 'https://weather-location-app-217808.firebaseio.com',
+  projectId: 'weather-location-app-217808',
+  storageBucket: 'weather-location-app-217808.appspot.com',
+  messagingSenderId: '302794681971'
+}
+
 // export environment
 export default ENVIRONMENT
