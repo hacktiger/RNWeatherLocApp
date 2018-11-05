@@ -29,7 +29,7 @@ class SignInViewer extends Component {
     this.Authentication = new Auth()
   }
   componentDidMount () {
-    // Initialize Firebase
+    // Initialize Firebase if not already needs testing
     if (AuthDataService.auth()) {
       console.log('ok')
     } else {
@@ -56,10 +56,26 @@ class SignInViewer extends Component {
         this.props.navigation.navigate('App')
       })
       .catch((err) => {
-        console.log(err.code)
-        console.log(err.message)
+        let errCode = err.code
+        let errMessage = ''
+        switch (errCode) {
+          case 'auth/invalid-email':
+            errMessage = 'Invalid e-mail address'
+            break
+          case 'auth/user-disabled':
+            errMessage = 'Account is disabled'
+            break
+          case 'auth/user-not-found':
+            errMessage = 'User e-mail not found'
+            break
+          case 'auth/wrong-password':
+            errMessage = 'User password is incorrect'
+            break
+          default:
+            errMessage = err.message
+        }
         this.setState({
-          error: err.message,
+          error: errMessage,
           isLoading: false,
           password: ''
         })
@@ -115,7 +131,7 @@ class SignInViewer extends Component {
           </View>
           <View style = { styles.buttonBox }>
             <Text style={{ color: 'blue' }} onPress={this._signUpScreen}>
-              Don`t have an Account? Register here 
+              Don`t have an Account? Register here
             </Text>
             {this.renderButton()}
           </View>

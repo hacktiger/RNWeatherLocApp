@@ -28,11 +28,7 @@ class SignUpViewer extends Component {
     this._handleSignUp = this._handleSignUp.bind(this)
     this.Authentication = new Auth()
   }
-  componentDidMount () {
-    // Initialize Firebase
 
-    // on Auth Events ( 73 )
-  }
   _handleChangeEmail (input) {
     this.setState({
       email: input
@@ -52,10 +48,23 @@ class SignUpViewer extends Component {
         this.props.navigation.navigate('App')
       })
       .catch((err) => {
-        console.log(err.code)
-        console.log(err.message)
+        let errCode = err.code
+        let errMessage = ''
+        switch (errCode) {
+          case 'auth/email-already-in-use':
+            errMessage = 'Account already exist'
+            break
+          case 'auth/invalid-email':
+            errMessage = 'Invalid e-mail address'
+            break
+          case 'auth/weak-password':
+            errMessage = 'Your password is too weak'
+            break
+          default:
+            errMessage = err.message
+        }
         this.setState({
-          error: err.message,
+          error: errMessage,
           isLoading: false,
           email: '',
           password: ''
