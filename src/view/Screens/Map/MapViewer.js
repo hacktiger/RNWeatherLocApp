@@ -65,11 +65,11 @@ class MapViewer extends Component {
   // MAIN RENDER
   render () {
     return (
-      <View style={{ flex: 1, elevation: 1 }}>
+      <View style={{ flex: 1 }}>
         <View style={{ flex: 0.5 }}>
           { this.renderMap() }
         </View>
-        <View style={{ flex: 0.5, elevation: 3 }}>
+        <View style={{ flex: 0.5, elevation: 10 }}>
           { this.renderForecast() }
         </View>
       </View>

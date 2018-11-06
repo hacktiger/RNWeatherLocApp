@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
-import { 
+import {
   View,
   Text,
   StyleSheet,
@@ -19,7 +20,7 @@ const renderLayout = (props) => {
 
       <View style={styles.icon}>
         <Text style={styles.text}>
-          {props.ForecastList.Day.IconPhrase}
+          Icon here
         </Text>
       </View>
 
@@ -75,6 +76,8 @@ const styles = StyleSheet.create({
     flexGrow: 2
   },
   phrase: {
+    paddingHorizontal: 5,
+    alignItems: 'center',
     justifyContent: 'center',
     flexGrow: 2
   },

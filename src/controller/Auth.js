@@ -1,16 +1,16 @@
 import AuthDataService from '../services/models/AuthDataService'
 
+var myVar = null
 class Auth {
-  initFirebase () {
-    AuthDataService.init()
+  constructor () {
+    this.FirebaseSingleton = AuthDataService.getInstance()
   }
-
   logInUser (email, password) {
-    return AuthDataService.auth().signInWithEmailAndPassword(email, password)
+    return this.FirebaseSingleton.auth().signInWithEmailAndPassword(email, password)
   }
 
   signUpUser (email, password) {
-    return AuthDataService.auth().createUserWithEmailAndPassword(email, password)
+    return this.FirebaseSingleton.auth().createUserWithEmailAndPassword(email, password)
   }
 }
 

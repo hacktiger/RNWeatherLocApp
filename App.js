@@ -3,9 +3,7 @@ import {
   StyleSheet,
   Dimensions,
   ActivityIndicator,
-  Text,
   View,
-  Button
 } from 'react-native'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation'
@@ -16,6 +14,7 @@ import UserViewer from './src/view/Screens/User/UserViewer'
 import LoginViewer from './src/view/Screens/Auth/LoginViewer'
 import SignUpViewer from './src/view/Screens/Auth/SignUpViewer'
 import SettingsViewer from './src/view/Screens/Settings/SettingsViewer'
+
 // Classes
 // 
 class UserViewScreen extends React.Component {
@@ -52,7 +51,7 @@ class AuthLoadingScreen extends React.Component {
   }
 
   _navigate = () => {
-    this.props.navigation.navigate('Auth')
+    this.props.navigation.navigate('Login')
   }
 
   render() {

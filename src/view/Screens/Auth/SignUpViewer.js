@@ -9,7 +9,6 @@ import {
   KeyboardAvoidingView
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
-// import firebase from 'firebase'
 import { TextInput, Button } from 'react-native-paper'
 import Spinner from '../../common/Spinner'
 import Auth from '../../../controller/Auth'
@@ -25,16 +24,18 @@ class SignUpViewer extends Component {
       error: '',
       isLoading: false
     }
+    // bind functions to this
     this._handleSignUp = this._handleSignUp.bind(this)
+    // init Auth.js controller
     this.Authentication = new Auth()
   }
-
+  // handle email input
   _handleChangeEmail (input) {
     this.setState({
       email: input
     })
   }
-
+  // handle password input
   _handleChangePassword (input) {
     this.setState({
       password: input
@@ -71,15 +72,15 @@ class SignUpViewer extends Component {
         })
       })
   }
-
-  renderButton () {
+  // render signup button
+  _renderButton () {
     if (this.state.isLoading) {
       return <Spinner size="small" />
     } else {
       return (
         <Button
           style = {styles.button}
-          color='blue'
+          color='purple'
           mode='contained'
           onPress={this._handleSignUp}
         >
@@ -88,14 +89,14 @@ class SignUpViewer extends Component {
       )
     }
   }
-
+  // MAIN RENDER
   render () {
     return (
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={ styles.inputBox }>
           {/* EMAIL INPUT */}
           <TextInput
-            theme = {{ roundness: 3, colors: { primary: 'red' } }}
+            theme = {{ roundness: 3, colors: { primary: 'purple' } }}
             label='Email'
             placeholder='Enter your email here...'
             value = {this.state.email}
@@ -105,7 +106,7 @@ class SignUpViewer extends Component {
           {/* PASSWORD INPUT */}
           <TextInput
             secureTextEntry = {true}
-            theme = {{ roundness: 3, colors: { primary: 'red' } }}
+            theme = {{ roundness: 3, colors: { primary: 'purple' } }}
             label='Password'
             placeholder='Enter your password here...'
             value = {this.state.password}
@@ -117,7 +118,7 @@ class SignUpViewer extends Component {
           <Text style={{ color: 'red' }}> { this.state.error } </Text>
         </View>
         <View style = { styles.buttonBox }>
-          {this.renderButton()}
+          {this._renderButton()}
         </View>
       </ScrollView>
     )
@@ -135,14 +136,16 @@ const styles = StyleSheet.create({
     paddingRight: 50
   },
   inputBox: {
+    paddingTop: 80,
+    paddingHorizontal: 40
   },
   buttonBox: {
-    paddingTop: 30,
+    paddingTop: 10,
     justifyContent: 'center',
     alignItems: 'center'
   },
   button: {
-    height: 55,
+    height: 45,
     width: 150,
     alignItems: 'center',
     justifyContent: 'center'

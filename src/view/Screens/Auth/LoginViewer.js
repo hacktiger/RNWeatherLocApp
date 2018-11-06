@@ -9,46 +9,40 @@ import {
   KeyboardAvoidingView
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
-import AuthDataService from '../../../services/models/AuthDataService'
 import { TextInput, Button } from 'react-native-paper'
 import Spinner from '../../common/Spinner'
 import Auth from '../../../controller/Auth'
 // IMPORTS FOR TESTING PURPOSES
 // main class
-class SignInViewer extends Component {
+class LoginViewer extends Component {
   constructor (props) {
     super(props)
     this.state = {
       email: '',
       password: '',
       error: '',
-      isLoading: false
+      isLoading: false,
+      checkingAuth: true
     }
+    // bind functions to this
     this._handleLogin = this._handleLogin.bind(this)
     this._signUpScreen = this._signUpScreen.bind(this)
+    // init Auth.js controller
     this.Authentication = new Auth()
   }
-  componentDidMount () {
-    // Initialize Firebase if not already needs testing
-    if (AuthDataService.auth()) {
-      console.log('ok')
-    } else {
-      this.Authentication.initFirebase()
-    }
-    // on Auth Events ( 73 )
-  }
+  // handle text change on email input
   _handleChange (input) {
     this.setState({
       email: input
     })
   }
-
+  // handle text change on password input
   _handleChangePassword (input) {
     this.setState({
       password: input
     })
   }
-
+  // handle login ( navigate when success| show error when fail )
   _handleLogin () {
     this.setState({ error: '', isLoading: true })
     this.Authentication.logInUser(this.state.email, this.state.password)
@@ -81,15 +75,15 @@ class SignInViewer extends Component {
         })
       })
   }
-
-  renderButton () {
+  // render login button
+  _renderButton () {
     if (this.state.isLoading) {
       return <Spinner size="small" />
     } else {
       return (
         <Button
           style = {styles.button}
-          color='blue'
+          color='green'
           mode='contained'
           onPress={this._handleLogin}
         >
@@ -98,9 +92,11 @@ class SignInViewer extends Component {
       )
     }
   }
+  // navigate to signup screen if have no account
   _signUpScreen () {
     this.props.navigation.navigate('SignUp')
   }
+  // MAIN RENDER
   render () {
     return (
       <KeyboardAvoidingView style = {{ flex: 1 }} keyboardVerticalOffset={-500} enabled>
@@ -129,11 +125,13 @@ class SignInViewer extends Component {
           <View style={{ flex: 1, alignItems: 'center' }}>
             <Text style={{ color: 'red' }}> { this.state.error } </Text>
           </View>
-          <View style = { styles.buttonBox }>
+          <View style={{ alignItems: 'center' }}>
             <Text style={{ color: 'blue' }} onPress={this._signUpScreen}>
-              Don`t have an Account? Register here
+                Don`t have an Account? Register here
             </Text>
-            {this.renderButton()}
+          </View>
+          <View style = { styles.buttonBox }>
+            {this._renderButton()}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -141,7 +139,7 @@ class SignInViewer extends Component {
   }
 }
 // export
-export default withNavigation(SignInViewer)
+export default withNavigation(LoginViewer)
 
 // Styles
 const styles = StyleSheet.create({
@@ -152,14 +150,16 @@ const styles = StyleSheet.create({
     paddingRight: 50
   },
   inputBox: {
+    paddingTop: 80,
+    paddingHorizontal: 40
   },
   buttonBox: {
-    paddingTop: 30,
+    paddingTop: 10,
     justifyContent: 'center',
     alignItems: 'center'
   },
   button: {
-    height: 55,
+    height: 45,
     width: 150,
     alignItems: 'center',
     justifyContent: 'center'
