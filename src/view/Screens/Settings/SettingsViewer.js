@@ -5,12 +5,15 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight
+  Switch,
+  ScrollView,
+  TouchableNativeFeedback
 } from 'react-native'
-import firebase from 'firebase'
 import { withNavigation } from 'react-navigation'
-import { Avatar, Divider } from 'react-native-elements'
-import { Switch } from 'react-native-paper'
+import { Avatar } from 'react-native-elements'
+//
+import SettingsOption from './common/SettingsOption'
+import Auth from '../../../controller/Auth'
 
 // IMPORTS FOR TESTING PURPOSES
 // main class
@@ -22,19 +25,34 @@ class SettingsViewer extends Component {
       isSwitch2On: false
     }
     this._handleLogout = this._handleLogout.bind(this)
+    this._onClickSetting2 = this._onClickSetting2.bind(this)
+    this.Authentication = new Auth()
   }
   _handleLogout () {
-    firebase.auth().signOut()
+    console.log('Pressed')
+    this.Authentication.signOutUser()
       .then(() => {
+        console.log('OK')
         this.props.navigation.navigate('Login')
       })
       .catch((err) => {
         console.log('Logout err', err)
       })
   }
+  _onClickSetting2 () {
+    this.setState({
+      isSwitch2On: !this.state.isSwitch2On
+    })
+  }
+  _onClickSettings () {
+    this.setState({
+      isSwitchOn: !this.state.isSwitchOn
+    })
+  }
+  // MAIN RENDER
   render () {
     return (
-      <View style={ styles.container }>
+      <ScrollView style={ styles.container }>
         <View style={ styles.localContainer }>
           <View style= { styles.containerAvatar }>
             <Avatar
@@ -43,48 +61,27 @@ class SettingsViewer extends Component {
               source = {{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg' }}
             />
           </View>
-
           <View style= { styles.containerTitle }>
             <Text style={{ fontSize: 30, fontWeight: '900' }}>
-              Your Profile
+              Your Profile5
             </Text>
           </View>
         </View>
 
-        <Divider style={{ height: 40, backgroundColor: '#e1e8ee', marginVertical: 20 }} />
-
-        <View style={styles.mainSettingsContainer}>
-
-          <View style={styles.mainSettings} >
-            <Text style={{ fontSize: 20, paddingLeft: 30 }}>
-                Settings 1
-            </Text>
-            <Switch
-              color = 'green'
-              value={this.state.isSwitchOn}
-              onValueChange={() => {
-                this.setState({ isSwitchOn: !this.state.isSwitchOn })
-              }}
-            />
-          </View>
-
-          <Divider style={{ height: 2, backgroundColor: '#e1e8ee' }} />
-
-          <View style={styles.mainSettings} >
-            <View style={{ backgroundColor: 'green', flexGrow: 7 }}>
-            </View>
-            <View style={{ backgroundColor: 'yellow', flexGrow: 2 }}>
-            </View>
-
-          </View>
-
-        </View>
-        <Divider style={{ height: 40, backgroundColor: '#e1e8ee', marginVertical: 20 }} />
-        <View style={styles.mainSettingsTouchable} onPress={this._handleLogout}>
-          <Text style={{ fontSize: 15, paddingLeft: 30 }}>Logout</Text>
+        <View style={{ paddingVertical: 40 }}>
+          <SettingsOption settingTitle='Setting 1' tintColor='#66ff66' switchValue={this.state.isSwitchOn} action={this._onClickSetting}/>
+          <SettingsOption settingTitle='Setting 2' tintColor='#66ff66' switchValue={this.state.isSwitch2On} action={this._onClickSetting2}/>
         </View>
 
-      </View>
+        <TouchableNativeFeedback
+          background={TouchableNativeFeedback.SelectableBackground()}
+          onPress={this._handleLogout}
+        >
+          <View style={styles.logout}>
+            <Text style={{ fontSize: 20, paddingLeft: 30, fontWeight: '900' }} >Logout</Text>
+          </View>
+        </TouchableNativeFeedback>
+      </ScrollView>
     )
   }
 }
@@ -94,10 +91,14 @@ export default withNavigation(SettingsViewer)
 
 // Styles
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#e1e8ee'
+  },
   localContainer: {
+    backgroundColor: 'white',
     flexDirection: 'row',
     paddingHorizontal: 20,
-    paddingTop: 20
+    paddingVertical: 15
   },
   containerAvatar: {
     flexGrow: 1
@@ -107,9 +108,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   mainSettings: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    backgroundColor: 'red'
+    height: 60,
+    flexDirection: 'row'
+  },
+  mainSettingsTextView: {
+    flexGrow: 5,
+    justifyContent: 'center'
+  },
+  mainSettingsTextStyle: {
+    paddingLeft: 20,
+    fontSize: 20,
+    fontWeight: '900'
+  },
+  mainSettingsSwitchView: {
+    flexGrow: 2,
+    justifyContent: 'center'
+  },
+  logout: {
+    backgroundColor: 'white',
+    height: 60,
+    justifyContent: 'center'
   }
 })

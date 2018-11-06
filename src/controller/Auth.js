@@ -1,6 +1,5 @@
 import AuthDataService from '../services/models/AuthDataService'
 
-var myVar = null
 class Auth {
   constructor () {
     this.FirebaseSingleton = AuthDataService.getInstance()
@@ -11,6 +10,10 @@ class Auth {
 
   signUpUser (email, password) {
     return this.FirebaseSingleton.auth().createUserWithEmailAndPassword(email, password)
+  }
+
+  signOutUser () {
+    return this.FirebaseSingleton.auth().signOut()
   }
 }
 
