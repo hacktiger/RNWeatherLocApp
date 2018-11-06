@@ -107,23 +107,6 @@ const styles = StyleSheet.create({
     flexGrow: 7,
     justifyContent: 'center'
   },
-  mainSettings: {
-    height: 60,
-    flexDirection: 'row'
-  },
-  mainSettingsTextView: {
-    flexGrow: 5,
-    justifyContent: 'center'
-  },
-  mainSettingsTextStyle: {
-    paddingLeft: 20,
-    fontSize: 20,
-    fontWeight: '900'
-  },
-  mainSettingsSwitchView: {
-    flexGrow: 2,
-    justifyContent: 'center'
-  },
   logout: {
     backgroundColor: 'white',
     height: 60,
