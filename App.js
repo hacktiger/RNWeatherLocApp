@@ -10,7 +10,10 @@ import { createSwitchNavigator, createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 // Screens
 import MapViewer from './src/view/Screens/Map/MapViewer'
+
 import UserViewer from './src/view/Screens/User/UserViewer'
+import ChatViewer from './src/view/Screens/User/ChatViewer'
+
 import LoginViewer from './src/view/Screens/Auth/LoginViewer'
 import SignUpViewer from './src/view/Screens/Auth/SignUpViewer'
 import SettingsViewer from './src/view/Screens/Settings/SettingsViewer'
@@ -18,9 +21,23 @@ import SettingsViewer from './src/view/Screens/Settings/SettingsViewer'
 // Classes
 // 
 class UserViewScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Chat'
+  }
   render () {
     return (
       <UserViewer/>
+    )
+  }
+}
+//
+class ChatScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Vs this person chat screen'
+  }
+  render () {
+    return (
+      <ChatViewer />
     )
   }
 }
@@ -85,6 +102,15 @@ class SignUpScreen extends React.Component {
   }
 }
 
+const ChatStack = createStackNavigator(
+  {
+    UserList: UserViewScreen,
+    Chat: ChatScreen
+  },{
+    initialRouteName: 'Chat'
+  }
+)
+
 const AuthStack = createStackNavigator(
   { 
     Login: LoginScreen,
@@ -97,7 +123,7 @@ const AuthStack = createStackNavigator(
 const AppStack = createMaterialBottomTabNavigator(
   {
     // RouteConfig
-    Home: { screen: UserViewScreen, 
+    Home: { screen: ChatStack, 
       navigationOptions: {
         tabBarLabel: 'Home',
         tabBarIcon: ({ tintColor }) => (

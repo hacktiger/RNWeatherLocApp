@@ -1,8 +1,8 @@
-import AuthDataService from '../services/models/AuthDataService'
+import FirebaseDataService from '../services/models/FirebaseDataService'
 
-class Auth {
+class Firebase {
   constructor () {
-    this.FirebaseSingleton = AuthDataService.getInstance()
+    this.FirebaseSingleton = FirebaseDataService.getInstance()
   }
   logInUser (email, password) {
     return this.FirebaseSingleton.auth().signInWithEmailAndPassword(email, password)
@@ -15,6 +15,11 @@ class Auth {
   signOutUser () {
     return this.FirebaseSingleton.auth().signOut()
   }
+
+  // DATABASE stuff
+  database () {
+    return this.FirebaseSingleton.database()
+  }
 }
 
-export default Auth
+export default Firebase

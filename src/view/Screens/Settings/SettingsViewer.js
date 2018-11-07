@@ -5,7 +5,6 @@ import {
   View,
   Text,
   StyleSheet,
-  Switch,
   ScrollView,
   TouchableNativeFeedback
 } from 'react-native'
@@ -13,7 +12,7 @@ import { withNavigation } from 'react-navigation'
 import { Avatar } from 'react-native-elements'
 //
 import SettingsOption from './common/SettingsOption'
-import Auth from '../../../controller/Auth'
+import Firebase from '../../../controller/Firebase'
 
 // IMPORTS FOR TESTING PURPOSES
 // main class
@@ -26,7 +25,8 @@ class SettingsViewer extends Component {
     }
     this._handleLogout = this._handleLogout.bind(this)
     this._onClickSetting2 = this._onClickSetting2.bind(this)
-    this.Authentication = new Auth()
+    this._onClickSetting = this._onClickSetting.bind(this)
+    this.Authentication = new Firebase()
   }
   _handleLogout () {
     console.log('Pressed')
@@ -44,7 +44,7 @@ class SettingsViewer extends Component {
       isSwitch2On: !this.state.isSwitch2On
     })
   }
-  _onClickSettings () {
+  _onClickSetting () {
     this.setState({
       isSwitchOn: !this.state.isSwitchOn
     })

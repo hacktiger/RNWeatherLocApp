@@ -11,7 +11,7 @@ import {
 import { withNavigation } from 'react-navigation'
 import { TextInput, Button } from 'react-native-paper'
 import Spinner from '../../common/Spinner'
-import Auth from '../../../controller/Auth'
+import Firebase from '../../../controller/Firebase'
 // IMPORTS FOR TESTING PURPOSES
 // main class
 class LoginViewer extends Component {
@@ -28,7 +28,7 @@ class LoginViewer extends Component {
     this._handleLogin = this._handleLogin.bind(this)
     this._signUpScreen = this._signUpScreen.bind(this)
     // init Auth.js controller
-    this.Authentication = new Auth()
+    this.Authentication = new Firebase()
   }
   // handle text change on email input
   _handleChange (input) {

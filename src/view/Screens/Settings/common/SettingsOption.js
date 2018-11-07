@@ -35,7 +35,8 @@ export default SettingsOption
 const styles = StyleSheet.create({
   mainSettings: {
     height: 60,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    backgroundColor: 'white'
   },
   mainSettingsTextView: {
     flexGrow: 5,
