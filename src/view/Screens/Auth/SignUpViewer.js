@@ -5,14 +5,13 @@ import {
   View,
   ScrollView,
   StyleSheet,
-  Text,
-  KeyboardAvoidingView
+  Text
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import { TextInput, Button } from 'react-native-paper'
 import Spinner from '../../common/Spinner'
 import Firebase from '../../../controller/Firebase'
-
+import firebase from 'firebase'
 // IMPORTS FOR TESTING PURPOSES
 // main class
 class SignUpViewer extends Component {
@@ -44,9 +43,12 @@ class SignUpViewer extends Component {
 
   _handleSignUp () {
     this.setState({ error: '', isLoading: true })
-    this.Authentication.signUpUser(this.state.email, this.state.password)
-      .then(() => {
-        this.props.navigation.navigate('App')
+    const { email, password } = this.state
+    this.Authentication.signUpUser(email, password)
+      .then((user) => {
+        console.log(user.user)
+        this.Authentication.saveUserToDB(user.user.uid, user.user.email)
+          .then(this.props.navigation.navigate('App')) // navigate after signed up
       })
       .catch((err) => {
         let errCode = err.code
@@ -65,10 +67,10 @@ class SignUpViewer extends Component {
             errMessage = err.message
         }
         this.setState({
-          error: errMessage,
-          isLoading: false,
           email: '',
-          password: ''
+          password: '',
+          error: errMessage,
+          isLoading: false
         })
       })
   }

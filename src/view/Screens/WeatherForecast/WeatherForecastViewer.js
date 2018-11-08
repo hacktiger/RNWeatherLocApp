@@ -31,6 +31,7 @@ class WeatherForecastViewer extends Component {
 
   // set Forecast
   setForecastList = () => {
+    // console.log('weatherforecastviewer.js/setForecastList(), ',this.state.lat, this.state.long )
     this.myForecast.get5DaysForecast(this.state.lat, this.state.long)
       .then((response) => {
         this.setState({

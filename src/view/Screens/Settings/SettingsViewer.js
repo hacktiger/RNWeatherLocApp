@@ -29,10 +29,10 @@ class SettingsViewer extends Component {
     this.Authentication = new Firebase()
   }
   _handleLogout () {
-    console.log('Pressed')
+    // console.log('Pressed')
     this.Authentication.signOutUser()
       .then(() => {
-        console.log('OK')
+        // console.log('OK')
         this.props.navigation.navigate('Login')
       })
       .catch((err) => {

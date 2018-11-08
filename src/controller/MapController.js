@@ -12,4 +12,4 @@ class MapController {
 }
 
 //
-export default MapController ;
+export default MapController

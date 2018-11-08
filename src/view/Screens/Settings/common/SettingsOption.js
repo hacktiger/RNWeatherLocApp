@@ -8,7 +8,6 @@ import {
 } from 'react-native'
 
 class SettingsOption extends Component {
-
   render () {
     return (
       <View style={styles.mainSettings}>

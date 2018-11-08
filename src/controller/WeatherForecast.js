@@ -10,7 +10,7 @@ export default class WeatherForecast {
   }
 
   _handleSuccess (response) {
-    // console.log('controller handle : ', response)
+    // console.log('forecast.js', response)
     return WeatherDataServices.forecast(response.data.Key)
   }
 

@@ -22,7 +22,8 @@ class LoginViewer extends Component {
       password: '',
       error: '',
       isLoading: false,
-      checkingAuth: true
+      checkingAuth: true,
+      auth: false
     }
     // bind functions to this
     this._handleLogin = this._handleLogin.bind(this)
@@ -30,6 +31,19 @@ class LoginViewer extends Component {
     // init Auth.js controller
     this.Authentication = new Firebase()
   }
+  //
+  componentDidMount () {
+    this._navigate()
+  }
+
+  _navigate () {
+    let kkk = this.Authentication.getUid()
+    console.log('navigate', kkk)
+    if (kkk !== '') {
+      this.props.navigation.navigate('App')
+    }
+  }
+
   // handle text change on email input
   _handleChange (input) {
     this.setState({

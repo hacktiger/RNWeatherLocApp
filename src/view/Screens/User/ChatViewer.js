@@ -13,7 +13,6 @@ class ChatViewer extends React.Component {
   }
   // lief cycle methods
   componentDidMount () {
-    
     this.myFirebase.loadMessages((message) => {
       console.log(message)
       this.setState((previousState) => {
