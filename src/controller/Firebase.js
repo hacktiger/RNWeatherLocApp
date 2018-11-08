@@ -1,4 +1,4 @@
-import FirebaseDataService from '../services/models/FirebaseDataService'
+import FirebaseDataService, {getUser} from '../services/models/FirebaseDataService'
 
 class Firebase {
   uid = ''
@@ -44,14 +44,12 @@ class Firebase {
   }
 
   // DB stuff
-  saveUserToDB (id, email) {
-    var db = this.database()
-    var ref = db.ref('users')
-    var data = {
+  saveUserToDB (id, email) { // maybe to let or const later
+    this.userRef = this.database().ref('users')
+    let data = {
       email: email
     }
-    console.log(id, data)
-    ref.child(id).set(data)
+    this.userRef.child(id).set(data)
   }
 
   // Chat App stuff
@@ -63,7 +61,6 @@ class Firebase {
   loadMessages (callback) {
     this.messagesRef = this.database().ref('messages')
     this.messagesRef.off()
-
     const onReceive = (data) => {
       const message = data.val()
       callback({
@@ -76,7 +73,7 @@ class Firebase {
         }
       })
     }
-    this.messagesRef.limitToLast(20).on('child_added', onReceive);
+    this.messagesRef.limitToLast(20).on('child_added', onReceive)
   }
   // send message
   sendMessage (message) {
@@ -93,6 +90,11 @@ class Firebase {
     if (this.messagesRef) {
       this.messagesRef.off()
     }
+  }
+
+  // REST
+  getUserList () {
+    return getUser()
   }
 // END CLASS
 }

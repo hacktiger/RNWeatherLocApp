@@ -5,3 +5,4 @@ import ApiGateway from '../services/models/ApiGateway'
 // exporting new ApiGateways
 export const WeatherGateway = new ApiGateway(createCloudConfigs('weather'))
 export const UserGateway = new ApiGateway(createCloudConfigs('user'))
+export const FirebaseUserGateway = new ApiGateway(createCloudConfigs('firebase'))

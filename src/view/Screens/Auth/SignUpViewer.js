@@ -45,10 +45,9 @@ class SignUpViewer extends Component {
     this.setState({ error: '', isLoading: true })
     const { email, password } = this.state
     this.Authentication.signUpUser(email, password)
-      .then((user) => {
-        console.log(user.user)
+      .then((user) => { // save user to DB if signed up correctly
         this.Authentication.saveUserToDB(user.user.uid, user.user.email)
-          .then(this.props.navigation.navigate('App')) // navigate after signed up
+        this.props.navigation.navigate('App') // navigate after save user successful
       })
       .catch((err) => {
         let errCode = err.code

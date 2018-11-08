@@ -1,5 +1,9 @@
 import { FIREBASE_CONFIGS } from '../../configs/environment/index'
 import firebase from 'firebase'
+//
+import { FirebaseUserGateway } from '../../configs/myGateway'
+const PATH_USER = '/users'
+const FIREBASE_JSON = '.json'
 
 const Singleton = (function () {
   var _instance
@@ -18,5 +22,9 @@ const Singleton = (function () {
     }
   }
 })()
+
+export const getUser = () => {
+  return FirebaseUserGateway.get(`${PATH_USER}${FIREBASE_JSON}`)
+}
 
 export default Singleton

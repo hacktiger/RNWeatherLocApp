@@ -49,6 +49,14 @@ const ENVIRONMENT = {
       timeout: DEFAULT_TIMEOUT,
       headers: HEADERS
     }
+  },
+  // type : 'firebase'
+  firebase: {
+    QA: {
+      endPoint: 'https://weather-location-app-217808.firebaseio.com',
+      timeout: DEFAULT_TIMEOUT,
+      headers: HEADERS
+    }
   }
 }
 

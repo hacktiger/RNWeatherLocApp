@@ -3,8 +3,8 @@ import React, { PureComponent } from 'react';
 import { View, Text, FlatList, StyleSheet,TouchableOpacity } from 'react-native';
 import { List, SearchBar, ListItem, Avatar } from 'react-native-elements';
 // My imports
+import User from '../../../controller/User';
 import Spinner from '../../common/Spinner';
-import Firebase from '../../../controller/Firebase'
 
 // main class
 class UserViewer extends PureComponent {
@@ -20,7 +20,7 @@ class UserViewer extends PureComponent {
       isRefreshing: false
     };
     // react native create reference
-    this.myFirebase = new Firebase()
+    this.User = new User()
   }
   // component did mount
   componentDidMount () {
@@ -29,21 +29,21 @@ class UserViewer extends PureComponent {
   //get User
   // @ref : componentDidMount
   retrieveUserList = () => {
-    this.myFirebase.getUserList()
+    this.User.getAllUserList(this.state.page)
       .then(response => this._handleResponse(response))
       .catch(err => console.log(err))
   }
   // handle success of getting user
   _handleResponse (response) {
     if ( response ) {
-      console.log('user view response: ', response.data)
+      // console.log('user view response: ', response)
       this.setState({
-        UserList: response.data,
-        OriginalUserList: response.data,
+        UserList: [...this.state.UserList, ...response.data.data],
+        OriginalUserList: [...this.state.OriginalUserList, ...response.data.data],
         isLoading: false,
         isRefreshing: false
       })
-      console.log(this.state.UserList)
+      // console.log(this.state.UserList)
     } else {
       this.setState({
         isLoading: false,
@@ -51,7 +51,7 @@ class UserViewer extends PureComponent {
         error: 'Something went wrong'
       });
     }
-    console.log('final', this.state)
+    // console.log(this.state)
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -62,7 +62,7 @@ class UserViewer extends PureComponent {
   _renderItem = ({ item }) => (
     <TouchableOpacity>
       <ListItem
-        title = {item}
+        title = {item.email}
         titleStyle = {{fontSize:25,paddingLeft:30}}
         chevronColor = 'black'
       />
@@ -126,7 +126,7 @@ class UserViewer extends PureComponent {
     }
   }
 
-/*   // handle when pull to refresh
+  // handle when pull to refresh
   // @ref render -> FlatList
   _handleRefresh = () => {
     this.setState({
@@ -145,7 +145,7 @@ class UserViewer extends PureComponent {
     }, () => {
       this.retrieveUserList(this.state.page)
     })
-  } */
+  }
 
   /////////////////////////////////////////////////////////////////////
   // MAIN RENDER
@@ -163,10 +163,10 @@ class UserViewer extends PureComponent {
             ListHeaderComponent={this._renderHeader}
             ListFooterComponent={this._renderFooter}
             // Refresh
-            // refreshing={this.state.isRefreshing}
-            // onRefresh={this._handleRefresh}
+            refreshing={this.state.isRefreshing}
+            onRefresh={this._handleRefresh}
             //Loadmore
-            // onEndReached = {this._handleLoadMore}
+            onEndReached = {this._handleLoadMore}
             onEndReachedThreshold={0.5}
           />
           </List>

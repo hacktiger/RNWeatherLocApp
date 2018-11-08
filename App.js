@@ -107,7 +107,7 @@ const ChatStack = createStackNavigator(
     UserList: UserViewScreen,
     Chat: ChatScreen
   },{
-    initialRouteName: 'Chat'
+    initialRouteName: 'UserList'
   }
 )
 
@@ -160,14 +160,14 @@ const AppStack = createMaterialBottomTabNavigator(
     barStyle :{  }
   }
 )
-
+// switch navigator for auth flow
 export default createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
     App: AppStack,
     Auth: AuthStack,
   },{
-    initialRouteName: 'AuthLoading'
+    initialRouteName: 'App' // initial screen of EVERYTHING
   }
 )
 
