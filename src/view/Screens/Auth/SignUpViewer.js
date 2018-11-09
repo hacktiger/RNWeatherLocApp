@@ -11,7 +11,6 @@ import { withNavigation } from 'react-navigation'
 import { TextInput, Button } from 'react-native-paper'
 import Spinner from '../../common/Spinner'
 import Firebase from '../../../controller/Firebase'
-import firebase from 'firebase'
 // IMPORTS FOR TESTING PURPOSES
 // main class
 class SignUpViewer extends Component {

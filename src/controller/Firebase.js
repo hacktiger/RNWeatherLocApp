@@ -19,7 +19,7 @@ class Firebase {
       } else {
         this.setUid('')
       }
-      // console.log('after set', this.getUid())
+      console.log('after set', this.getUid())
     })
   }
   // setter + getter
@@ -47,6 +47,7 @@ class Firebase {
   saveUserToDB (id, email) { // maybe to let or const later
     this.userRef = this.database().ref('users')
     let data = {
+      id: id,
       email: email
     }
     this.userRef.child(id).set(data)
@@ -68,12 +69,12 @@ class Firebase {
         text: message.text,
         createdAt: message.createdAt,
         user: {
-          _id: message.user._id,
-          name: message.user.name
+          _id: message.user._id
         }
       })
     }
-    this.messagesRef.limitToLast(20).on('child_added', onReceive)
+    console.log('aaaaaa', this.getUid())
+    this.messagesRef.orderByChild('user/_id').equalTo(this.getUid()).limitToLast(20).on('child_added', onReceive)
   }
   // send message
   sendMessage (message) {

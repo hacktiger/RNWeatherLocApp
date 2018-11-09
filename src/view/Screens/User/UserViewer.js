@@ -1,7 +1,8 @@
 // react imports
 import React, { PureComponent } from 'react';
 import { View, Text, FlatList, StyleSheet,TouchableOpacity } from 'react-native';
-import { List, SearchBar, ListItem, Avatar } from 'react-native-elements';
+import { List, SearchBar, ListItem } from 'react-native-elements';
+import { withNavigation } from 'react-navigation'
 // My imports
 import Spinner from '../../common/Spinner';
 import Firebase from '../../../controller/Firebase'
@@ -14,7 +15,6 @@ class UserViewer extends PureComponent {
       OriginalUserList: [],
       UserList: [],
       query: '',
-      page: 1,
       error: 'None',
       isLoading: true,
       isRefreshing: false
@@ -36,14 +36,17 @@ class UserViewer extends PureComponent {
   // handle success of getting user
   _handleResponse (response) {
     if ( response ) {
-      console.log('user view response: ', response.data)
+      let temp = []
+      Object.keys(response.data).forEach(function(k){
+        temp.push(response.data[k])
+      });
+
       this.setState({
-        UserList: response.data,
-        OriginalUserList: response.data,
+        UserList: [...this.state.UserList,...temp],
+        OriginalUserList: [...this.state.OriginalUserList,...temp],
         isLoading: false,
         isRefreshing: false
       })
-      console.log(this.state.UserList)
     } else {
       this.setState({
         isLoading: false,
@@ -51,18 +54,23 @@ class UserViewer extends PureComponent {
         error: 'Something went wrong'
       });
     }
-    console.log('final', this.state)
   }
 
   ///////////////////////////////////////////////////////////////////
   // HELPER FUNCTIONS FOR FLAT LIST   
   ///////////////////////////////////////////////////////////////////
+  _onPressItem (id) {
+    this.props.navigation.navigate('Chat', {
+      userid: id
+    })
+  }
   // render each items
   // @ref render -> FlatList
   _renderItem = ({ item }) => (
     <TouchableOpacity>
       <ListItem
-        title = {item}
+        title = {item.email}
+        onPress = {smt => this._onPressItem(item.id)}
         titleStyle = {{fontSize:25,paddingLeft:30}}
         chevronColor = 'black'
       />
@@ -126,17 +134,19 @@ class UserViewer extends PureComponent {
     }
   }
 
-/*   // handle when pull to refresh
+   // handle when pull to refresh
   // @ref render -> FlatList
   _handleRefresh = () => {
     this.setState({
-        page: 1,
-        isRefreshing: true
+      OriginalUserList: [],
+      UserList: [],
+      isRefreshing: true
       },() => {
         this.retrieveUserList();
       }
     )
   }
+  /*
   // load more
   // @ref render -> FlatList
   _handleLoadMore = () => {
@@ -163,19 +173,19 @@ class UserViewer extends PureComponent {
             ListHeaderComponent={this._renderHeader}
             ListFooterComponent={this._renderFooter}
             // Refresh
-            // refreshing={this.state.isRefreshing}
-            // onRefresh={this._handleRefresh}
+            refreshing={this.state.isRefreshing}
+            onRefresh={this._handleRefresh}
             //Loadmore
             // onEndReached = {this._handleLoadMore}
             onEndReachedThreshold={0.5}
           />
-          </List>
+        </List> 
       </View>
     )
   }
 }
 
-export default UserViewer;
+export default withNavigation(UserViewer)
 
 // STYLES
 const styles = StyleSheet.create({
