@@ -23,12 +23,20 @@
   PUT: update
   DELETE
 
-  [] Create Login Page w user token
+  [x] Create Login Page w user token
 
   [x] new Endpoint => list user/load more with flatlist
 
   [x] constructor not needed 
 
-  [] handle error only if key not exist
+  [x] handle error only if key not exist
+  // PRIORITY DECENDING
+  [] Loadmore/ limit load/ load ealier on userview and chatview
 
-I m on a new branch
+  [] Header in Chat
+
+  [] Avatar in Chat ?
+
+  [] Settings currently does nothing
+
+  [] (optional) implement redux ?

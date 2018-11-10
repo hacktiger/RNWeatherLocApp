@@ -1,7 +1,6 @@
 import FirebaseDataService, {getUser} from '../services/models/FirebaseDataService'
 
 class Firebase {
-  uid = ''
   messagesRef = null // firebase database ref('chat/messages')
   roomsRef = null // chat room ref('chat/rooms')
   userRef = null
@@ -10,8 +9,17 @@ class Firebase {
     this.FirebaseSingleton = FirebaseDataService.getInstance()
   }
 
+  auth() {
+    return this.FirebaseSingleton.auth()
+  }
   getUid () {
-    return this.FirebaseSingleton.auth().currentUser.uid
+    let check = this.FirebaseSingleton.auth().currentUser
+    console.log(check)
+    if (check){
+      return check.uid
+    } else {
+      return null
+    }
   }
   // Authentication stuff
   logInUser (email, password) {
@@ -24,6 +32,7 @@ class Firebase {
 
   signOutUser () {
     return this.FirebaseSingleton.auth().signOut()
+
   }
 
   // DB stuff
@@ -49,7 +58,7 @@ class Firebase {
     this.messagesRef.off()
     const onReceive = (data) => {
       const message = data.val()
-      // console.log(message)
+      // console.log(message.text)
       callback({
         _id: data.key,
         text: message.text,
@@ -74,27 +83,23 @@ class Firebase {
         roomID: roomID
       })
     }
-    // create middletable 
-    this.createRoom(friendID, myID)
   }
-  // 
+  // get room id
   getRoomID (friendID, myID) {
     let bigger = ''
     let smaller = ''
     if (friendID > myID){
       bigger = friendID
       smaller = myID
-    } else if (friendID < myID) {
+    } else {
       bigger = myID
       smaller = friendID
-    } else {
-      return roomID = bigger
     }
     return roomID = bigger+smaller
   }
   // create chat room
   async createRoom (receiverID, senderID) {
-    let roomID = this.getRoomID(receiverID, senderID)
+    let roomID = await this.getRoomID(receiverID, senderID)
     this.roomsRef = await this.database().ref('chat/rooms')
     this.roomsRef.orderByKey().equalTo(roomID).once('value', (snap) => {
       if (snap.exists()){

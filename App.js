@@ -2,12 +2,14 @@ import React from 'react'
 import {
   StyleSheet,
   Dimensions,
-  ActivityIndicator,
   View,
+  Text
 } from 'react-native'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
+import Spinner from './src/view/common/Spinner'
+import Firebase from './src/controller/Firebase'
 // Screens
 import MapViewer from './src/view/Screens/Map/MapViewer'
 
@@ -16,10 +18,12 @@ import ChatViewer from './src/view/Screens/User/ChatViewer'
 
 import LoginViewer from './src/view/Screens/Auth/LoginViewer'
 import SignUpViewer from './src/view/Screens/Auth/SignUpViewer'
+
 import SettingsViewer from './src/view/Screens/Settings/SettingsViewer'
 
 // Classes
 // 
+console.ignoredYellowBox = ['Setting a timer', 'Warning'] // rid of yellow boxes for easy handling when testing
 class UserViewScreen extends React.Component {
   static navigationOptions = {
     title: 'Chat'
@@ -58,19 +62,28 @@ class SettingsScreen extends React.Component {
 class AuthLoadingScreen extends React.Component {
   constructor (props) {
     super(props)
-    this._navigate()
+    this.myFirebase = new Firebase()
   }
 
-  _navigate = () => {
-    this.props.navigation.navigate('Login')
+  componentDidMount () {
+    this.myFirebase.auth().onAuthStateChanged((user) => {
+      if(user){
+        // console.log('ok')
+        this.props.navigation.navigate('App')
+      }else{
+        // console.log('nah')
+        this.props.navigation.navigate('Login')
+      }
+    })
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <ActivityIndicator />
+        <Spinner size='large' />
+        <Text>Checking authentication ... </Text>
       </View>
-    );
+    )
   }
 }
 
@@ -168,7 +181,9 @@ export default createSwitchNavigator(
 // Styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   body: {
     width: Dimensions.get('window').width,

@@ -33,11 +33,7 @@ class LoginViewer extends Component {
   }
   //
   componentDidMount () {
-    this._navigate()
-  }
-
-  _navigate () {
-    // this.props.navigation.navigate('App')
+    // this._navigate()
   }
 
   // handle text change on email input

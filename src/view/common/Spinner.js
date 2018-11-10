@@ -1,8 +1,9 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React from 'react'
 import {
   View,
-  ActivityIndicator 
-} from 'react-native';
+  ActivityIndicator
+} from 'react-native'
 
 const Spinner = ({ size }) => {
   return (
@@ -18,6 +19,6 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center'
   }
-};
+}
 
-export default Spinner;
+export default Spinner
