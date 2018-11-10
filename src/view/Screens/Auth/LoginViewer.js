@@ -37,11 +37,7 @@ class LoginViewer extends Component {
   }
 
   _navigate () {
-    let kkk = this.Authentication.getUid()
-    console.log('navigate', kkk)
-    if (kkk !== '') {
-      this.props.navigation.navigate('App')
-    }
+    // this.props.navigation.navigate('App')
   }
 
   // handle text change on email input

@@ -59,9 +59,10 @@ class UserViewer extends PureComponent {
   ///////////////////////////////////////////////////////////////////
   // HELPER FUNCTIONS FOR FLAT LIST   
   ///////////////////////////////////////////////////////////////////
-  _onPressItem (id) {
+  _onPressItem (id, email) {
     this.props.navigation.navigate('Chat', {
-      userid: id
+      userid: id,
+      email: email
     })
   }
   // render each items
@@ -70,7 +71,7 @@ class UserViewer extends PureComponent {
     <TouchableOpacity>
       <ListItem
         title = {item.email}
-        onPress = {smt => this._onPressItem(item.id)}
+        onPress = {smt => this._onPressItem(item.id, item.email)}
         titleStyle = {{fontSize:25,paddingLeft:30}}
         chevronColor = 'black'
       />

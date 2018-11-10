@@ -12,20 +12,12 @@ class ChatViewer extends React.Component {
     }
     this.myFirebase = new Firebase()
     this.targetUserID = this.props.navigation.getParam('userid')
+    this.myID = this.myFirebase.getUid()
   }
   // lief cycle methods
   componentDidMount () {
-    // TRYING to get message only from certain person
-    /*     const myID = 'jOwlfhE8KpPMctrz6mCOaxkxpGX2'
-    const ref = this.myFirebase.database().ref('messages')
-    const query = ref.orderByChild('user/_id').equalTo(myID)
-    query.on('value', (snap) => {
-      console.log('BBBBB :', snap.val())
-    }, (err) => {
-      console.log(err)
-    }) */
-    this.myFirebase.loadMessages((message) => {
-      console.log(message)
+    this.myFirebase.loadMessages(this.targetUserID, this.myID, (message) => {
+      // console.log(message)
       this.setState((previousState) => {
         return {
           messages: GiftedChat.append(previousState.messages, message)
@@ -42,9 +34,9 @@ class ChatViewer extends React.Component {
     return (
       <GiftedChat
         messages={this.state.messages}
-        onSend={messages => this.myFirebase.sendMessage(messages)}
+        onSend={messages => this.myFirebase.sendMessage(this.targetUserID, this.myID, messages)}
         user={{
-          _id: 'jOwlfhE8KpPMctrz6mCOaxkxpGX2'// need to be changed to current user ID
+          _id: this.myID// need to be changed to current user ID
         }}
       />
     )

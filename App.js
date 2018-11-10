@@ -32,9 +32,6 @@ class UserViewScreen extends React.Component {
 }
 //
 class ChatScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Vs this person chat screen'
-  }
   render () {
     return (
       <ChatViewer />
@@ -51,9 +48,6 @@ class MapViewScreen extends React.Component {
 }
 // 
 class SettingsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Settings',
-  }
   render () {
     return (
       <SettingsViewer />
@@ -167,7 +161,7 @@ export default createSwitchNavigator(
     App: AppStack,
     Auth: AuthStack,
   },{
-    initialRouteName: 'App' // initial screen of EVERYTHING
+    initialRouteName: 'AuthLoading' // initial screen of EVERYTHING
   }
 )
 
