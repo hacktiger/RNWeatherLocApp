@@ -20,7 +20,6 @@ class ChatViewer extends React.Component {
   async componentDidMount () {
     await this.myFirebase.createRoom(this.targetUserID, this.myID)
     this.myFirebase.loadMessages(this.targetUserID, this.myID, (message) => {
-      // console.log(message)
       this.setState((previousState) => {
         return {
           messages: GiftedChat.append(previousState.messages, message)

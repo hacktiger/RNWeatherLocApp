@@ -1,12 +1,15 @@
 import FirebaseDataService, {getUser} from '../services/models/FirebaseDataService'
 
 class Firebase {
-  messagesRef = null // firebase database ref('chat/messages')
+  messagesRef = null // firebase database ref('chat/messages/' + roomID)
   roomsRef = null // chat room ref('chat/rooms')
-  userRef = null
+  roomMessagesRef = null // // firebase database ref('chat/messages')
+  userRef = null // firebase database ref('users')
   // contructor
   constructor() {
     this.FirebaseSingleton = FirebaseDataService.getInstance()
+    this.roomMessagesRef = this.database().ref('chat/messages')
+    this.userRef = this.database().ref('users')
   }
 
   auth() {
@@ -34,31 +37,26 @@ class Firebase {
     return this.FirebaseSingleton.auth().signOut()
 
   }
-
   // DB stuff
   saveUserToDB (id, email) { // maybe to let or const later
-    this.userRef = this.database().ref('users')
     let data = {
       id: id,
       email: email
     }
     this.userRef.child(id).set(data)
   }
-
   // Chat App stuff
   // init database
   database () {
     return this.FirebaseSingleton.database()
   }
   // load previous message
-  loadMessages (friendID, myID, callback) {
+  loadMessages (friendID, myID, lastMess, callback) {
     let roomID = this.getRoomID(friendID, myID)
-    // console.log('load mess', UserID)
-    this.messagesRef = this.database().ref('chat/messages')
+    this.messagesRef = this.database().ref('chat/messages/'+roomID)
     this.messagesRef.off()
     const onReceive = (data) => {
       const message = data.val()
-      // console.log(message.text)
       callback({
         _id: data.key,
         text: message.text,
@@ -68,19 +66,16 @@ class Firebase {
         }
       })
     }
-    // console.log(UserID) // roomID equalTo roomID
-    this.messagesRef.orderByChild('roomID').equalTo(roomID).limitToLast(20).on('child_added', onReceive)
+    this.messagesRef.orderByKey().limitToLast(10).on('child_added', onReceive)
   }
   // send message
   sendMessage (friendID, myID, message) {
-    // console.log('send mess', senderID)
     let roomID = this.getRoomID(friendID, myID)
     for(let i = 0; i < message.length; i++) {
-      this.messagesRef.push({
+      this.roomMessagesRef.child(roomID).push({
         text: message[i].text,
         user: message[i].user,
-        createdAt: new Date().toUTCString(),
-        roomID: roomID
+        createdAt: new Date().toUTCString()
       })
     }
   }
@@ -112,14 +107,12 @@ class Firebase {
       }
     })
   }
-
   // close chat connection
   closeChatConn () {
     if (this.messagesRef) {
       this.messagesRef.off()
     }
   }
-
   // REST
   getUserList () {
     return getUser()

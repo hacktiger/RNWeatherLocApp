@@ -41,3 +41,5 @@
   [] Settings currently does nothing
 
   [] (optional) implement redux ?
+
+  [] just to be sure check null before create room
