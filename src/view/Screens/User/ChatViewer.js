@@ -13,6 +13,7 @@ class ChatViewer extends React.Component {
     }
     this.myFirebase = new Firebase()
     this.targetUserID = this.props.navigation.getParam('userid')
+    this.userEmail = this.props.navigation.getParam('email')
     this.myID = this.myFirebase.getUid()
   }
   // lief cycle methods
@@ -32,7 +33,6 @@ class ChatViewer extends React.Component {
   }
   //
   _loadEalier () {
-
     this.myFirebase.loadMessages()
   }
 

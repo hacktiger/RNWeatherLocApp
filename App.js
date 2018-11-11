@@ -26,7 +26,8 @@ import SettingsViewer from './src/view/Screens/Settings/SettingsViewer'
 console.ignoredYellowBox = ['Setting a timer', 'Warning'] // rid of yellow boxes for easy handling when testing
 class UserViewScreen extends React.Component {
   static navigationOptions = {
-    title: 'Chat'
+    title: 'Chat Screen',
+    headerTintColor: 'purple'
   }
   render () {
     return (
@@ -36,6 +37,7 @@ class UserViewScreen extends React.Component {
 }
 //
 class ChatScreen extends React.Component {
+  
   render () {
     return (
       <ChatViewer />
@@ -90,6 +92,8 @@ class AuthLoadingScreen extends React.Component {
 class LoginScreen extends React.Component {
   static navigationOptions = {
     title: 'Login Screen',
+    headerTintColor: 'green',
+    headerPressColorAndroid: 'white'
   }
   render () {
     return (
@@ -100,7 +104,9 @@ class LoginScreen extends React.Component {
 
 class SignUpScreen extends React.Component {
   static navigationOptions = {
-    title: 'Sign up Screen'
+    title: 'Sign up Screen',
+    headerTintColor: 'purple',
+    headerPressColorAndroid: 'white'
   }
   render () {
     return (
@@ -108,6 +114,7 @@ class SignUpScreen extends React.Component {
     )
   }
 }
+
 
 const ChatStack = createStackNavigator(
   {
@@ -150,6 +157,7 @@ const AppStack = createMaterialBottomTabNavigator(
     },
     Settings: { screen: SettingsScreen,
       navigationOptions: {
+        title: 'Settings Screen',
         tabBarLabel: 'Settings',
         tabBarIcon: ({ tintColor }) => (
           <Icon name='ios-settings' color={tintColor} size={24} />
