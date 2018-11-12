@@ -20,6 +20,11 @@ class Firebase {
   auth() {
     return this.FirebaseSingleton.auth()
   }
+
+  getCurrUser () {
+    return this.FirebaseSingleton.auth().currentUser
+  }
+
   getUid () {
     let check = this.FirebaseSingleton.auth().currentUser
     // console.log(check)
@@ -59,9 +64,13 @@ class Firebase {
   sendMessage (friendID, myID, message) {
     let roomID = this.getRoomID(friendID, myID)
     for(let i = 0; i < message.length; i++) {
+      console.log(message[i].user)
       this.roomMessagesRef.child(roomID).push({
         text: message[i].text,
-        user: message[i].user,
+        user: {
+          _id: message[i].user._id,
+          avatar: 'https://placeimg.com/140/140/any'
+        },
         createdAt: new Date().toUTCString()
       })
     }

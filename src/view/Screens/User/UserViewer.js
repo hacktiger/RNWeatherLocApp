@@ -54,7 +54,7 @@ class UserViewer extends PureComponent {
         isLoading: false,
         isRefreshing: false
       })
-      console.log(this.state)
+      // console.log(this.state)
     } else {
       this.setState({
         isLoading: false,
@@ -111,9 +111,9 @@ class UserViewer extends PureComponent {
   }
   // do some filtering on search bar later
   _handleTextChange = (text) => {
-    console.log(text)
-    console.log(this.state.UserList)
-    console.log(this.state.OriginalUserList)
+    //console.log(text)
+    //console.log(this.state.UserList)
+    //console.log(this.state.OriginalUserList)
     const filteredData = this.state.OriginalUserList.filter(item => {      
       const itemData = `${item.email.toUpperCase()}`;
       const formatQuery = text.toUpperCase();
@@ -161,10 +161,10 @@ class UserViewer extends PureComponent {
   // load more
   // @ref render -> FlatList
   _handleLoadMore = () => {
-    console.log('load more')
+    // console.log('load more')
     this.myFirebase.getMoreUserList(this.state.lastUser)
       .then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         this._handleResponse(response)})
       .catch(err => console.log(err))
   }

@@ -28,6 +28,11 @@ class SettingsViewer extends Component {
     this._onClickSetting = this._onClickSetting.bind(this)
     this.Authentication = new Firebase()
   }
+  //
+  getCurrentUserEmail () {
+    return this.Authentication.getCurrUser().email
+  }
+  //
   _handleLogout () {
     // console.log('Pressed')
     this.Authentication.signOutUser()
@@ -63,7 +68,7 @@ class SettingsViewer extends Component {
           </View>
           <View style= { styles.containerTitle }>
             <Text style={{ fontSize: 30, fontWeight: '900' }}>
-              Your Profile5
+              {this.getCurrentUserEmail()}
             </Text>
           </View>
         </View>
