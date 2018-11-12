@@ -32,7 +32,14 @@
   [x] handle error only if key not exist
   
   // PRIORITY DECENDING
-  [] Loadmore/ limit load/ load ealier on userview and chatview
+  [in progress] limit load/ load ealier on userview and chatview
+      [x] chat view
+        [x] load ealier
+        [x] limit load
+      [] user view
+        [] load ealier
+        [] limit load
+  [] (optional) maybe send message with REST instead of firebase query
 
   [] Header in Chat
 
@@ -40,6 +47,6 @@
 
   [] Settings currently does nothing
 
-  [] (optional) implement redux ?
+  [o] (optional) implement redux ?
 
-  [] just to be sure check null before create room
+  [x] just to be sure check null before create room

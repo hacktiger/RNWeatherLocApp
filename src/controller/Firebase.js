@@ -1,4 +1,4 @@
-import FirebaseDataService, {getUser} from '../services/models/FirebaseDataService'
+import FirebaseDataService, {getUser, getMessages, getEalierMessages} from '../services/models/FirebaseDataService'
 
 class Firebase {
   messagesRef = null // firebase database ref('chat/messages/' + roomID)
@@ -17,7 +17,7 @@ class Firebase {
   }
   getUid () {
     let check = this.FirebaseSingleton.auth().currentUser
-    console.log(check)
+    // console.log(check)
     if (check){
       return check.uid
     } else {
@@ -49,24 +49,6 @@ class Firebase {
   // init database
   database () {
     return this.FirebaseSingleton.database()
-  }
-  // load previous message
-  loadMessages (friendID, myID, lastMess, callback) {
-    let roomID = this.getRoomID(friendID, myID)
-    this.messagesRef = this.database().ref('chat/messages/'+roomID)
-    this.messagesRef.off()
-    const onReceive = (data) => {
-      const message = data.val()
-      callback({
-        _id: data.key,
-        text: message.text,
-        createdAt: message.createdAt,
-        user: {
-          _id: message.user._id
-        }
-      })
-    }
-    this.messagesRef.orderByKey().limitToLast(10).on('child_added', onReceive)
   }
   // send message
   sendMessage (friendID, myID, message) {
@@ -116,6 +98,12 @@ class Firebase {
   // REST
   getUserList () {
     return getUser()
+  }
+  getMessagesList (roomID) {
+    return getMessages(roomID)
+  }
+  getEalierMessagesList (roomID, endAtMessKey) {
+    return getEalierMessages(roomID, endAtMessKey)
   }
 // END CLASS
 }
