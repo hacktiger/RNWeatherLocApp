@@ -27,6 +27,7 @@ class ChatViewer extends React.Component {
   }
   // LOAD MESSAGE
   async loadMessage () {
+    this.setState({ isLoading: true })
     await this.myFirebase.createRoom(this.targetUserID, this.myID)
     this.setState({
       roomID: await this.myFirebase.getRoomID(this.targetUserID, this.myID)
@@ -49,7 +50,8 @@ class ChatViewer extends React.Component {
       lastMess: mess[mess.length - 1]._id,
       messages: [ ...this.state.messages, ...mess.splice(0, mess.length - 1) ]
     })
-    console.log(this.state)
+    // console.log(this.state)
+    this.setState({ isLoading: false })
   }
   //
   _handleError (err) {
@@ -59,10 +61,20 @@ class ChatViewer extends React.Component {
   }
   //
   _loadEalier () {
+    this.setState({ isLoading: true })
     // endAtMessageKey
     this.myFirebase.getEalierMessagesList(this.state.roomID, this.state.lastMess)
       .then((res) => this._handleResponse(res))
       .catch((err) => this._handleError(err))
+  }
+  //
+  _handlesendMessage (sentMessage) {
+    this.setState((prev) => {
+      return {
+        messages: GiftedChat.append(prev.messages, sentMessage)
+      }
+    })
+    this.myFirebase.sendMessage(this.targetUserID, this.myID, sentMessage)
   }
 
   // MAIN RENDER
@@ -79,7 +91,7 @@ class ChatViewer extends React.Component {
         isLoadingEarlier = {this.state.isLoading}
         // main information
         messages={this.state.messages}
-        onSend={messages => this.myFirebase.sendMessage(this.targetUserID, this.myID, messages)}
+        onSend={messages => this._handlesendMessage(messages)}
         user={{
           _id: this.myID // need to be changed to current user ID
         }}
