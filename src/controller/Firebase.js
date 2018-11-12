@@ -1,4 +1,9 @@
-import FirebaseDataService, {getUser, getMessages, getEalierMessages} from '../services/models/FirebaseDataService'
+import FirebaseDataService, {
+  getUser, 
+  getMessages, 
+  getEalierMessages, 
+  getMoreUser
+} from '../services/models/FirebaseDataService'
 
 class Firebase {
   messagesRef = null // firebase database ref('chat/messages/' + roomID)
@@ -98,6 +103,9 @@ class Firebase {
   // REST
   getUserList () {
     return getUser()
+  }
+  getMoreUserList (endAtUserKey) {
+    return getMoreUser(endAtUserKey)
   }
   getMessagesList (roomID) {
     return getMessages(roomID)

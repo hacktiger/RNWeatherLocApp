@@ -39,6 +39,11 @@ class ChatViewer extends React.Component {
   //
   _handleResponse (res) {
     let data = res.data
+    // if no data => stop the spinner in load latter
+    if (data === null) {
+      this.setState({ isLoading: false })
+      return
+    }
     let mess = []
     Object.keys(data).forEach((key) => {
       let _id = key

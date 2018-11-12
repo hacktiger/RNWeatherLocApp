@@ -17,7 +17,8 @@ class UserViewer extends PureComponent {
       query: '',
       error: 'None',
       isLoading: true,
-      isRefreshing: false
+      isRefreshing: false,
+      lastUser: '',
     };
     // react native create reference
     this.myFirebase = new Firebase()
@@ -37,13 +38,19 @@ class UserViewer extends PureComponent {
   _handleResponse (response) {
     if ( response ) {
       let temp = []
-      Object.keys(response.data).forEach(function(k){
-        temp.push(response.data[k])
+      let data = response.data
+      Object.keys(data).forEach((key) => {
+        temp.push(data[key])
       });
-
+      if(temp.length === 1){
+        return
+      }
+      // console.log(this.state)
+      this.setState({ isLoading: false })
       this.setState({
-        UserList: [...this.state.UserList,...temp],
-        OriginalUserList: [...this.state.OriginalUserList,...temp],
+        lastUser: temp[temp.length-1].id,
+        UserList: [...this.state.UserList,...temp.splice(0, temp.length-1)],
+        OriginalUserList: [...this.state.OriginalUserList,...temp.splice(0, temp.length-1)],
         isLoading: false,
         isRefreshing: false
       })
@@ -147,16 +154,17 @@ class UserViewer extends PureComponent {
       }
     )
   }
-  /*
+  
   // load more
   // @ref render -> FlatList
   _handleLoadMore = () => {
-    this.setState({
-      page: this.state.page + 1
-    }, () => {
-      this.retrieveUserList(this.state.page)
-    })
-  } */
+    console.log('load more')
+    this.myFirebase.getMoreUserList(this.state.lastUser)
+      .then(response => {
+        console.log(response.data)
+        this._handleResponse(response)})
+      .catch(err => console.log(err))
+  }
 
   /////////////////////////////////////////////////////////////////////
   // MAIN RENDER
@@ -177,7 +185,7 @@ class UserViewer extends PureComponent {
             refreshing={this.state.isRefreshing}
             onRefresh={this._handleRefresh}
             //Loadmore
-            // onEndReached = {this._handleLoadMore}
+            onEndReached = {this._handleLoadMore}
             onEndReachedThreshold={0.5}
           />
         </List> 
