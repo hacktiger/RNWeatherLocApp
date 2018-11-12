@@ -41,19 +41,20 @@ class UserViewer extends PureComponent {
       let data = response.data
       Object.keys(data).forEach((key) => {
         temp.push(data[key])
-      });
+      })
+      // to prevent multiple load more on the same key over and over again
       if(temp.length === 1){
         return
       }
-      // console.log(this.state)
-      this.setState({ isLoading: false })
+      temp2 = temp.splice(0, temp.length-1)
       this.setState({
         lastUser: temp[temp.length-1].id,
-        UserList: [...this.state.UserList,...temp.splice(0, temp.length-1)],
-        OriginalUserList: [...this.state.OriginalUserList,...temp.splice(0, temp.length-1)],
+        UserList: [...this.state.UserList,...temp2],
+        OriginalUserList: [...this.state.OriginalUserList,...temp2],
         isLoading: false,
         isRefreshing: false
       })
+      console.log(this.state)
     } else {
       this.setState({
         isLoading: false,
@@ -110,6 +111,9 @@ class UserViewer extends PureComponent {
   }
   // do some filtering on search bar later
   _handleTextChange = (text) => {
+    console.log(text)
+    console.log(this.state.UserList)
+    console.log(this.state.OriginalUserList)
     const filteredData = this.state.OriginalUserList.filter(item => {      
       const itemData = `${item.email.toUpperCase()}`;
       const formatQuery = text.toUpperCase();
@@ -154,7 +158,6 @@ class UserViewer extends PureComponent {
       }
     )
   }
-  
   // load more
   // @ref render -> FlatList
   _handleLoadMore = () => {
@@ -193,9 +196,8 @@ class UserViewer extends PureComponent {
     )
   }
 }
-
+// EXPORT
 export default withNavigation(UserViewer)
-
 // STYLES
 const styles = StyleSheet.create({
   container: {

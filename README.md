@@ -32,21 +32,26 @@
   [x] handle error only if key not exist
   
   // PRIORITY DECENDING
-  [in progress] limit load/ load ealier on userview and chatview
+  [x] limit load/ load ealier on userview and chatview
       [x] chat view
         [x] load ealier
         [x] limit load
-      [] user view
-        [] load ealier
-        [] limit load
+      [x] user view
+        [x] load ealier
+        [x] limit load
+
   [] (optional) maybe send message with REST instead of firebase query
 
-  [] Header in Chat
+  [in progress] Header in Chat
 
-  [] Avatar in Chat ?
+  [x] Avatar in Chat ? Cus dont have a func to upload avatar so....
 
-  [] Settings currently does nothing
+  [] Settings currently does nothing (cant think of anything yet)
 
   [o] (optional) implement redux ?
 
+  [] (optional) sort by most messages ( may need to create another object in firebase )
+
   [x] just to be sure check null before create room
+
+  [] clean code ( check funcs + performance + delete useless things)
