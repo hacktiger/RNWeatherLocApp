@@ -190,7 +190,7 @@ export default createSwitchNavigator(
     App: AppStack,
     Auth: AuthStack,
   },{
-    initialRouteName: 'AuthLoading' // initial screen of EVERYTHING
+    initialRouteName: 'App' // initial screen of EVERYTHING
   }
 )
 

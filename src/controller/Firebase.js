@@ -6,6 +6,7 @@ import FirebaseDataService, {
 } from '../services/models/FirebaseDataService'
 
 class Firebase {
+  mess = []
   messagesRef = null // firebase database ref('chat/messages/' + roomID)
   roomsRef = null // chat room ref('chat/rooms')
   roomMessagesRef = null // // firebase database ref('chat/messages')
@@ -64,7 +65,7 @@ class Firebase {
   sendMessage (friendID, myID, message) {
     let roomID = this.getRoomID(friendID, myID)
     for(let i = 0; i < message.length; i++) {
-      console.log(message[i].user)
+      // console.log(message[i].user)
       this.roomMessagesRef.child(roomID).push({
         text: message[i].text,
         user: {
@@ -74,6 +75,7 @@ class Firebase {
         createdAt: new Date().toUTCString()
       })
     }
+
   }
   // get room id
   getRoomID (friendID, myID) {
@@ -123,6 +125,47 @@ class Firebase {
     return getEalierMessages(roomID, endAtMessKey)
   }
 // END CLASS
-}
 
+
+///////// 
+// TEST
+////////
+
+  // retrieve the messages from the Backend
+  loadMessages2(callback) {
+    this.messagesRef = this.FirebaseSingleton.database().ref('messages');
+    this.messagesRef.off();
+    const onReceive = (data) => {
+      const message = data.val();
+      //console.log('before', this.mess)
+      //console.log('message', message)
+      this.mess.push(message)
+      //console.log('after', this.mess)
+      //console.log(data.val())
+      callback({
+        _id: data.key,
+        text: message.text,
+        createdAt: new Date(message.createdAt),
+        user: {
+          _id: message.user._id,
+          name: message.user.name,
+        },
+      });
+    };
+    this.messagesRef.limitToLast(20).on('child_added', onReceive);
+  }
+  // send the message to the Backend
+  sendMessage2(message) {
+    for (let i = 0; i < message.length; i++) {
+      this.messagesRef.push({
+        text: message[i].text,
+        user: message[i].user,
+        createdAt: new Date().toUTCString(),
+      });
+    }
+  }
+  printMess() {
+    return this.mess
+  }
+}
 export default Firebase
