@@ -4,8 +4,6 @@ import firebase from 'firebase'
 import { FirebaseUserGateway } from '../../configs/myGateway'
 const PATH_USER = '/users'
 const USER_QUERY = 'orderBy="$key"&limitToFirst=8&print=pretty'
-const PATH_MESSAGES = '/chat/messages'
-const MESSAGE_QUERY = 'orderBy="$key"&limitToLast=21&print=pretty'
 const FIREBASE_JSON = '.json'
 
 const Singleton = (function () {
@@ -33,13 +31,4 @@ export const getUser = () => {
 export const getMoreUser = (endAtUserKey) => {
   return FirebaseUserGateway.get(`${PATH_USER}${FIREBASE_JSON}?${USER_QUERY}&startAt="${endAtUserKey}"`)
 }
-
-export const getMessages = (roomID) => {
-  return FirebaseUserGateway.get(`${PATH_MESSAGES}/${roomID}${FIREBASE_JSON}?${MESSAGE_QUERY}`)
-}
-
-export const getEalierMessages = (roomID, endAtMessKey) => {
-  return FirebaseUserGateway.get(`${PATH_MESSAGES}/${roomID}${FIREBASE_JSON}?${MESSAGE_QUERY}&endAt="${endAtMessKey}"`)
-}
-
 export default Singleton
