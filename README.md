@@ -54,4 +54,4 @@
 
   [x] just to be sure check null before create room
 
-  [] clean code ( check funcs + performance + delete useless things)
+  [] clean code ( check funcs + performance + delete useless things + increase UX)
