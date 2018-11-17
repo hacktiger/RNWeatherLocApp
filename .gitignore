@@ -1,7 +1,8 @@
 # OSX
 #
 .DS_Store
-
+android/app/src/*/res/*/reactnative_*.png
+android/app/src/*/res/*/node_modules_*.png
 # Xcode
 #
 build/
