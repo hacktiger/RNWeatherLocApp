@@ -8,18 +8,18 @@ import {
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
-import Spinner from './src/view/common/Spinner'
-import Firebase from './src/controller/Firebase'
+import Spinner from './public/view/common/Spinner'
+import Firebase from './public/controller/Firebase'
 // Screens
-import MapViewer from './src/view/Screens/Map/MapViewer'
+import MapViewer from './public/view/Screens/Map/MapViewer'
 
-import UserViewer from './src/view/Screens/User/UserViewer'
-import ChatViewer from './src/view/Screens/User/ChatViewer'
+import UserViewer from './public/view/Screens/User/UserViewer'
+import ChatViewer from './public/view/Screens/User/ChatViewer'
 
-import LoginViewer from './src/view/Screens/Auth/LoginViewer'
-import SignUpViewer from './src/view/Screens/Auth/SignUpViewer'
+import LoginViewer from './public/view/Screens/Auth/LoginViewer'
+import SignUpViewer from './public/view/Screens/Auth/SignUpViewer'
 
-import SettingsViewer from './src/view/Screens/Settings/SettingsViewer'
+import SettingsViewer from './public/view/Screens/Settings/SettingsViewer'
 
 // Classes
 // 

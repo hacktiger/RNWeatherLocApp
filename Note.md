@@ -26,3 +26,5 @@ with
 
 runBefore("merge${targetName}Resources", currentBundleTask)
 runBefore("merge${targetName}Assets", currentBundleTask)
+
+//

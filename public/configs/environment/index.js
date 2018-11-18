@@ -1,5 +1,6 @@
+
 // constants
-export const WEATHER_API_KEY = 'UgEihPiQMVVUIdsz05M8MHxCxpi5jG2I'
+import { FIREBASE_API_KEY } from '../constants/keys'
 const DEFAULT_TIMEOUT = 3000
 const HEADERS = {
   'Content-Type': 'application/json'
@@ -61,7 +62,7 @@ const ENVIRONMENT = {
 }
 
 export const FIREBASE_CONFIGS = {
-  apiKey: 'AIzaSyDh6IrfHjQuQyUXAAhtPQcSFUx1NIyWxUU',
+  apiKey: FIREBASE_API_KEY,
   authDomain: 'weather-location-app-217808.firebaseapp.com',
   databaseURL: 'https://weather-location-app-217808.firebaseio.com',
   projectId: 'weather-location-app-217808',

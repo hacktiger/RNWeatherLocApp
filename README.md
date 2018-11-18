@@ -55,3 +55,13 @@
   [x] just to be sure check null before create room
 
   [] clean code ( check funcs + performance + delete useless things + increase UX)
+
+[x] src rename => public
+[x] 1 là static key
+[] 2 là controllers
+[] 3 là data
+[] 4 là models
+[] 5 là presentation
+[] 6 là middlewares
+[] 7 là configs
+[] 8 là resources

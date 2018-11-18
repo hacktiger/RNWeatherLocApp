@@ -1,5 +1,5 @@
 // my imports
-import WeatherDataService from '../services/models/WeatherDataService';
+import WeatherDataService from '../services/models/WeatherDataService'
 // init WeatherDataService as  WeatherDataServices
 const WeatherDataServices = new WeatherDataService()
 export default class WeatherForecast {
