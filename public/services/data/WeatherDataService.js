@@ -1,5 +1,5 @@
 import { WeatherGateway } from '../../configs/myGateway'
-import { WEATHER_API_KEY } from '../../configs/constants/keys'
+import { WEATHER_API_KEY } from '../../constants/keys'
 //
 const PATH_LOCATION_KEY = '/locations/v1/cities/geoposition'
 const PATH_5DAYS_FORECAST = '/forecasts/v1/daily/5day'

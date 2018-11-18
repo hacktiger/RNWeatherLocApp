@@ -1,7 +1,7 @@
 import FirebaseDataService, {
   getUser,
   getMoreUser
-} from "../services/models/FirebaseDataService";
+} from "../services/data/FirebaseDataService";
 
 class Firebase {
   messagesRef = null; // firebase database ref('chat/messages/' + roomID)

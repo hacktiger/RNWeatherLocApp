@@ -1,6 +1,6 @@
 
 // constants
-import { FIREBASE_API_KEY } from '../constants/keys'
+import { FIREBASE_API_KEY } from '../../constants/keys'
 const DEFAULT_TIMEOUT = 3000
 const HEADERS = {
   'Content-Type': 'application/json'

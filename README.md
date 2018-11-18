@@ -58,10 +58,10 @@
 
 [x] src rename => public
 [x] 1 là static key
-[] 2 là controllers
+[x] 2 là controllers
 [] 3 là data
 [] 4 là models
-[] 5 là presentation
+[x] 5 là presentation ( now is view )
 [] 6 là middlewares
-[] 7 là configs
+[x] 7 là configs
 [] 8 là resources

@@ -1,5 +1,5 @@
 // my imports
-import Map from '../services/models/MapDataService'
+import Map from '../services/data/MapDataService'
 // init Map() from MapDataService
 const myMap = new Map()
 // Class

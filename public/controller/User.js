@@ -1,5 +1,5 @@
 // my imports
-import UserDataService from '../services/models/UserDataService'
+import UserDataService from '../services/data/UserDataService'
 // init UserDataService() as UserData
 const UserData = new UserDataService()
 export default class User {
