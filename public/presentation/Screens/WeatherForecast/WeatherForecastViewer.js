@@ -1,6 +1,8 @@
 // react imports
 import React, { Component } from 'react'
 import {
+  Text,
+  View,
   ScrollView
 } from 'react-native'
 
@@ -12,7 +14,7 @@ class WeatherForecastViewer extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      LocationKey: 0,
+      LocationKey: -9999,
       ForecastList: [],
       lat: -9999,
       long: -9999
@@ -44,9 +46,18 @@ class WeatherForecastViewer extends Component {
 
   // Helper function
   renderForecast () {
-    return this.state.ForecastList.map(ForecastList => (
-      <WeatherForecastDetail key={ForecastList.Date} ForecastList={ForecastList} />
-    ))
+    if(this.state.LocationKey === -9999){
+      return (
+        <View style={{paddingLeft: 90, justifyContent: 'center' }}>
+          <Text style={{color:'red'}}> Something went wrong !</Text>
+          <Text style={{color:'red'}}> Make sure your GPS is turned on</Text>
+        </View>
+      )
+    } else {
+      return this.state.ForecastList.map(ForecastList => (
+        <WeatherForecastDetail key={ForecastList.Date} ForecastList={ForecastList} />
+      ))
+    }
   }
 
   // MAIN RENDER

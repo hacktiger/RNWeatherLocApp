@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
-import Firebase from '../../../controller/Firebase'
+import ChatFirebase from '../../../controller/Chat'
 import { withNavigation } from 'react-navigation'
 class ChatViewer extends React.Component {
   constructor (props) {
@@ -14,7 +14,7 @@ class ChatViewer extends React.Component {
       error: '',
       temp: 0
     }
-    this.myFirebase = new Firebase()
+    this.myFirebase = new ChatFirebase()
     this.targetUserID = this.props.navigation.getParam('userid')
     this.userEmail = this.props.navigation.getParam('email')
     this.myID = this.myFirebase.getUid()
@@ -32,8 +32,12 @@ class ChatViewer extends React.Component {
     await this.setState({ roomID: this.myFirebase.getRoomID(this.targetUserID, this.myID) })
     this.myFirebase.loadMessages(this.state.roomID, (message) => {
       if (this.state.temp === 0) {
-        console.log('temp == 0')
-        this.setState({ lastMess: message._id, temp: 1 })
+        // console.log('temp == 0')
+        // console.log(message.text)
+        this.setState({
+          lastMess: message._id,
+          temp: 1
+        })
         return
       }
       this.setState((previousState) => {
@@ -44,13 +48,13 @@ class ChatViewer extends React.Component {
     })
   }
   //
-  async _loadEalier () {
-    await this.setState({ isLoading: true })
-    await this.myFirebase.messagesRef
+  _loadEalier () {
+    this.setState({ isLoading: true })
+    this.myFirebase.messagesRef
       .orderByKey()
       .limitToLast(20)
       .endAt(this.state.lastMess)
-      .on('value', (snap) => this._handleLoadEarlierResponse(snap))    
+      .on('value', (snap) => this._handleLoadEarlierResponse(snap))
   }
   // handle load more response
   _handleLoadEarlierResponse (snap) {
@@ -62,10 +66,9 @@ class ChatViewer extends React.Component {
       let _id = key
       tempArr.push({ _id, ...messages[key] })
     })
-    //
-    tempArr.sort()
     tempArr.reverse()
     // set state result
+    // console.log(tempArr[tempArr.length - 1].text)
     this.setState({
       lastMess: tempArr[tempArr.length - 1]._id,
       messages: [ ...this.state.messages, ...tempArr.splice(0, tempArr.length - 1) ]

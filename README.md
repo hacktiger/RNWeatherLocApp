@@ -40,13 +40,11 @@
         [x] load ealier
         [x] limit load
 
-  [] (optional) maybe send message with REST instead of firebase query
-
-  [in progress] Header in Chat
+  [x] Header in Chat
 
   [x] Avatar in Chat ? Cus dont have a func to upload avatar so....
 
-  [] Settings currently does nothing (cant think of anything yet)
+  [x] Settings currently does nothing (cant think of anything yet)
 
   [o] (optional) implement redux ?
 
@@ -65,3 +63,5 @@
 [] 6 là middlewares
 [x] 7 là configs
 [] 8 là resources
+
+[] Attention in Chat.js controller

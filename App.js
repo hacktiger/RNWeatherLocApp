@@ -22,7 +22,6 @@ import SignUpViewer from './public/presentation/Screens/Auth/SignUpViewer'
 import SettingsViewer from './public/presentation/Screens/Settings/SettingsViewer'
 
 // Classes
-// 
 console.ignoredYellowBox = ['Setting a timer', 'Warning'] // rid of yellow boxes for easy handling when testing
 class UserViewScreen extends React.Component {
   static navigationOptions = {

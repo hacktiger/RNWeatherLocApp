@@ -3,6 +3,8 @@
 - async funcs return a promise
 - <React.Fragment> </React.Fragment> { a container but is not a component }
 
+- Array.sort() behave differently on Safari and Chrome cus they use 2 diff engine to run JS
+
 /// TESTS 
 
 
