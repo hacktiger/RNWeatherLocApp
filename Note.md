@@ -31,3 +31,8 @@ runBefore("merge${targetName}Resources", currentBundleTask)
 runBefore("merge${targetName}Assets", currentBundleTask)
 
 //
+        <MyIcon
+          name = 'bubbles3'
+          size={20}
+          color={'#333333'}
+        />

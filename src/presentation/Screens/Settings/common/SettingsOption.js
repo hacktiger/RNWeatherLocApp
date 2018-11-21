@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   mainSettingsTextStyle: {
+    fontFamily: '8BIT WONDER Nominal',
     paddingLeft: 20,
     fontSize: 20,
     fontWeight: '900'

@@ -13,6 +13,8 @@ import { Avatar } from 'react-native-elements'
 //
 import SettingsOption from './common/SettingsOption'
 import Firebase from '../../../controller/Firebase'
+// test
+import MyIcon from '../../common/MyIcon'
 
 // IMPORTS FOR TESTING PURPOSES
 // main class
@@ -54,8 +56,7 @@ class SettingsViewer extends Component {
       isSwitchOn: !this.state.isSwitchOn
     })
   }
-  // MAIN RENDER
-  render () {
+  renderMainView () {
     return (
       <ScrollView style={ styles.container }>
         <View style={ styles.localContainer }>
@@ -67,7 +68,7 @@ class SettingsViewer extends Component {
             />
           </View>
           <View style= { styles.containerTitle }>
-            <Text style={{ fontSize: 30, fontWeight: '900' }}>
+            <Text style={{ fontFamily: '8BIT WONDER Nominal', fontSize: 30, fontWeight: '900' }}>
               {this.getCurrentUserEmail()}
             </Text>
           </View>
@@ -87,6 +88,12 @@ class SettingsViewer extends Component {
           </View>
         </TouchableNativeFeedback>
       </ScrollView>
+    )
+  }// 
+  // MAIN RENDER
+  render () {
+    return (
+      <View style={{ flex: 1 }}>{this.renderMainView()}</View>
     )
   }
 }
@@ -110,7 +117,8 @@ const styles = StyleSheet.create({
   },
   containerTitle: {
     flexGrow: 7,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingLeft: 10
   },
   logout: {
     backgroundColor: 'white',

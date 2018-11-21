@@ -8,18 +8,18 @@ import {
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
-import Spinner from './public/presentation/common/Spinner'
-import Firebase from './public/controller/Firebase'
+import Spinner from './src/presentation/common/Spinner'
+import Firebase from './src/controller/Firebase'
 // Screens
-import MapViewer from './public/presentation/Screens/Map/MapViewer'
+import MapViewer from './src/presentation/Screens/Map/MapViewer'
 
-import UserViewer from './public/presentation/Screens/User/UserViewer'
-import ChatViewer from './public/presentation/Screens/User/ChatViewer'
+import UserViewer from './src/presentation/Screens/User/UserViewer'
+import ChatViewer from './src/presentation/Screens/User/ChatViewer'
 
-import LoginViewer from './public/presentation/Screens/Auth/LoginViewer'
-import SignUpViewer from './public/presentation/Screens/Auth/SignUpViewer'
+import LoginViewer from './src/presentation/Screens/Auth/LoginViewer'
+import SignUpViewer from './src/presentation/Screens/Auth/SignUpViewer'
 
-import SettingsViewer from './public/presentation/Screens/Settings/SettingsViewer'
+import SettingsViewer from './src/presentation/Screens/Settings/SettingsViewer'
 
 // Classes
 console.ignoredYellowBox = ['Setting a timer', 'Warning'] // rid of yellow boxes for easy handling when testing
