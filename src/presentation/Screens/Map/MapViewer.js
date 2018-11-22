@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { Component } from 'react'
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'
 import {
@@ -5,12 +6,14 @@ import {
   View
 } from 'react-native'
 // my c
+import { Navigation } from 'react-native-navigation'
 import MapController from '../../../controller/MapController'
 import WeatherForecastViewer from '../WeatherForecast/WeatherForecastViewer'
 /**
  *main class map view
  */
 class MapViewer extends Component {
+
   constructor (props) {
     super(props)
     this.state = {
@@ -18,6 +21,16 @@ class MapViewer extends Component {
       LONGITUDE: -9999
     }
     this.myMapController = new MapController()
+    Navigation.mergeOptions(this.props.componentId, {
+      // bottomtabs
+      bottomTabs: {
+        visible: true,
+        animate: true,
+        currentTabIndex: 2,
+        drawBehind: false,
+        backgroundColor: '#ffa500'
+      }
+    })
   }
   //
   componentDidMount () {

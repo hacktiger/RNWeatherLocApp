@@ -28,10 +28,10 @@ Navigation.registerComponent(`SettingsScreen`, () => SettingsViewer)
 Navigation.events().registerAppLaunchedListener(async () => {
   Navigation.setDefaultOptions({
     bottomTab: {
-      iconColor: '#1B4C77',
-      selectedIconColor: '#0f0',
-      textColor: '#1B4C77',
-      selectedTextColor: '#0f0',
+      iconColor: '#595959',
+      selectedIconColor: '#ffffff',
+      textColor: '#595959',
+      selectedTextColor: '#ffffff',
       fontFamily: 'HelveticaNeue-Italic',
       fontSize: 13
     },
@@ -128,7 +128,7 @@ Navigation.events().registerAppLaunchedListener(async () => {
       }
     }
   })
-  
+
   Navigation.setRoot({
     root: {
       stack: {

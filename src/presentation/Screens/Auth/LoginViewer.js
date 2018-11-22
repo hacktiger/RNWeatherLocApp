@@ -15,6 +15,30 @@ import { goToApp, goToSignUp } from '../../common/Navigation';
 // IMPORTS FOR TESTING PURPOSES
 // main class
 class LoginViewer extends Component {
+  static options (passProp) {
+    return {
+      topBar: {
+        title: {
+          text: 'Log In',
+          fontSize: 20,
+          color: 'white',
+          fontFamily: 'Helvetica'
+        },
+        drawBehind: false,
+        visible: true,
+        animate: false,
+        subtitle: {
+          text: 'Log in to explore features',
+          fontSize: 11,
+          fontFamily: 'Helvetica',
+          color: '#b3b3b3'
+        },
+        background: {
+          color: 'green'
+        }
+      }
+    }
+  }
   constructor (props) {
     super(props)
     this.state = {
@@ -149,7 +173,6 @@ export default LoginViewer
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 300,
     paddingLeft: 50,
     paddingRight: 50
   },

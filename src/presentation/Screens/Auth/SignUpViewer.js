@@ -14,6 +14,31 @@ import { goToLogIn } from '../../common/Navigation'
 // IMPORTS FOR TESTING PURPOSES
 // main class
 class SignUpViewer extends Component {
+  static options (passProp) {
+    return {
+      topBar: {
+        title: {
+          text: 'Sign Up',
+          fontSize: 20,
+          color: 'white',
+          fontFamily: 'Helvetica'
+        },
+        drawBehind: false,
+        visible: true,
+        animate: false,
+        subtitle: {
+          text: 'Create an account here',
+          fontSize: 11,
+          fontFamily: 'Helvetica',
+          color: '#b3b3b3'
+        },
+        background: {
+          color: 'purple'
+        }
+      }
+    }
+  }
+  //
   constructor (props) {
     super(props)
     this.state = {
@@ -139,7 +164,6 @@ export default SignUpViewer
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 300,
     paddingLeft: 50,
     paddingRight: 50
   },

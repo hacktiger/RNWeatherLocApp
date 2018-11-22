@@ -20,7 +20,6 @@ Navigation.registerComponent(`SignUpScreen`, () => SignUpViewer)
 Navigation.registerComponent(`SettingsScreen`, () => SettingsViewer)
 
 export const goToApp = () => Navigation.setRoot({
-
   root: {
     bottomTabs: {
       children: [
@@ -30,13 +29,13 @@ export const goToApp = () => Navigation.setRoot({
               component: {
                 name: 'UserScreen',
                 passProps: {
-                  text: 'This is tab 1'
+                  text: 'This is the user screen tab'
                 }
               }
             }],
             options: {
               bottomTab: {
-                text: 'Tab 1',
+                text: 'Chat',
                 icon: require('../../../public/assets/images/test.png'),
                 testID: 'FIRST_TAB_BAR_BUTTON'
               }
@@ -47,11 +46,11 @@ export const goToApp = () => Navigation.setRoot({
           component: {
             name: 'MapScreen',
             passProps: {
-              text: 'This is tab 2'
+              text: 'This is map tab'
             },
             options: {
               bottomTab: {
-                text: 'Tab 2',
+                text: 'Forecast',
                 icon: require('../../../public/assets/images/test.png'),
                 testID: 'SECOND_TAB_BAR_BUTTON'
               }
@@ -62,11 +61,11 @@ export const goToApp = () => Navigation.setRoot({
           component: {
             name: 'SettingsScreen',
             passProps: {
-              text: 'This is tab 3'
+              text: 'This is the settings tab'
             },
             options: {
               bottomTab: {
-                text: 'Tab 3',
+                text: 'Settings',
                 icon: require('../../../public/assets/images/test.png'),
                 testID: 'THIRD_TAB_BAR_BUTTON'
               }

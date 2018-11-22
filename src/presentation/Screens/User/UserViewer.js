@@ -22,7 +22,42 @@ class UserViewer extends PureComponent {
     };
     // react native create reference
     this.myFirebase = new Firebase()
+    //
+    Navigation.mergeOptions(this.props.componentId, {
+      topBar: {
+        title: {
+          text: 'Chat Screen',
+          fontSize: 20,
+          color: 'white',
+          fontFamily: 'Helvetica',
+        },
+        hideOnScroll: true,
+        drawBehind: true,
+        visible: true,
+        animate: false,
+        subtitle: {
+          text: 'Chat with your friends about the weather',
+          fontSize: 11,
+          fontFamily: 'Helvetica',
+          color: '#b3b3b3'
+        },
+        background: {
+          color: '#800080'
+        }
+      },
+      // bottomtabs
+      bottomTabs: {
+        visible: true,
+        animate: true,
+        currentTabIndex: 1,
+        drawBehind: false,
+        backgroundColor: '#800080'
+      }
+    })
   }
+
+
+
   // component did mount
   componentDidMount () {
     this.retrieveUserList()
@@ -68,7 +103,7 @@ class UserViewer extends PureComponent {
   ///////////////////////////////////////////////////////////////////
   _onPressItem (id, email) {
     ///////// change later for react-native-navigation
-/*     this.props.navigation.navigate('Chat', {
+    /*     this.props.navigation.navigate('Chat', {
       userid: id,
       email: email
     }) */
@@ -206,7 +241,7 @@ export default UserViewer
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop :-22
+    marginTop: 35
   },
   spinnerView:{
     height: 1,
