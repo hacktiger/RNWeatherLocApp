@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { View, Text, FlatList, StyleSheet,TouchableOpacity } from 'react-native';
 import { List, SearchBar, ListItem } from 'react-native-elements';
-import { withNavigation } from 'react-navigation'
+import { Navigation } from 'react-native-navigation'
 // My imports
 import Spinner from '../../common/Spinner';
 import Firebase from '../../../controller/Firebase'
@@ -68,6 +68,7 @@ class UserViewer extends PureComponent {
   // HELPER FUNCTIONS FOR FLAT LIST   
   ///////////////////////////////////////////////////////////////////
   _onPressItem (id, email) {
+    ///////// change later for react-native-navigation
     this.props.navigation.navigate('Chat', {
       userid: id,
       email: email
@@ -168,7 +169,25 @@ class UserViewer extends PureComponent {
         this._handleResponse(response)})
       .catch(err => console.log(err))
   }
-
+  _loadFlatList () {
+    return (
+      <FlatList
+        data={this.state.UserList}
+        renderItem={this._renderItem}
+        keyExtractor={this._keyExtractor}
+        // Separator/ Header/ Footer
+        ItemSeparatorComponent={this._renderSeparator}
+        ListHeaderComponent={this._renderHeader}
+        ListFooterComponent={this._renderFooter}
+        // Refresh
+        refreshing={this.state.isRefreshing}
+        onRefresh={this._handleRefresh}
+        //Loadmore
+        onEndReached = {this._handleLoadMore}
+        onEndReachedThreshold={0.5}
+      />
+    )
+  }
   /////////////////////////////////////////////////////////////////////
   // MAIN RENDER
   /////////////////////////////////////////////////////////////////////
@@ -176,28 +195,14 @@ class UserViewer extends PureComponent {
     return (
       <View style={styles.container}>
         <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
-          <FlatList
-            data={this.state.UserList}
-            renderItem={this._renderItem}
-            keyExtractor={this._keyExtractor}
-            // Separator/ Header/ Footer
-            ItemSeparatorComponent={this._renderSeparator}
-            ListHeaderComponent={this._renderHeader}
-            ListFooterComponent={this._renderFooter}
-            // Refresh
-            refreshing={this.state.isRefreshing}
-            onRefresh={this._handleRefresh}
-            //Loadmore
-            onEndReached = {this._handleLoadMore}
-            onEndReachedThreshold={0.5}
-          />
+          {this._loadFlatList()}
         </List> 
       </View>
     )
   }
 }
 // EXPORT
-export default withNavigation(UserViewer)
+export default UserViewer
 // STYLES
 const styles = StyleSheet.create({
   container: {

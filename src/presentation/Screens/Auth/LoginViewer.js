@@ -8,7 +8,7 @@ import {
   Text,
   KeyboardAvoidingView
 } from 'react-native'
-import { withNavigation } from 'react-navigation'
+import { Navigation } from 'react-native-navigation'
 import { TextInput, Button } from 'react-native-paper'
 import Spinner from '../../common/Spinner'
 import Firebase from '../../../controller/Firebase'
@@ -31,11 +31,6 @@ class LoginViewer extends Component {
     // init Auth.js controller
     this.Authentication = new Firebase()
   }
-  //
-  componentDidMount () {
-    // this._navigate()
-  }
-
   // handle text change on email input
   _handleChange (input) {
     this.setState({
@@ -53,7 +48,9 @@ class LoginViewer extends Component {
     this.setState({ error: '', isLoading: true })
     this.Authentication.logInUser(this.state.email, this.state.password)
       .then(() => {
-        this.props.navigation.navigate('App')
+        //
+        //  Add navigation if success here
+        //
       })
       .catch((err) => {
         let errCode = err.code
@@ -100,7 +97,12 @@ class LoginViewer extends Component {
   }
   // navigate to signup screen if have no account
   _signUpScreen () {
-    this.props.navigation.navigate('SignUp')
+    //
+    // add navigation to sign up here
+    //
+  }
+  _renderTextInput (label, placeholder, value) {
+    // put smt here to reduce code length in main render
   }
   // MAIN RENDER
   render () {
@@ -145,7 +147,7 @@ class LoginViewer extends Component {
   }
 }
 // export
-export default withNavigation(LoginViewer)
+export default LoginViewer
 
 // Styles
 const styles = StyleSheet.create({

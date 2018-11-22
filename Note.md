@@ -36,3 +36,5 @@ runBefore("merge${targetName}Assets", currentBundleTask)
           size={20}
           color={'#333333'}
         />
+
+// npm run android to build application
