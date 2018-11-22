@@ -23,37 +23,6 @@ class UserViewer extends PureComponent {
     // react native create reference
     this.myFirebase = new Firebase()
     //
-    Navigation.mergeOptions(this.props.componentId, {
-      topBar: {
-        title: {
-          text: 'Chat Screen',
-          fontSize: 20,
-          color: 'white',
-          fontFamily: 'Helvetica',
-        },
-        hideOnScroll: true,
-        drawBehind: true,
-        visible: true,
-        animate: false,
-        subtitle: {
-          text: 'Chat with your friends about the weather',
-          fontSize: 11,
-          fontFamily: 'Helvetica',
-          color: '#b3b3b3'
-        },
-        background: {
-          color: '#800080'
-        }
-      },
-      // bottomtabs
-      bottomTabs: {
-        visible: true,
-        animate: true,
-        currentTabIndex: 1,
-        drawBehind: false,
-        backgroundColor: '#800080'
-      }
-    })
   }
 
 

@@ -137,7 +137,12 @@ Navigation.events().registerAppLaunchedListener(async () => {
           component: {
             name: 'AppScreen'
           }
-        }]
+        }],
+        options: {
+          topBar: {
+            visible: false
+          }
+        }
       }
     }
   })

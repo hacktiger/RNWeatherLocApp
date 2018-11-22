@@ -1,2 +1,2 @@
-export const WEATHER_API_KEY = 'UgEihPiQMVVUIdsz05M8MHxCxpi5jG2I'
+export const WEATHER_API_KEY = '09AxFc2Zya9YX5S3y43RkNFy9OvGXklB'
 export const FIREBASE_API_KEY = 'AIzaSyDh6IrfHjQuQyUXAAhtPQcSFUx1NIyWxUU'

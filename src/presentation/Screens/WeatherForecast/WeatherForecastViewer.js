@@ -36,6 +36,7 @@ class WeatherForecastViewer extends Component {
     // console.log('weatherforecastviewer.js/setForecastList(), ',this.state.lat, this.state.long )
     this.myForecast.get5DaysForecast(this.state.lat, this.state.long)
       .then((response) => {
+        console.log('5DAYS', response)
         this.setState({
           ForecastList: response.data.DailyForecasts
         })
@@ -46,18 +47,9 @@ class WeatherForecastViewer extends Component {
 
   // Helper function
   renderForecast () {
-    if(this.state.LocationKey === -9999){
-      return (
-        <View style={{paddingLeft: 90, justifyContent: 'center' }}>
-          <Text style={{color:'red'}}> Something went wrong !</Text>
-          <Text style={{color:'red'}}> Make sure your GPS is turned on</Text>
-        </View>
-      )
-    } else {
-      return this.state.ForecastList.map(ForecastList => (
-        <WeatherForecastDetail key={ForecastList.Date} ForecastList={ForecastList} />
-      ))
-    }
+    return this.state.ForecastList.map(ForecastList => (
+      <WeatherForecastDetail key={ForecastList.Date} ForecastList={ForecastList} />
+    )) 
   }
 
   // MAIN RENDER

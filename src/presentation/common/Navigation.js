@@ -34,7 +34,35 @@ export const goToApp = () => Navigation.setRoot({
               }
             }],
             options: {
+              bottomTabs: {
+                visible: true,
+                animate: true,
+                drawBehind: false,
+                backgroundColor: '#800080'
+              },
+              topBar: {
+                title: {
+                  text: 'Chat Screen',
+                  fontSize: 20,
+                  color: 'white',
+                  fontFamily: 'Helvetica'
+                },
+                hideOnScroll: true,
+                drawBehind: true,
+                visible: true,
+                animate: false,
+                subtitle: {
+                  text: 'Chat with your friends about the weather',
+                  fontSize: 11,
+                  fontFamily: 'Helvetica',
+                  color: '#b3b3b3'
+                },
+                background: {
+                  color: '#800080'
+                }
+              },
               bottomTab: {
+                // bottomtabs
                 text: 'Chat',
                 icon: require('../../../public/assets/images/test.png'),
                 testID: 'FIRST_TAB_BAR_BUTTON'
@@ -43,12 +71,43 @@ export const goToApp = () => Navigation.setRoot({
           }
         },
         {
-          component: {
-            name: 'MapScreen',
-            passProps: {
-              text: 'This is map tab'
-            },
+          stack: {
+            children: [{
+              component: {
+                name: 'MapScreen',
+                passProps: {
+                  text: 'This is map tab'
+                }
+              }
+            }],
             options: {
+              bottomTabs: {
+                visible: true,
+                animate: true,
+                drawBehind: false,
+                backgroundColor: '#e69500'
+              },
+              topBar: {
+                title: {
+                  text: 'Weather Forecast',
+                  fontSize: 20,
+                  color: 'white',
+                  fontFamily: 'Helvetica'
+                },
+                hideOnScroll: true,
+                drawBehind: true,
+                visible: true,
+                animate: false,
+                subtitle: {
+                  text: 'Weather forecasts in your current position',
+                  fontSize: 11,
+                  fontFamily: 'Helvetica',
+                  color: '#b3b3b3'
+                },
+                background: {
+                  color: '#e69500'
+                }
+              },
               bottomTab: {
                 text: 'Forecast',
                 icon: require('../../../public/assets/images/test.png'),
@@ -58,12 +117,44 @@ export const goToApp = () => Navigation.setRoot({
           }
         },
         {
-          component: {
-            name: 'SettingsScreen',
-            passProps: {
-              text: 'This is the settings tab'
-            },
+          stack: {
+            children: [{
+              component: {
+                name: 'SettingsScreen',
+                passProps: {
+                  text: 'This is the settings tab'
+                }
+              }
+            }],
             options: {
+              bottomTabs: {
+                visible: true,
+                animate: true,
+                // currentTabIndex: 0,
+                drawBehind: false,
+                backgroundColor: '#008000'
+              },
+              topBar: {
+                title: {
+                  text: 'Settings',
+                  fontSize: 20,
+                  color: 'white',
+                  fontFamily: 'Helvetica'
+                },
+                hideOnScroll: true,
+                drawBehind: true,
+                visible: true,
+                animate: false,
+                subtitle: {
+                  text: 'Customize app settings to your liking',
+                  fontSize: 11,
+                  fontFamily: 'Helvetica',
+                  color: '#b3b3b3'
+                },
+                background: {
+                  color: '#008000'
+                }
+              },
               bottomTab: {
                 text: 'Settings',
                 icon: require('../../../public/assets/images/test.png'),

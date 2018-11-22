@@ -21,16 +21,6 @@ class MapViewer extends Component {
       LONGITUDE: -9999
     }
     this.myMapController = new MapController()
-    Navigation.mergeOptions(this.props.componentId, {
-      // bottomtabs
-      bottomTabs: {
-        visible: true,
-        animate: true,
-        currentTabIndex: 2,
-        drawBehind: false,
-        backgroundColor: '#ffa500'
-      }
-    })
   }
   //
   componentDidMount () {
@@ -78,11 +68,11 @@ class MapViewer extends Component {
   // MAIN RENDER
   render () {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={styles.container}>
         <View style={{ flex: 0.5 }}>
           { this.renderMap() }
         </View>
-        <View style={{ flex: 0.5, elevation: 10 }}>
+        <View style={styles.forecastContainer}>
           { this.renderForecast() }
         </View>
       </View>
@@ -92,8 +82,17 @@ class MapViewer extends Component {
 
 // STYLES
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 20
+  },
+  forecastContainer: {
+    flex: 0.5,
+    elevation: 10
+  },
   map: {
-    flex: 1
+    flex: 1,
+    marginTop: 35
   }
 })
 

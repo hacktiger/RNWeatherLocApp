@@ -30,16 +30,6 @@ class SettingsViewer extends Component {
     this._onClickSetting = this._onClickSetting.bind(this)
     this.Authentication = new Firebase()
     //
-    Navigation.mergeOptions(this.props.componentId, {
-      // bottomtabs
-      bottomTabs: {
-        visible: true,
-        animate: true,
-        currentTabIndex: 0,
-        drawBehind: false,
-        backgroundColor: '#008000'
-      }
-    })
   }
   //
   getCurrentUserEmail () {
@@ -118,6 +108,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e1e8ee'
   },
   localContainer: {
+    marginTop: 52,
     backgroundColor: 'white',
     flexDirection: 'row',
     paddingHorizontal: 20,
