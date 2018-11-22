@@ -8,7 +8,7 @@ import {
   ScrollView,
   TouchableNativeFeedback
 } from 'react-native'
-import { withNavigation } from 'react-navigation'
+import { Navigation } from 'react-native-navigation'
 import { Avatar } from 'react-native-elements'
 //
 import SettingsOption from './common/SettingsOption'
@@ -99,7 +99,7 @@ class SettingsViewer extends Component {
 }
 
 // export
-export default withNavigation(SettingsViewer)
+export default SettingsViewer
 
 // Styles
 const styles = StyleSheet.create({

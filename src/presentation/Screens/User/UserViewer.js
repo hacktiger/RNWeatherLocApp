@@ -54,7 +54,6 @@ class UserViewer extends PureComponent {
         isLoading: false,
         isRefreshing: false
       })
-      // console.log(this.state)
     } else {
       this.setState({
         isLoading: false,
@@ -69,11 +68,12 @@ class UserViewer extends PureComponent {
   ///////////////////////////////////////////////////////////////////
   _onPressItem (id, email) {
     ///////// change later for react-native-navigation
-    this.props.navigation.navigate('Chat', {
+/*     this.props.navigation.navigate('Chat', {
       userid: id,
       email: email
-    })
+    }) */
   }
+
   // render each items
   // @ref render -> FlatList
   _renderItem = ({ item }) => (
@@ -86,9 +86,11 @@ class UserViewer extends PureComponent {
       />
     </TouchableOpacity>
   )
+
   // key Extractor
   // @ref render -> Flatlist
   _keyExtractor = (item,index) => index.toString()
+
   // render separator between items
   // @ref render -> FlatList
   _renderSeparator = () => {
@@ -112,13 +114,10 @@ class UserViewer extends PureComponent {
   }
   // do some filtering on search bar later
   _handleTextChange = (text) => {
-    //console.log(text)
-    //console.log(this.state.UserList)
-    //console.log(this.state.OriginalUserList)
     const filteredData = this.state.OriginalUserList.filter(item => {      
       const itemData = `${item.email.toUpperCase()}`;
       const formatQuery = text.toUpperCase();
-      // return  
+
       return itemData.indexOf(formatQuery) > -1;    
     });
     this.setState({ UserList: filteredData })
@@ -195,7 +194,7 @@ class UserViewer extends PureComponent {
     return (
       <View style={styles.container}>
         <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
-          {this._loadFlatList()}
+          { this._loadFlatList() }
         </List> 
       </View>
     )

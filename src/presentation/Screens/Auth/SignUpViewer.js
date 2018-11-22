@@ -7,10 +7,10 @@ import {
   StyleSheet,
   Text
 } from 'react-native'
-import { withNavigation } from 'react-navigation'
 import { TextInput, Button } from 'react-native-paper'
 import Spinner from '../../common/Spinner'
 import Firebase from '../../../controller/Firebase'
+import { goToLogIn } from '../../common/Navigation'
 // IMPORTS FOR TESTING PURPOSES
 // main class
 class SignUpViewer extends Component {
@@ -89,6 +89,9 @@ class SignUpViewer extends Component {
       )
     }
   }
+  _logInScreen () {
+    goToLogIn()
+  }
   // MAIN RENDER
   render () {
     return (
@@ -117,6 +120,11 @@ class SignUpViewer extends Component {
         <View style={{ flex: 1, alignItems: 'center' }}>
           <Text style={{ color: 'red' }}> { this.state.error } </Text>
         </View>
+        <View style={{ alignItems: 'center' }}>
+          <Text style={{ color: 'blue' }} onPress={this._logInScreen}>
+              Already have an account ? Log in here.
+          </Text>
+        </View>
         <View style = { styles.buttonBox }>
           {this._renderButton()}
         </View>
@@ -125,7 +133,7 @@ class SignUpViewer extends Component {
   }
 }
 // export
-export default withNavigation(SignUpViewer)
+export default SignUpViewer
 
 // Styles
 const styles = StyleSheet.create({

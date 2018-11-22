@@ -8,7 +8,7 @@ import {
 //
 import Spinner from './src/presentation/common/Spinner'
 //
-import { Navigation } from 'react-native-navigation'
+import { goToLogIn, goToApp } from './src/presentation/common/Navigation'
 import Firebase from './src/controller/Firebase'
 class AppScreen extends React.Component {
   constructor (props) {
@@ -16,20 +16,20 @@ class AppScreen extends React.Component {
     this.myFirebase = new Firebase()
   }
 
-  _goToScreen (screenName) {
+/*   _goToScreen (screenName) {
     Navigation.push(this.props.componentId, {
       component: {
         name: screenName
       }
     })
-  }
+  } */
 
   componentDidMount () {
     this.myFirebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this._goToScreen('UserScreen')
+        goToApp()
       } else {
-        this._goToScreen('LoginScreen')
+        goToLogIn()
       }
     })
   }

@@ -8,10 +8,10 @@ import {
   Text,
   KeyboardAvoidingView
 } from 'react-native'
-import { Navigation } from 'react-native-navigation'
 import { TextInput, Button } from 'react-native-paper'
 import Spinner from '../../common/Spinner'
 import Firebase from '../../../controller/Firebase'
+import { goToApp, goToSignUp } from '../../common/Navigation';
 // IMPORTS FOR TESTING PURPOSES
 // main class
 class LoginViewer extends Component {
@@ -48,9 +48,7 @@ class LoginViewer extends Component {
     this.setState({ error: '', isLoading: true })
     this.Authentication.logInUser(this.state.email, this.state.password)
       .then(() => {
-        //
-        //  Add navigation if success here
-        //
+        goToApp()
       })
       .catch((err) => {
         let errCode = err.code
@@ -97,9 +95,7 @@ class LoginViewer extends Component {
   }
   // navigate to signup screen if have no account
   _signUpScreen () {
-    //
-    // add navigation to sign up here
-    //
+    goToSignUp()
   }
   _renderTextInput (label, placeholder, value) {
     // put smt here to reduce code length in main render
