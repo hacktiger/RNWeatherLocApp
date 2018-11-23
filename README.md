@@ -48,7 +48,7 @@
 
   [o] (optional) implement redux ?
 
-  [] (optional) sort by most messages ( may need to create another object in firebase )
+  [o] (optional) sort by most messages ( may need to create another object in firebase )
 
   [x] just to be sure check null before create room
 
@@ -64,4 +64,10 @@
 [x] 7 là configs
 [] 8 là resources
 
-[] Attention in Chat.js controller
+[x] Attention in Chat.js controller
+
+[x] Finish up Navigation
+[x] Make Navigation.js more readable
+[] Chat screen header hide on scroll leaves blank => animate list to cover it later
+[] Change date => sunday, sat, mon,... for readability
+[] Add models to handle data

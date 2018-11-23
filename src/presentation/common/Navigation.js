@@ -19,6 +19,39 @@ Navigation.registerComponent(`SignUpScreen`, () => SignUpViewer)
 //
 Navigation.registerComponent(`SettingsScreen`, () => SettingsViewer)
 
+const bottomBarSettings = (color) => {
+  return {
+    visible: true,
+    animate: true,
+    drawBehind: false,
+    backgroundColor: color
+  } // #e69500
+}
+
+const topBarSettings = (title = '', subtitle = '', backgroundColor = '', hideOnScroll = false, drawBehind = false) => {
+  return {
+    title: {
+      text: title,
+      fontSize: 20,
+      color: 'white',
+      fontFamily: 'Helvetica'
+    },
+    hideOnScroll: hideOnScroll,
+    drawBehind: drawBehind,
+    visible: true,
+    animate: false,
+    subtitle: {
+      text: subtitle,
+      fontSize: 11,
+      fontFamily: 'Helvetica',
+      color: '#b3b3b3'
+    },
+    background: {
+      color: backgroundColor
+    }
+  }
+}
+
 export const goToApp = () => Navigation.setRoot({
   root: {
     bottomTabs: {
@@ -34,35 +67,9 @@ export const goToApp = () => Navigation.setRoot({
               }
             }],
             options: {
-              bottomTabs: {
-                visible: true,
-                animate: true,
-                drawBehind: false,
-                backgroundColor: '#800080'
-              },
-              topBar: {
-                title: {
-                  text: 'Chat Screen',
-                  fontSize: 20,
-                  color: 'white',
-                  fontFamily: 'Helvetica'
-                },
-                hideOnScroll: true,
-                drawBehind: true,
-                visible: true,
-                animate: false,
-                subtitle: {
-                  text: 'Chat with your friends about the weather',
-                  fontSize: 11,
-                  fontFamily: 'Helvetica',
-                  color: '#b3b3b3'
-                },
-                background: {
-                  color: '#800080'
-                }
-              },
+              bottomTabs: bottomBarSettings('#800080'),
+              topBar: topBarSettings('Chat Screen', 'Chat with your friends here', '#800080', true, true),
               bottomTab: {
-                // bottomtabs
                 text: 'Chat',
                 icon: require('../../../public/assets/images/test.png'),
                 testID: 'FIRST_TAB_BAR_BUTTON'
@@ -81,33 +88,8 @@ export const goToApp = () => Navigation.setRoot({
               }
             }],
             options: {
-              bottomTabs: {
-                visible: true,
-                animate: true,
-                drawBehind: false,
-                backgroundColor: '#e69500'
-              },
-              topBar: {
-                title: {
-                  text: 'Weather Forecast',
-                  fontSize: 20,
-                  color: 'white',
-                  fontFamily: 'Helvetica'
-                },
-                hideOnScroll: true,
-                drawBehind: true,
-                visible: true,
-                animate: false,
-                subtitle: {
-                  text: 'Weather forecasts in your current position',
-                  fontSize: 11,
-                  fontFamily: 'Helvetica',
-                  color: '#b3b3b3'
-                },
-                background: {
-                  color: '#e69500'
-                }
-              },
+              bottomTabs: bottomBarSettings('#e69500'),
+              topBar: topBarSettings('Weather Forecast', 'Weather forecasts in your current position', '#e69500', false, true),
               bottomTab: {
                 text: 'Forecast',
                 icon: require('../../../public/assets/images/test.png'),
@@ -117,6 +99,7 @@ export const goToApp = () => Navigation.setRoot({
           }
         },
         {
+          // Settings Screen
           stack: {
             children: [{
               component: {
@@ -126,35 +109,10 @@ export const goToApp = () => Navigation.setRoot({
                 }
               }
             }],
+            // options for Settings Screen
             options: {
-              bottomTabs: {
-                visible: true,
-                animate: true,
-                // currentTabIndex: 0,
-                drawBehind: false,
-                backgroundColor: '#008000'
-              },
-              topBar: {
-                title: {
-                  text: 'Settings',
-                  fontSize: 20,
-                  color: 'white',
-                  fontFamily: 'Helvetica'
-                },
-                hideOnScroll: true,
-                drawBehind: true,
-                visible: true,
-                animate: false,
-                subtitle: {
-                  text: 'Customize app settings to your liking',
-                  fontSize: 11,
-                  fontFamily: 'Helvetica',
-                  color: '#b3b3b3'
-                },
-                background: {
-                  color: '#008000'
-                }
-              },
+              bottomTabs: bottomBarSettings('#008000'),
+              topBar: topBarSettings('Settings', 'Customize app settings to your liking', '#008000', false, true),
               bottomTab: {
                 text: 'Settings',
                 icon: require('../../../public/assets/images/test.png'),
@@ -167,6 +125,7 @@ export const goToApp = () => Navigation.setRoot({
     }
   }
 })
+
 export const goToSignUp = () => Navigation.setRoot({
   root: {
     stack: {
@@ -175,7 +134,10 @@ export const goToSignUp = () => Navigation.setRoot({
         component: {
           name: 'SignUpScreen'
         }
-      }]
+      }],
+      options: {
+        topBar: topBarSettings('Sign Up', 'Create an account here', 'purple', false, false)
+      }
     }
   }
 })
@@ -187,7 +149,10 @@ export const goToLogIn = () => Navigation.setRoot({
         component: {
           name: 'LogInScreen'
         }
-      }]
+      }],
+      options: {
+        topBar: topBarSettings('Log In', 'Log in to explore features', 'green', false, false)
+      }
     }
   }
 })

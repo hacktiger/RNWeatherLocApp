@@ -23,6 +23,9 @@ export default class ApiGateway {
 
         this._instance = apisauce.create(configsGateway);
         this.get = this.get.bind(this);
+        this.post = this.post.bind(this);
+        this.put = this.post.bind(this);
+        this.delete = this.post.bind(this);
     }
     //error
     _handleError(error){ 

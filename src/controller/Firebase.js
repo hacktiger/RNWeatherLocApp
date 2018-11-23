@@ -3,7 +3,7 @@ import FirebaseDataService, {
   getMoreUser
 } from '../services/data/FirebaseDataService'
 
-class UserFirebase {
+class Firebase {
   // contructor
   constructor () {
     this.FirebaseSingleton = FirebaseDataService.getInstance()
@@ -67,4 +67,4 @@ class UserFirebase {
   }
   // END CLASS
 }
-export default UserFirebase
+export default Firebase

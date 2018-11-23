@@ -1,8 +1,8 @@
 // react imports
 import React, { Component } from 'react'
 import {
-  Text,
   View,
+  Text,
   ScrollView
 } from 'react-native'
 
@@ -23,7 +23,6 @@ class WeatherForecastViewer extends Component {
   }
   //
   async componentWillReceiveProps (props) {
-    // console.log('PROPS :', props)
     await this.setState({
       lat: props.lat,
       long: props.long
@@ -33,23 +32,29 @@ class WeatherForecastViewer extends Component {
 
   // set Forecast
   setForecastList = () => {
-    // console.log('weatherforecastviewer.js/setForecastList(), ',this.state.lat, this.state.long )
     this.myForecast.get5DaysForecast(this.state.lat, this.state.long)
       .then((response) => {
-        console.log('5DAYS', response)
         this.setState({
           ForecastList: response.data.DailyForecasts
         })
-        // console.log('state', this.state.ForecastList)
       })
       .catch(err => console.log('MapForecastViewer :', err))
   }
 
   // Helper function
   renderForecast () {
-    return this.state.ForecastList.map(ForecastList => (
-      <WeatherForecastDetail key={ForecastList.Date} ForecastList={ForecastList} />
-    )) 
+    if (this.state.ForecastList && this.state.ForecastList.length !== 0){
+      return this.state.ForecastList.map(ForecastList => (
+        <WeatherForecastDetail key={ForecastList.Date} ForecastList={ForecastList} />
+      )) 
+    } else {
+      return (
+        <View style={{ alignItems: 'center', justifyContent: 'center'}}>
+          <Text>Something went wrong !</Text>
+        </View>
+      )
+    }
+
   }
 
   // MAIN RENDER
