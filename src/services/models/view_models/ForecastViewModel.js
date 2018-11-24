@@ -2,41 +2,42 @@ import WeatherForecast from '../../../controller/WeatherForecast'
 
 export default class ForecastViewModel {
   weatherData = new WeatherForecast()
+  forecastData = null
 
   get5DaysForecastList (lat, long) {
     this.weatherData.get5DaysForecast(lat, long)
-      .then((res) => this._handleResponse(res))
-      .catch((err) => this._handleError(err))
+      .then(async (res) => await this._handleResponse(res))
+      .catch((err) => this._handleReturn(null, err))
   }
 
   _handleResponse (res) {
     if ( res.status === 200){
-      var forecastList = []
-      forecastList = res.data.DailyForecast
-      if (!forecastList || forecastList.length === 0) {
-        this._handleReturn (res.status, 'Forecast list is empty')
+      var forecastList = res.data.DailyForecasts
+      // Check data
+      if (forecastList == null || forecastList.length === 0) {
+        this._setData (null, res.data.Code, res.data.Message)
       } else {
         if (forecastList instanceof Array){
-          return forecastList
+          return this._setData(forecastList, res.status, null)
         } else {
-          this._handleReturn (res.status, 'Data is not an Array')
+          this._setData (null, res.status, 'Data is not an Array')
         }
       }
     } else {
-      this._handleReturn (res.status, res.problem)
+      this._setData (null, res.status, res.problem)
     }
   }
 
-  _handleReturn (status, error) {
-    return {
-      status: status,
+  _setData (data, status, error) {
+    this.weatherData = {
+      data: data,
+      code: status,
       error: error
     }
   }
 
-  _handleError (err) {
-    // console.log(err)
-    return null
+  getData () {
+    console.log(this.weatherData)
+    return this.weatherData
   }
-
 }

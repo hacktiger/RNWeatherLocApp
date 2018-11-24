@@ -9,6 +9,7 @@ import {
 // IMPORTS FOR TESTING PURPOSES
 import WeatherForecast from '../../../controller/WeatherForecast'
 import WeatherForecastDetail from './components/WeatherForecastDetail'
+import ForecastViewModel from '../../../services/models/view_models/ForecastViewModel'
 // main class
 class WeatherForecastViewer extends Component {
   constructor (props) {
@@ -17,9 +18,11 @@ class WeatherForecastViewer extends Component {
       LocationKey: -9999,
       ForecastList: [],
       lat: -9999,
-      long: -9999
+      long: -9999,
+      status: '',
+      err: ''
     }
-    this.myForecast = new WeatherForecast()
+    this.myForecast = new ForecastViewModel()
   }
   //
   async componentWillReceiveProps (props) {
@@ -31,30 +34,25 @@ class WeatherForecastViewer extends Component {
   }
 
   // set Forecast
-  setForecastList = () => {
-    this.myForecast.get5DaysForecast(this.state.lat, this.state.long)
-      .then((response) => {
-        this.setState({
-          ForecastList: response.data.DailyForecasts
-        })
-      })
-      .catch(err => console.log('MapForecastViewer :', err))
+  async setForecastList () {
+    await this.myForecast.get5DaysForecastList(this.state.lat, this.state.long)
+    var kkk = await this.myForecast.getData()
+    console.log('forecastlist', kkk)
   }
 
   // Helper function
   renderForecast () {
-    if (this.state.ForecastList && this.state.ForecastList.length !== 0){
+    if (this.state.ForecastList && this.state.ForecastList.length !== 0) {
       return this.state.ForecastList.map(ForecastList => (
         <WeatherForecastDetail key={ForecastList.Date} ForecastList={ForecastList} />
-      )) 
+      ))
     } else {
       return (
-        <View style={{ alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
           <Text>Something went wrong !</Text>
         </View>
       )
     }
-
   }
 
   // MAIN RENDER
