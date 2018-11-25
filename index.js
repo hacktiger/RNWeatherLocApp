@@ -1,6 +1,5 @@
 import { Navigation } from 'react-native-navigation'
 // import React from 'react'
-// import all screens
 // Main App
 import App from './App'
 // other screens

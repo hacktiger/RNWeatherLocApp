@@ -26,6 +26,7 @@ class ChatViewer extends React.Component {
       isLoading: false,
       lastMess: '',
       roomID: '',
+      loadEarlier: false,
       temp: 0
     }
     this.myFirebase = new ChatFirebase()
@@ -46,9 +47,8 @@ class ChatViewer extends React.Component {
     await this.setState({ roomID: this.myFirebase.getRoomID(this.targetUserID, this.myID) })
     this.myFirebase.loadMessages(this.state.roomID, (message) => {
       if (this.state.temp === 0) {
-        // console.log('temp == 0')
-        // console.log(message.text)
         this.setState({
+          loadEarlier: true,
           lastMess: message._id,
           temp: 1
         })
@@ -103,7 +103,7 @@ class ChatViewer extends React.Component {
         isAnimated = {true}
         showAvatarForEveryMessage={true}
         // load ealier
-        loadEarlier = {true}
+        loadEarlier = {this.state.loadEarlier}
         onLoadEarlier = {() => { this._loadEalier() }}
         isLoadingEarlier = {this.state.isLoading}
         // main information

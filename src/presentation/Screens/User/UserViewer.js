@@ -9,6 +9,8 @@ import Firebase from '../../../controller/Firebase'
 
 // main class
 class UserViewer extends PureComponent {
+  _isMounted = false
+
   constructor (props) {
     super (props)
     this.state = {
@@ -29,7 +31,12 @@ class UserViewer extends PureComponent {
 
   // component did mount
   componentDidMount () {
+    this._isMounted = true
     this.retrieveUserList()
+  }
+  //
+  componentWillUnmount () {
+    this._isMounted = false
   }
   //get User
   // @ref : componentDidMount
@@ -40,30 +47,32 @@ class UserViewer extends PureComponent {
   }
   // handle success of getting user
   _handleResponse (response) {
-    if ( response ) {
-      let temp = []
-      let data = response.data
-      Object.keys(data).forEach((key) => {
-        temp.push(data[key])
-      })
-      // to prevent multiple load more on the same key over and over again
-      if(temp.length === 1){
-        return
+    if (this._isMounted) {
+      if ( response ) {
+        let temp = []
+        let data = response.data
+        Object.keys(data).forEach((key) => {
+          temp.push(data[key])
+        })
+        // to prevent multiple load more on the same key over and over again
+        if(temp.length === 1){
+          return
+        }
+        temp2 = temp.splice(0, temp.length-1)
+        this.setState({
+          lastUser: temp[temp.length-1].id,
+          UserList: [...this.state.UserList,...temp2],
+          OriginalUserList: [...this.state.OriginalUserList,...temp2],
+          isLoading: false,
+          isRefreshing: false
+        })
+      } else {
+        this.setState({
+          isLoading: false,
+          isRefreshing: false,
+          error: 'Something went wrong'
+        });
       }
-      temp2 = temp.splice(0, temp.length-1)
-      this.setState({
-        lastUser: temp[temp.length-1].id,
-        UserList: [...this.state.UserList,...temp2],
-        OriginalUserList: [...this.state.OriginalUserList,...temp2],
-        isLoading: false,
-        isRefreshing: false
-      })
-    } else {
-      this.setState({
-        isLoading: false,
-        isRefreshing: false,
-        error: 'Something went wrong'
-      });
     }
   }
 

@@ -45,15 +45,15 @@ class WeatherForecastViewer extends Component {
 
   // Helper function
   renderForecast () {
-    if (true !== true/* this.state.ForecastList.status == null && this.state.ForecastList.length !== 0 */) {
+    if (this.state.ForecastList.status == null && this.state.ForecastList.length !== 0) {
       return this.state.ForecastList.map(ForecastList => (
         <WeatherForecastDetail key={ForecastList.index} ForecastList={ForecastList} />
       ))
     } else {
       return (
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-{/*           <Text style={{ color: 'red' }}>{this.state.ForecastList.code}</Text>
-          <Text style={{ color: 'red' }}>{this.state.ForecastList.message}</Text> */}
+          <Text style={{ color: 'red' }}>{this.state.ForecastList.code}</Text>
+          <Text style={{ color: 'red' }}>{this.state.ForecastList.message}</Text>
         </View>
       )
     }

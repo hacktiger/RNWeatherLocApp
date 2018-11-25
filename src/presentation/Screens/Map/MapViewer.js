@@ -13,6 +13,7 @@ import WeatherForecastViewer from '../WeatherForecast/WeatherForecastViewer'
  *main class map view
  */
 class MapViewer extends Component {
+  _isMounted = false
 
   constructor (props) {
     super(props)
@@ -24,15 +25,22 @@ class MapViewer extends Component {
   }
   //
   componentDidMount () {
+    this._isMounted = true
     this.setLatLong()
+  }
+  //
+  componentWillUnmount () {
+    this._isMounted = false
   }
   //
   async setLatLong () {
     let coords = await this.myMapController.retrieveMyCurrentPosition()
-    this.setState({
-      LATITUDE: coords.LATITUDE,
-      LONGITUDE: coords.LONGITUDE
-    })
+    if (this._isMounted) {
+      this.setState({
+        LATITUDE: coords.LATITUDE,
+        LONGITUDE: coords.LONGITUDE
+      })
+    }
   }
   //
   renderMap () {

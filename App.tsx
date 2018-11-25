@@ -11,21 +11,13 @@ import Spinner from './src/presentation/common/Spinner'
 import { goToLogIn, goToApp } from './src/presentation/common/Navigation'
 import Firebase from './src/controller/Firebase'
 class AppScreen extends React.Component {
-  constructor (props) {
+  myFirebase: Firebase;
+  constructor (props: any) {
     super(props)
     this.myFirebase = new Firebase()
   }
-
-/*   _goToScreen (screenName) {
-    Navigation.push(this.props.componentId, {
-      component: {
-        name: screenName
-      }
-    })
-  } */
-
   componentDidMount () {
-    this.myFirebase.auth().onAuthStateChanged((user) => {
+    this.myFirebase.auth().onAuthStateChanged((user: any) => {
       if (user) {
         goToApp()
       } else {
