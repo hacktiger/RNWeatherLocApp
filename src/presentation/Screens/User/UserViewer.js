@@ -72,10 +72,15 @@ class UserViewer extends PureComponent {
   ///////////////////////////////////////////////////////////////////
   _onPressItem (id, email) {
     ///////// change later for react-native-navigation
-    /*     this.props.navigation.navigate('Chat', {
-      userid: id,
-      email: email
-    }) */
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'ChatScreen',
+        passProps: {
+          userid: id,
+          email: email
+        }
+      }
+    })
   }
 
   // render each items

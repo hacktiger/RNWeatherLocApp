@@ -12,9 +12,9 @@ const renderLayout = (props) => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.text}>
-          {props.ForecastList.Date.substring(8, 10)}
+          {props.ForecastList.date.substring(8, 10)}
           {'/'}
-          {props.ForecastList.Date.substring(5, 7)}
+          {props.ForecastList.date.substring(5, 7)}
         </Text>
       </View>
 
@@ -26,18 +26,18 @@ const renderLayout = (props) => {
 
       <View style={styles.temp}>
         <Text style={styles.text}>
-          {props.ForecastList.Temperature.Minimum.Value}
-          {'\u00b0'}{' '}{props.ForecastList.Temperature.Minimum.Unit}
+          {props.ForecastList.min_temp}
+          {'\u00b0'}{' '}{props.ForecastList.unit}
           {' '}{'~'}{' '}
-          {props.ForecastList.Temperature.Maximum.Value}
-          {'\u00b0'}{' '}{props.ForecastList.Temperature.Maximum.Unit}
+          {props.ForecastList.max_temp}
+          {'\u00b0'}{' '}{props.ForecastList.unit}
         </Text>
 
       </View>
 
       <View style={styles.phrase}>
         <Text style={styles.text}>
-          {props.ForecastList.Day.IconPhrase}
+          {props.ForecastList.day_icon_phrase}
         </Text>
       </View>
     </View>

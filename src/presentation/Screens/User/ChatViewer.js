@@ -2,8 +2,23 @@
 import React from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
 import ChatFirebase from '../../../controller/Chat'
-import { withNavigation } from 'react-navigation'
+// main class
 class ChatViewer extends React.Component {
+  static options(passProps) {
+    return {
+      topBar: {
+        title: {
+          text: `${passProps.email}`
+        },
+        subtitle: {
+          text: `Chat with ${passProps.email}`
+        },
+        drawBehind: true,
+        visible: true,
+        animate: false
+      }
+    };
+  }
   constructor (props) {
     super(props)
     this.state = {
@@ -11,12 +26,11 @@ class ChatViewer extends React.Component {
       isLoading: false,
       lastMess: '',
       roomID: '',
-      error: '',
       temp: 0
     }
     this.myFirebase = new ChatFirebase()
-    this.targetUserID = this.props.navigation.getParam('userid')
-    this.userEmail = this.props.navigation.getParam('email')
+    this.targetUserID = props.userid
+    this.userEmail = props.email
     this.myID = this.myFirebase.getUid()
   }
   // lief cycle methods
@@ -103,4 +117,4 @@ class ChatViewer extends React.Component {
   }
 }
 
-export default withNavigation(ChatViewer)
+export default ChatViewer

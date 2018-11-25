@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // react imports
 import React, { Component } from 'react'
 import {
@@ -9,7 +10,7 @@ import {
 // IMPORTS FOR TESTING PURPOSES
 import WeatherForecast from '../../../controller/WeatherForecast'
 import WeatherForecastDetail from './components/WeatherForecastDetail'
-import ForecastViewModel from '../../../services/models/view_models/ForecastViewModel'
+import WeatherForecastModel from '../../../services/models/view_models/WeatherForecastModel'
 // main class
 class WeatherForecastViewer extends Component {
   constructor (props) {
@@ -18,11 +19,9 @@ class WeatherForecastViewer extends Component {
       LocationKey: -9999,
       ForecastList: [],
       lat: -9999,
-      long: -9999,
-      status: '',
-      err: ''
+      long: -9999
     }
-    this.myForecast = new ForecastViewModel()
+    this.forecastModel = new WeatherForecastModel()
   }
   //
   async componentWillReceiveProps (props) {
@@ -35,21 +34,26 @@ class WeatherForecastViewer extends Component {
 
   // set Forecast
   async setForecastList () {
-    await this.myForecast.get5DaysForecastList(this.state.lat, this.state.long)
-    var kkk = await this.myForecast.getData()
-    console.log('forecastlist', kkk)
+    // get data from model
+    this.forecastModel.getForecastModel(this.state.lat, this.state.long)
+      .then((response) => {
+        this.setState({
+          ForecastList: response
+        })
+      })
   }
 
   // Helper function
   renderForecast () {
-    if (this.state.ForecastList && this.state.ForecastList.length !== 0) {
+    if (true !== true/* this.state.ForecastList.status == null && this.state.ForecastList.length !== 0 */) {
       return this.state.ForecastList.map(ForecastList => (
-        <WeatherForecastDetail key={ForecastList.Date} ForecastList={ForecastList} />
+        <WeatherForecastDetail key={ForecastList.index} ForecastList={ForecastList} />
       ))
     } else {
       return (
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <Text>Something went wrong !</Text>
+{/*           <Text style={{ color: 'red' }}>{this.state.ForecastList.code}</Text>
+          <Text style={{ color: 'red' }}>{this.state.ForecastList.message}</Text> */}
         </View>
       )
     }
