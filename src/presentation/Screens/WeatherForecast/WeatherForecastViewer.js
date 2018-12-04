@@ -44,7 +44,8 @@ class WeatherForecastViewer extends Component {
 
   // Helper function
   renderForecast () {
-    if (this.state.ForecastList.status == null && this.state.ForecastList.length !== 0) {
+    // still have problems here
+    if ( 1 !== 1 /* this.state.ForecastList == null && this.state.ForecastList.length !== 0 */) {
       return this.state.ForecastList.map(ForecastList => (
         <WeatherForecastDetail key={ForecastList.index} ForecastList={ForecastList} />
       ))
