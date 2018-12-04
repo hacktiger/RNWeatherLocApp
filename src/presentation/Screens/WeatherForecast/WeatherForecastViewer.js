@@ -8,7 +8,6 @@ import {
 } from 'react-native'
 
 // IMPORTS FOR TESTING PURPOSES
-import WeatherForecast from '../../../controller/WeatherForecast'
 import WeatherForecastDetail from './components/WeatherForecastDetail'
 import WeatherForecastModel from '../../../services/models/view_models/WeatherForecastModel'
 // main class

@@ -6,6 +6,9 @@ import { Navigation } from 'react-native-navigation'
 // My imports
 import Spinner from '../../common/Spinner';
 import Firebase from '../../../controller/Firebase'
+import UserModel from '../../../services/models/view_models/UserModel'
+//
+
 
 // main class
 class UserViewer extends PureComponent {
@@ -24,6 +27,7 @@ class UserViewer extends PureComponent {
     };
     // react native create reference
     this.myFirebase = new Firebase()
+    this.myUserModel = new UserModel()
     //
   }
 
@@ -41,7 +45,7 @@ class UserViewer extends PureComponent {
   //get User
   // @ref : componentDidMount
   retrieveUserList = () => {
-    this.myFirebase.getUserList()
+    this.myUserModel.getUserList()
       .then(response => this._handleResponse(response))
       .catch(err => console.log(err))
   }
@@ -49,20 +53,10 @@ class UserViewer extends PureComponent {
   _handleResponse (response) {
     if (this._isMounted) {
       if ( response ) {
-        let temp = []
-        let data = response.data
-        Object.keys(data).forEach((key) => {
-          temp.push(data[key])
-        })
-        // to prevent multiple load more on the same key over and over again
-        if(temp.length === 1){
-          return
-        }
-        temp2 = temp.splice(0, temp.length-1)
         this.setState({
-          lastUser: temp[temp.length-1].id,
-          UserList: [...this.state.UserList,...temp2],
-          OriginalUserList: [...this.state.OriginalUserList,...temp2],
+          lastUser: response.lastUser,
+          UserList: [...this.state.UserList,...response.userArray],
+          OriginalUserList: [...this.state.OriginalUserList,...response.userArray],
           isLoading: false,
           isRefreshing: false
         })
@@ -180,11 +174,9 @@ class UserViewer extends PureComponent {
   // @ref render -> FlatList
   _handleLoadMore = () => {
     // console.log('load more')
-    this.myFirebase.getMoreUserList(this.state.lastUser)
-      .then(response => {
-        // console.log(response.data)
-        this._handleResponse(response)})
-      .catch(err => console.log(err))
+    this.myUserModel.getMoreUserList(this.state.lastUser)
+      .then(response => this._handleResponse(response))
+      .catch(err => console.log('UserView.loadMore', err))
   }
   _loadFlatList () {
     return (
