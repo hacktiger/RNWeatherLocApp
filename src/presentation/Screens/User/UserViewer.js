@@ -6,7 +6,7 @@ import { Navigation } from 'react-native-navigation'
 // My imports
 import Spinner from '../../common/Spinner';
 import Firebase from '../../../controller/Firebase'
-import UserModel from '../../../services/models/view_models/UserModel'
+import UserViewModel from '../../../viewmodel/UserViewModel'
 //
 
 
@@ -27,12 +27,9 @@ class UserViewer extends PureComponent {
     };
     // react native create reference
     this.myFirebase = new Firebase()
-    this.myUserModel = new UserModel()
+    this.myUserModel = new UserViewModel()
     //
   }
-
-
-
   // component did mount
   componentDidMount () {
     this._isMounted = true
@@ -44,10 +41,21 @@ class UserViewer extends PureComponent {
   }
   //get User
   // @ref : componentDidMount
-  retrieveUserList = () => {
-    this.myUserModel.getUserList()
-      .then(response => this._handleResponse(response))
-      .catch(err => console.log(err))
+  retrieveUserList = async () => {
+    try {
+      await this.myUserModel.getUserList()
+        .then((res) => this._handleResponse(res))
+        .catch((err) => {
+          // TODO: handle error in user view when get user list
+          console.log('ERR', err)
+        })
+    } catch (error) {
+      // print error
+      this.setState({
+        error: 'Error'
+      })
+    }
+    
   }
   // handle success of getting user
   _handleResponse (response) {
@@ -55,8 +63,8 @@ class UserViewer extends PureComponent {
       if ( response ) {
         this.setState({
           lastUser: response.lastUser,
-          UserList: [...this.state.UserList,...response.userArray],
-          OriginalUserList: [...this.state.OriginalUserList,...response.userArray],
+          UserList: [...this.state.UserList,...response.userList],
+          OriginalUserList: [...this.state.OriginalUserList,...response.userList],
           isLoading: false,
           isRefreshing: false
         })
@@ -173,7 +181,8 @@ class UserViewer extends PureComponent {
   // load more
   // @ref render -> FlatList
   _handleLoadMore = () => {
-    // console.log('load more')
+    //TODO: scroll down make header lose it selft
+    console.log('load more')
     this.myUserModel.getMoreUserList(this.state.lastUser)
       .then(response => this._handleResponse(response))
       .catch(err => console.log('UserView.loadMore', err))

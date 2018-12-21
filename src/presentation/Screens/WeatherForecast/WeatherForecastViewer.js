@@ -9,7 +9,7 @@ import {
 
 // IMPORTS FOR TESTING PURPOSES
 import WeatherForecastDetail from './components/WeatherForecastDetail'
-import WeatherForecastModel from '../../../services/models/view_models/WeatherForecastModel'
+import ForecastViewModel from '../../../viewmodel/ForecastViewModel'
 // main class
 class WeatherForecastViewer extends Component {
   constructor (props) {
@@ -20,7 +20,7 @@ class WeatherForecastViewer extends Component {
       lat: -9999,
       long: -9999
     }
-    this.forecastModel = new WeatherForecastModel()
+    this.mforecastViewModel = new ForecastViewModel()
   }
   //
   async componentWillReceiveProps (props) {
@@ -34,8 +34,9 @@ class WeatherForecastViewer extends Component {
   // set Forecast
   async setForecastList () {
     // get data from model
-    this.forecastModel.getForecastModel(this.state.lat, this.state.long)
+    this.mforecastViewModel.get5DaysForecast(this.state.lat, this.state.long)
       .then((response) => {
+        console.log('reSSSS', response)
         this.setState({
           ForecastList: response
         })
@@ -44,16 +45,17 @@ class WeatherForecastViewer extends Component {
 
   // Helper function
   renderForecast () {
-    // still have problems here
-    if ( 1 !== 1 /* this.state.ForecastList == null && this.state.ForecastList.length !== 0 */) {
-      return this.state.ForecastList.map(ForecastList => (
+    let forecastListArray = []
+    forecastListArray = this.state.ForcastList
+    if (forecastListArray != null && forecastListArray.length !== 0) {
+      return this.state.ForecastList.map(ForecastList => ( // TODO: something still not right here
         <WeatherForecastDetail key={ForecastList.index} ForecastList={ForecastList} />
       ))
     } else {
       return (
         <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ color: 'red' }}>{this.state.ForecastList.code}</Text>
-          <Text style={{ color: 'red' }}>{this.state.ForecastList.message}</Text>
+          <Text style={{ color: 'red' }}>{/* {this.state.ForecastList.code} */} ERR</Text>
+          <Text style={{ color: 'red' }}>{/* {this.state.ForecastList.message} */} MESS </Text>
         </View>
       )
     }
